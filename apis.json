@@ -1,0 +1,59 @@
+{
+    "name": "ThingSpeak",
+    "description": "ThingSpeak is the open IoT platform with MATLAB analytics.",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/952-thingspeak.jpg",
+    "tags": [
+        "devices",
+        "have api",
+        "internet of things",
+        "sensors",
+        "things"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/thingspeak\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "ThingSpeak",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/952-thingspeak.jpg",
+            "humanURL": "https:\/\/thingspeak.com\/",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/thingspeak-openapi.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Blog",
+            "url": "http:\/\/community.thingspeak.com\/"
+        },
+        {
+            "type": "Blog RSS",
+            "url": "http:\/\/feeds.feedburner.com\/internetofthings"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "https:\/\/crunchbase.com\/organization\/thingspeak"
+        },
+        {
+            "type": "Github",
+            "url": "https:\/\/github.com\/thingspeak"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/thingspeak"
+        },
+        {
+            "type": "Website",
+            "url": "https:\/\/thingspeak.com\/"
+        }
+    ]
+}
