@@ -1,0 +1,16 @@
+{
+  "transport": "mqtt",
+  "broker": "mqtt3.thingspeak.com",
+  "port": 8883,
+  "tls": true,
+  "auth": {
+    "clientId": "MQTT_DEVICE_CLIENT_ID",
+    "username": "MQTT_DEVICE_USERNAME",
+    "password": "MQTT_DEVICE_PASSWORD"
+  },
+  "publish": {
+    "topic": "channels/12345/publish",
+    "qos": 0,
+    "payload": "field1=23.5&field2=45.2&status=ok"
+  }
+}

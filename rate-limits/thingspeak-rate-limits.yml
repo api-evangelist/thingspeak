@@ -1,0 +1,117 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: ThingSpeak
+providerId: thingspeak
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - IoT
+  - MQTT
+  - REST
+description: ThingSpeak rate-limit policies reconciled from MathWorks documentation
+  and license terms.
+sources:
+  - https://www.mathworks.com/help/thingspeak/rest-api.html
+  - https://www.mathworks.com/help/thingspeak/writedata.html
+  - https://www.mathworks.com/help/thingspeak/bulkwritejsondata.html
+  - https://www.mathworks.com/help/thingspeak/mqtt-basics.html
+  - https://thingspeak.mathworks.com/prices
+limits:
+  - id: free-channel-update-interval
+    name: Free Plan Channel Update Interval
+    description: Free-tier channels enforce a minimum 15-second interval between
+      successive `/update` requests on the same channel. Earlier writes are silently
+      rejected.
+    scope: channel
+    metric: seconds-between-updates
+    value: 15
+    timeFrame: per-write
+    appliesTo:
+      - Free
+  - id: paid-channel-update-interval
+    name: Paid Plan Channel Update Interval
+    description: Paid licenses lower the minimum interval between updates to 1
+      second per channel.
+    scope: channel
+    metric: seconds-between-updates
+    value: 1
+    timeFrame: per-write
+    appliesTo:
+      - Standard
+      - Home
+      - Academic
+      - Student
+  - id: free-annual-messages
+    name: Free Plan Annual Message Cap
+    description: Free accounts may post up to ~3M messages per year across all
+      channels (~8,200 per day).
+    scope: account
+    metric: messages
+    value: 3000000
+    timeFrame: year
+    appliesTo:
+      - Free
+  - id: paid-annual-messages-per-unit
+    name: Paid Annual Message Cap (per unit)
+    description: Each paid license unit grants 33M messages per year (~90,400 per
+      day). Additional units stack additively.
+    scope: account
+    metric: messages
+    value: 33000000
+    timeFrame: year
+    appliesTo:
+      - Standard
+      - Home
+      - Academic
+      - Student
+  - id: bulk-update-batch-free
+    name: Bulk Update Batch (Free)
+    description: Free-tier bulk_update accepts up to 960 messages per request.
+    scope: request
+    metric: messages-per-request
+    value: 960
+    timeFrame: per-request
+    appliesTo:
+      - Free
+  - id: bulk-update-batch-paid
+    name: Bulk Update Batch (Paid)
+    description: Paid bulk_update accepts up to 14,400 messages per request.
+    scope: request
+    metric: messages-per-request
+    value: 14400
+    timeFrame: per-request
+    appliesTo:
+      - Standard
+      - Home
+      - Academic
+      - Student
+  - id: mqtt-inactivity-timeout
+    name: MQTT Connection Inactivity Timeout
+    description: ThingSpeak's MQTT broker disconnects clients after one hour of
+      inactivity.
+    scope: connection
+    metric: seconds
+    value: 3600
+    timeFrame: inactivity
+    appliesTo:
+      - Free
+      - Standard
+      - Home
+      - Academic
+      - Student
+  - id: feed-read-max-results
+    name: Feed Read Maximum Results
+    description: A single `/channels/{channel_id}/feeds` request returns at most
+      8,000 entries.
+    scope: request
+    metric: entries-per-request
+    value: 8000
+    timeFrame: per-request
+    appliesTo:
+      - Free
+      - Standard
+      - Home
+      - Academic
+      - Student

@@ -1,0 +1,162 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ThingSpeak TalkBack API — Commands
+  description: ThingSpeak TalkBack API — asynchronous cloud-to-device command queue.
+    Lead operation — Execute Next Command. Self-contained Naftiko capability covering
+    ThingSpeak's command-queue business surface.
+  tags:
+  - ThingSpeak
+  - TalkBack
+  - IoT
+  - Commands
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    THINGSPEAK_TALKBACK_API_KEY: THINGSPEAK_TALKBACK_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: talkback-commands
+    baseUri: https://api.thingspeak.com
+    description: ThingSpeak TalkBack — command queue resources.
+    resources:
+    - name: commands
+      path: /talkbacks/{talkback_id}/commands.json
+      operations:
+      - name: listcommands
+        method: GET
+        description: List all commands in a TalkBack queue.
+        inputParameters:
+        - name: talkback_id
+          in: path
+          type: integer
+          required: true
+        - name: api_key
+          in: query
+          type: string
+          required: true
+      - name: addcommand
+        method: POST
+        description: Add a new command to the queue.
+        inputParameters:
+        - name: talkback_id
+          in: path
+          type: integer
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+    - name: command-execute
+      path: /talkbacks/{talkback_id}/commands/execute.json
+      operations:
+      - name: executenext
+        method: GET
+        description: Atomically dequeue and return the next pending command.
+        inputParameters:
+        - name: talkback_id
+          in: path
+          type: integer
+          required: true
+        - name: api_key
+          in: query
+          type: string
+          required: true
+    - name: command
+      path: /talkbacks/{talkback_id}/commands/{command_id}.json
+      operations:
+      - name: readcommand
+        method: GET
+        description: Read a single command from the queue.
+        inputParameters:
+        - name: talkback_id
+          in: path
+          type: integer
+          required: true
+        - name: command_id
+          in: path
+          type: integer
+          required: true
+        - name: api_key
+          in: query
+          type: string
+          required: true
+      - name: updatecommand
+        method: PUT
+        description: Update an existing command.
+        inputParameters:
+        - name: talkback_id
+          in: path
+          type: integer
+          required: true
+        - name: command_id
+          in: path
+          type: integer
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+      - name: deletecommand
+        method: DELETE
+        description: Delete a command from the queue.
+        inputParameters:
+        - name: talkback_id
+          in: path
+          type: integer
+          required: true
+        - name: command_id
+          in: path
+          type: integer
+          required: true
+        - name: api_key
+          in: query
+          type: string
+          required: true
+  exposes:
+  - type: mcp
+    namespace: talkback-commands-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ThingSpeak TalkBack API.
+    tools:
+    - name: thingspeak-list-commands
+      description: List commands in a TalkBack queue.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: talkback-commands.listcommands
+      with:
+        talkback_id: tools.talkback_id
+        api_key: tools.api_key
+    - name: thingspeak-add-command
+      description: Add a new command to a TalkBack queue.
+      hints:
+        readOnly: false
+        idempotent: false
+      call: talkback-commands.addcommand
+      with:
+        talkback_id: tools.talkback_id
+        body: tools.body
+    - name: thingspeak-execute-next-command
+      description: Atomically dequeue and return the next command.
+      hints:
+        readOnly: false
+        idempotent: false
+      call: talkback-commands.executenext
+      with:
+        talkback_id: tools.talkback_id
+        api_key: tools.api_key
+    - name: thingspeak-delete-command
+      description: Delete a TalkBack command.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: talkback-commands.deletecommand
+      with:
+        talkback_id: tools.talkback_id
+        command_id: tools.command_id
+        api_key: tools.api_key

@@ -1,0 +1,230 @@
+openapi: 3.0.3
+info:
+  title: ThingSpeak Update API
+  version: '1.0'
+  description: Write entries to a ThingSpeak channel — single update via /update or
+    high-volume batches via /channels/{channel_id}/bulk_update.json.
+  contact:
+    name: MathWorks
+    url: https://www.mathworks.com/help/thingspeak/writedata.html
+servers:
+- url: https://api.thingspeak.com
+  description: ThingSpeak production REST API
+security:
+- WriteApiKeyQuery: []
+- WriteApiKeyHeader: []
+paths:
+  /update:
+    get:
+      summary: Update Channel Feed (GET)
+      operationId: updateChannelFeedGet
+      description: Write a single entry to a channel via query parameters. Returns
+        the new entry_id (text) or the full entry (json/xml).
+      parameters:
+      - $ref: '#/components/parameters/ApiKeyQuery'
+      - in: query
+        name: field1
+        schema:
+          type: string
+      - in: query
+        name: field2
+        schema:
+          type: string
+      - in: query
+        name: field3
+        schema:
+          type: string
+      - in: query
+        name: field4
+        schema:
+          type: string
+      - in: query
+        name: field5
+        schema:
+          type: string
+      - in: query
+        name: field6
+        schema:
+          type: string
+      - in: query
+        name: field7
+        schema:
+          type: string
+      - in: query
+        name: field8
+        schema:
+          type: string
+      - in: query
+        name: lat
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: long
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: elevation
+        schema:
+          type: number
+      - in: query
+        name: status
+        schema:
+          type: string
+      - in: query
+        name: created_at
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Entry written. Body is the new entry_id (text) or the entry object.
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entry'
+        '400':
+          description: Bad request — invalid parameters or duplicate timestamp.
+    post:
+      summary: Update Channel Feed (POST)
+      operationId: updateChannelFeedPost
+      description: Identical to GET /update but accepts form-encoded body. Preferred
+        for write API keys that should not appear in URLs.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateRequest'
+      responses:
+        '200':
+          description: Entry written.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entry'
+  /channels/{channel_id}/bulk_update.json:
+    post:
+      summary: Bulk Update Channel
+      operationId: bulkUpdateChannel
+      description: Upload up to 960 messages per request (free) or 14,400 (paid) for
+        high-volume devices that cache data offline.
+      parameters:
+      - in: path
+        name: channel_id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkUpdateRequest'
+      responses:
+        '202':
+          description: Accepted — entries are queued for ingestion.
+        '400':
+          description: Bad request.
+components:
+  securitySchemes:
+    WriteApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+    WriteApiKeyHeader:
+      type: apiKey
+      in: header
+      name: THINGSPEAKAPIKEY
+  parameters:
+    ApiKeyQuery:
+      in: query
+      name: api_key
+      required: true
+      schema:
+        type: string
+  schemas:
+    UpdateRequest:
+      type: object
+      required:
+      - api_key
+      properties:
+        api_key:
+          type: string
+        field1:
+          type: string
+        field2:
+          type: string
+        field3:
+          type: string
+        field4:
+          type: string
+        field5:
+          type: string
+        field6:
+          type: string
+        field7:
+          type: string
+        field8:
+          type: string
+        lat:
+          type: number
+        long:
+          type: number
+        elevation:
+          type: number
+        status:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    BulkUpdateRequest:
+      type: object
+      required:
+      - write_api_key
+      - updates
+      properties:
+        write_api_key:
+          type: string
+        updates:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateRequest'
+    Entry:
+      type: object
+      properties:
+        channel_id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        entry_id:
+          type: integer
+        field1:
+          type: string
+        field2:
+          type: string
+        field3:
+          type: string
+        field4:
+          type: string
+        field5:
+          type: string
+        field6:
+          type: string
+        field7:
+          type: string
+        field8:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        elevation:
+          type: number
+        status:
+          type: string

@@ -1,0 +1,132 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ThingSpeak Channels API — Channels
+  description: ThingSpeak Channels API — Channels. 6 operations. Lead operation —
+    List User Channels. Self-contained Naftiko capability covering one ThingSpeak
+    business surface.
+  tags:
+  - ThingSpeak
+  - Channels
+  - IoT
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    THINGSPEAK_USER_API_KEY: THINGSPEAK_USER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: channels-channels
+    baseUri: https://api.thingspeak.com
+    description: ThingSpeak Channels API — Channels business capability.
+    resources:
+    - name: channels
+      path: /channels.json
+      operations:
+      - name: listchannels
+        method: GET
+        description: List user channels.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: array
+          value: $.
+      - name: createchannel
+        method: POST
+        description: Create a new channel.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    - name: channels-public
+      path: /channels/public.json
+      operations:
+      - name: listpublicchannels
+        method: GET
+        description: List public channels.
+    - name: channel
+      path: /channels/{channel_id}.json
+      operations:
+      - name: readchannel
+        method: GET
+        description: Read channel settings.
+        inputParameters:
+        - name: channel_id
+          in: path
+          type: integer
+          required: true
+      - name: updatechannel
+        method: PUT
+        description: Update channel settings.
+        inputParameters:
+        - name: channel_id
+          in: path
+          type: integer
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+      - name: deletechannel
+        method: DELETE
+        description: Delete a channel.
+        inputParameters:
+        - name: channel_id
+          in: path
+          type: integer
+          required: true
+    authentication:
+      type: apikey
+      key: THINGSPEAKAPIKEY
+      value: '{{env.THINGSPEAK_USER_API_KEY}}'
+      placement: header
+  exposes:
+  - type: mcp
+    namespace: channels-channels-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ThingSpeak Channels API.
+    tools:
+    - name: thingspeak-list-channels
+      description: List the authenticated user's channels.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: channels-channels.listchannels
+    - name: thingspeak-create-channel
+      description: Create a new channel.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: channels-channels.createchannel
+      with:
+        body: tools.body
+    - name: thingspeak-read-channel
+      description: Read channel settings.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: channels-channels.readchannel
+      with:
+        channel_id: tools.channel_id
+    - name: thingspeak-update-channel
+      description: Update channel settings.
+      hints:
+        readOnly: false
+        idempotent: true
+      call: channels-channels.updatechannel
+      with:
+        channel_id: tools.channel_id
+        body: tools.body
+    - name: thingspeak-delete-channel
+      description: Delete a channel.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: channels-channels.deletechannel
+      with:
+        channel_id: tools.channel_id

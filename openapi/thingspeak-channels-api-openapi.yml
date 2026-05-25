@@ -1,0 +1,213 @@
+openapi: 3.0.3
+info:
+  title: ThingSpeak Channels API
+  version: '1.0'
+  description: Create, list, update, and delete ThingSpeak channels — the primary
+    container for time-series IoT data. Requires a User API Key on the
+    `THINGSPEAKAPIKEY` header.
+  contact:
+    name: MathWorks
+    url: https://www.mathworks.com/help/thingspeak/channelsapi.html
+servers:
+- url: https://api.thingspeak.com
+security:
+- UserApiKeyHeader: []
+paths:
+  /channels.json:
+    get:
+      summary: List User Channels
+      operationId: listChannels
+      responses:
+        '200':
+          description: List of channels the authenticated user owns.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Channel'
+    post:
+      summary: Create Channel
+      operationId: createChannel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelInput'
+      responses:
+        '200':
+          description: Channel created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Channel'
+  /channels/public.json:
+    get:
+      summary: List Public Channels
+      operationId: listPublicChannels
+      parameters:
+      - in: query
+        name: tag
+        schema:
+          type: string
+      - in: query
+        name: username
+        schema:
+          type: string
+      - in: query
+        name: page
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Public channels matching the filter.
+          content:
+            application/json:
+              schema:
+                type: object
+  /channels/{channel_id}.json:
+    get:
+      summary: Read Channel Settings
+      operationId: readChannel
+      parameters:
+      - $ref: '#/components/parameters/ChannelId'
+      responses:
+        '200':
+          description: Channel metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Channel'
+    put:
+      summary: Update Channel Settings
+      operationId: updateChannel
+      parameters:
+      - $ref: '#/components/parameters/ChannelId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelInput'
+      responses:
+        '200':
+          description: Channel updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Channel'
+    delete:
+      summary: Delete Channel
+      operationId: deleteChannel
+      parameters:
+      - $ref: '#/components/parameters/ChannelId'
+      responses:
+        '200':
+          description: Channel deleted.
+  /channels/{channel_id}/feeds.json:
+    delete:
+      summary: Clear Channel Feed
+      operationId: clearChannelFeed
+      parameters:
+      - $ref: '#/components/parameters/ChannelId'
+      responses:
+        '200':
+          description: All entries deleted.
+components:
+  securitySchemes:
+    UserApiKeyHeader:
+      type: apiKey
+      in: header
+      name: THINGSPEAKAPIKEY
+  parameters:
+    ChannelId:
+      in: path
+      name: channel_id
+      required: true
+      schema:
+        type: integer
+  schemas:
+    ChannelInput:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        public_flag:
+          type: boolean
+        tags:
+          type: string
+          description: Comma-separated list of tags.
+        latitude:
+          type: number
+        longitude:
+          type: number
+        elevation:
+          type: number
+        url:
+          type: string
+        field1:
+          type: string
+        field2:
+          type: string
+        field3:
+          type: string
+        field4:
+          type: string
+        field5:
+          type: string
+        field6:
+          type: string
+        field7:
+          type: string
+        field8:
+          type: string
+        metadata:
+          type: string
+    Channel:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        elevation:
+          type: number
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        last_entry_id:
+          type: integer
+        public_flag:
+          type: boolean
+        url:
+          type: string
+        tags:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+        api_keys:
+          type: array
+          items:
+            type: object
+            properties:
+              api_key:
+                type: string
+              write_flag:
+                type: boolean

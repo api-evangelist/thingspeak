@@ -1,0 +1,372 @@
+aid: thingspeak
+url: https://raw.githubusercontent.com/api-evangelist/thingspeak/refs/heads/main/apis.yml
+apis:
+- aid: thingspeak:thingspeak-channels-api
+  name: ThingSpeak Channels API
+  tags:
+  - IoT
+  - Channels
+  - Data
+  - Analytics
+  humanURL: https://www.mathworks.com/help/thingspeak/channelsapi.html
+  baseURL: https://api.thingspeak.com/
+  properties:
+  - url: https://www.mathworks.com/help/thingspeak/channelsapi.html
+    type: Documentation
+  - url: openapi/thingspeak-channels-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/thingspeak-channel-schema.json
+    type: JSONSchema
+  - url: json-ld/thingspeak-context.jsonld
+    type: JSONLD
+  - url: capabilities/channels-channels.yaml
+    type: NaftikoCapability
+  description: List, create, read, update, and delete ThingSpeak channels — the
+    primary container for time-series IoT data. Each channel holds up to eight
+    numeric fields plus latitude, longitude, elevation, and a status string.
+    Channels can be public, private, or shared via read API keys.
+- aid: thingspeak:thingspeak-feeds-api
+  name: ThingSpeak Feeds API
+  tags:
+  - IoT
+  - Feeds
+  - Time Series
+  - Read
+  humanURL: https://www.mathworks.com/help/thingspeak/readdata.html
+  baseURL: https://api.thingspeak.com/
+  properties:
+  - url: https://www.mathworks.com/help/thingspeak/readdata.html
+    type: Documentation
+  - url: openapi/thingspeak-feeds-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/thingspeak-feed-schema.json
+    type: JSONSchema
+  - url: capabilities/feeds-feeds.yaml
+    type: NaftikoCapability
+  description: Read channel feed entries with rich querying — last N results, by
+    date range, by field, with timezone, rounding, averaging, and median/sum
+    aggregation. Supports JSON, XML, and CSV response formats and works with
+    both public channels and private channels via Read API Keys.
+- aid: thingspeak:thingspeak-update-api
+  name: ThingSpeak Update API
+  tags:
+  - IoT
+  - Write
+  - Telemetry
+  humanURL: https://www.mathworks.com/help/thingspeak/writedata.html
+  baseURL: https://api.thingspeak.com/
+  properties:
+  - url: https://www.mathworks.com/help/thingspeak/writedata.html
+    type: Documentation
+  - url: https://www.mathworks.com/help/thingspeak/bulkwritejsondata.html
+    type: Documentation
+  - url: openapi/thingspeak-update-api-openapi.yml
+    type: OpenAPI
+  - url: capabilities/update-update.yaml
+    type: NaftikoCapability
+  description: Write a single channel entry via `/update` or push high-volume
+    telemetry via `/channels/{channel_id}/bulk_update.json` (CSV or JSON
+    batches). The write surface is the workhorse of every ThingSpeak device —
+    Arduino, ESP32, Raspberry Pi, Particle, and any HTTP-capable sensor node.
+- aid: thingspeak:thingspeak-mqtt-api
+  name: ThingSpeak MQTT API
+  tags:
+  - IoT
+  - MQTT
+  - Pub/Sub
+  - Real-Time
+  humanURL: https://www.mathworks.com/help/thingspeak/mqtt-api.html
+  baseURL: mqtt3.thingspeak.com
+  properties:
+  - url: https://www.mathworks.com/help/thingspeak/mqtt-api.html
+    type: Documentation
+  - url: https://www.mathworks.com/help/thingspeak/mqtt-basics.html
+    type: Documentation
+  - url: asyncapi/thingspeak-mqtt-asyncapi.yml
+    type: AsyncAPI
+  description: Lightweight pub/sub MQTT broker at `mqtt3.thingspeak.com` over
+    TCP (1883), TLS (8883), WebSocket (80), and secure WebSocket (443, path
+    `/mqtt`). Publish to `channels/{channelID}/publish` and subscribe via
+    `channels/{channelID}/subscribe/fields/field{n}/{readAPIKey}`. QoS 0
+    only; connections time out after one hour of inactivity. Devices use
+    MQTT-specific Client ID / Username / Password credentials provisioned in
+    ThingSpeak.
+- aid: thingspeak:thingspeak-talkback-api
+  name: ThingSpeak TalkBack API
+  tags:
+  - IoT
+  - Commands
+  - Queue
+  - Device Management
+  humanURL: https://www.mathworks.com/help/thingspeak/talkbackapp.html
+  baseURL: https://api.thingspeak.com/
+  properties:
+  - url: https://www.mathworks.com/help/thingspeak/talkbackapp.html
+    type: Documentation
+  - url: openapi/thingspeak-talkback-api-openapi.yml
+    type: OpenAPI
+  - url: capabilities/talkback-commands.yaml
+    type: NaftikoCapability
+  description: Asynchronous command queue letting cloud-side logic or humans
+    push instructions to remote devices. Devices poll `talkbacks/{id}/commands`
+    and execute the next command; commands can be added, updated, executed, or
+    deleted via the REST surface. Pairs naturally with React for closed-loop
+    automation.
+- aid: thingspeak:thingspeak-react-api
+  name: ThingSpeak React API
+  tags:
+  - IoT
+  - Automation
+  - Triggers
+  - Events
+  humanURL: https://www.mathworks.com/help/thingspeak/react-app.html
+  baseURL: https://api.thingspeak.com/
+  properties:
+  - url: https://www.mathworks.com/help/thingspeak/react-app.html
+    type: Documentation
+  description: React lets channels react to incoming data — running ThingHTTP
+    requests, MATLAB Analysis snippets, TalkBack commands, or Twitter/Tweet
+    posts when conditions (numeric threshold, string match, no-data) are met.
+    Configured via the React app UI, this is ThingSpeak's primary rules engine.
+- aid: thingspeak:thingspeak-alerts-api
+  name: ThingSpeak Alerts API
+  tags:
+  - IoT
+  - Alerts
+  - Email
+  - Notifications
+  humanURL: https://www.mathworks.com/help/thingspeak/alerts.html
+  baseURL: https://api.thingspeak.com/
+  properties:
+  - url: https://www.mathworks.com/help/thingspeak/alerts.html
+    type: Documentation
+  description: Send email alerts from a channel via the alerts API or React,
+    and retrieve alert history. Useful for environmental monitoring,
+    threshold-based warnings, and inactivity notifications.
+- aid: thingspeak:thingspeak-charts-api
+  name: ThingSpeak Charts API
+  tags:
+  - IoT
+  - Charts
+  - Visualization
+  humanURL: https://www.mathworks.com/help/thingspeak/charts.html
+  baseURL: https://api.thingspeak.com/
+  properties:
+  - url: https://www.mathworks.com/help/thingspeak/charts.html
+    type: Documentation
+  description: Server-rendered chart embeds for any channel/field — line, bar,
+    column, spline — with parameters for color, scale, axis, timezone, title,
+    bgcolor, transparent, and dynamic options. Returns embeddable HTML/SVG.
+- aid: thingspeak:thingspeak-matlab-analysis-api
+  name: ThingSpeak MATLAB Analysis API
+  tags:
+  - IoT
+  - MATLAB
+  - Analysis
+  - Compute
+  humanURL: https://www.mathworks.com/help/thingspeak/matlab-analysis-app.html
+  baseURL: https://api.thingspeak.com/
+  properties:
+  - url: https://www.mathworks.com/help/thingspeak/matlab-analysis-app.html
+    type: Documentation
+  description: Run scheduled or React-triggered MATLAB code against channel
+    data — the differentiator that separates ThingSpeak from generic MQTT
+    brokers. Read channel data with `thingSpeakRead`, write results back with
+    `thingSpeakWrite`, and access the standard MATLAB toolboxes (signal
+    processing, statistics, machine learning) inside a managed sandbox.
+- aid: thingspeak:thingspeak-matlab-visualization-api
+  name: ThingSpeak MATLAB Visualization API
+  tags:
+  - IoT
+  - MATLAB
+  - Visualization
+  humanURL: https://www.mathworks.com/help/thingspeak/matlab-visualizations-app.html
+  baseURL: https://api.thingspeak.com/
+  properties:
+  - url: https://www.mathworks.com/help/thingspeak/matlab-visualizations-app.html
+    type: Documentation
+  description: Generate custom plots from MATLAB code and embed them on
+    ThingSpeak channel pages or external dashboards. Supports `plotyy`,
+    `geoplot`, `histogram`, custom colormaps, and any other MATLAB plotting
+    primitive against channel feed data.
+- aid: thingspeak:thingspeak-thinghttp-api
+  name: ThingSpeak ThingHTTP API
+  tags:
+  - IoT
+  - Webhooks
+  - Integrations
+  humanURL: https://www.mathworks.com/help/thingspeak/thinghttp-app.html
+  baseURL: https://api.thingspeak.com/
+  properties:
+  - url: https://www.mathworks.com/help/thingspeak/thinghttp-app.html
+    type: Documentation
+  description: Outbound HTTP requests stored as named "ThingHTTP" actions and
+    fired by React, TimeControl, or device pollers. Lets ThingSpeak push data
+    into third-party services (Twilio, IFTTT, custom webhooks) without a
+    backend server.
+- aid: thingspeak:thingspeak-timecontrol-api
+  name: ThingSpeak TimeControl API
+  tags:
+  - IoT
+  - Scheduling
+  - Cron
+  humanURL: https://www.mathworks.com/help/thingspeak/timecontrolapp.html
+  baseURL: https://api.thingspeak.com/
+  properties:
+  - url: https://www.mathworks.com/help/thingspeak/timecontrolapp.html
+    type: Documentation
+  description: Cron-style scheduler that fires ThingHTTP, TalkBack, or MATLAB
+    Analysis actions at a chosen time, recurring frequency, or after a delay.
+    Pairs with React and TalkBack to close the IoT control loop.
+name: ThingSpeak
+tags:
+- IoT
+- Internet of Things
+- Analytics
+- Time Series
+- MQTT
+- MATLAB
+- Sensors
+- Telemetry
+kind: contract
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+access: 3rd-Party
+common:
+- url: https://thingspeak.mathworks.com/
+  name: ThingSpeak Portal
+  type: Portal
+- url: https://www.mathworks.com/help/thingspeak/
+  name: ThingSpeak Documentation
+  type: Documentation
+- url: https://www.mathworks.com/help/thingspeak/rest-api.html
+  name: REST API Reference
+  type: Documentation
+- url: https://www.mathworks.com/help/thingspeak/mqtt-api.html
+  name: MQTT API Reference
+  type: Documentation
+- url: https://www.mathworks.com/help/thingspeak/get-started-with-thingspeak.html
+  name: Get Started with ThingSpeak
+  type: GettingStarted
+- url: https://thingspeak.mathworks.com/login
+  name: Sign In
+  type: SignUp
+- url: https://www.mathworks.com/mwaccount/register
+  name: Create MathWorks Account
+  type: SignUp
+- url: https://thingspeak.mathworks.com/prices
+  name: Pricing
+  type: Pricing
+- url: https://thingspeak.mathworks.com/pages/license_faq
+  name: Licensing FAQ
+  type: TermsOfService
+- url: https://www.mathworks.com/company/aboutus/policies_statements/
+  name: MathWorks Policies
+  type: TermsOfService
+- url: https://www.mathworks.com/company/aboutus/policies_statements/privacy-policy.html
+  name: Privacy Policy
+  type: PrivacyPolicy
+- url: https://www.mathworks.com/support/contact_us.html
+  name: Support
+  type: Support
+- url: https://github.com/mathworks
+  name: MathWorks on GitHub
+  type: GitHubOrganization
+- url: https://github.com/mathworks/thingspeak-arduino
+  name: thingspeak-arduino
+  type: SDK
+- url: https://github.com/mathworks/thingspeak-particle
+  name: thingspeak-particle
+  type: SDK
+- url: https://www.mathworks.com/matlabcentral/fileexchange/52244-thingspeak-support-from-desktop-matlab
+  name: ThingSpeak Support from Desktop MATLAB
+  type: SDK
+- url: https://www.mathworks.com/help/thingspeak/use-arduino-client-to-publish-to-a-channel.html
+  name: Arduino Tutorial
+  type: Tutorials
+- url: https://www.mathworks.com/help/thingspeak/raspberry-pi-tutorials.html
+  name: Raspberry Pi Tutorials
+  type: Tutorials
+- url: https://www.mathworks.com/help/thingspeak/esp32-tutorials.html
+  name: ESP32 Tutorials
+  type: Tutorials
+- url: https://www.mathworks.com/help/thingspeak/esp8266-tutorials.html
+  name: ESP8266 Tutorials
+  type: Tutorials
+- url: https://www.mathworks.com/help/thingspeak/particle-photon-tutorials.html
+  name: Particle Tutorials
+  type: Tutorials
+- url: https://www.mathworks.com/matlabcentral/answers/index?term=tag%3Athingspeak
+  name: MATLAB Answers — ThingSpeak
+  type: Forum
+- url: https://www.mathworks.com/matlabcentral/communitycontests/contests/4/entries
+  name: IoT Contest
+  type: Community
+- url: https://blogs.mathworks.com/iot/
+  name: MathWorks IoT Blog
+  type: Blog
+- url: https://www.mathworks.com/products/thingspeak.html
+  name: ThingSpeak Product Page
+  type: ProductPage
+- url: https://www.linkedin.com/company/the-mathworks_2/
+  name: MathWorks on LinkedIn
+  type: LinkedIn
+- url: https://x.com/MATLAB
+  name: MATLAB on X
+  type: X
+- url: https://www.youtube.com/user/MATLAB
+  name: MATLAB on YouTube
+  type: YouTube
+- url: https://plans/thingspeak-plans-pricing.yml
+  type: Plans
+- url: https://rate-limits/thingspeak-rate-limits.yml
+  type: RateLimits
+- url: https://finops/thingspeak-finops.yml
+  type: FinOps
+- type: Features
+  data:
+  - IoT analytics platform from MathWorks integrating natively with MATLAB and Simulink
+  - Channels with up to eight numeric fields plus latitude, longitude, elevation, and status string
+  - REST API over `api.thingspeak.com` for channel CRUD, feed read/write, and bulk updates
+  - MQTT broker at `mqtt3.thingspeak.com` on ports 1883 / 8883 / 80 / 443 (WebSocket path `/mqtt`)
+  - MATLAB Analysis app for scheduled/triggered compute against channel data
+  - MATLAB Visualizations app for custom embeddable plots
+  - React app providing a rules engine triggered by channel data conditions
+  - TalkBack queue for asynchronous cloud-to-device command delivery
+  - ThingHTTP for outbound webhooks to third-party services
+  - TimeControl scheduler (cron-like) for periodic actions
+  - Server-rendered chart embeds via the Charts API
+  - Email alerts via the Alerts surface
+  - Public and private channels with read/write API keys
+  - Bulk update endpoint for high-volume devices (JSON and CSV batches)
+  - Native client libraries for Arduino, ESP8266, ESP32, and Particle
+  - Free tier (~3M messages/year) plus Standard, Home, Academic, and Student licenses
+  - 33M messages/year per paid unit (~90,400 messages/day)
+  - Inactivity monitoring and last-entry timestamps for device health
+  - Sharing channels publicly via read-only links and embedding charts in third-party sites
+  sources:
+  - https://thingspeak.mathworks.com/
+  - https://www.mathworks.com/help/thingspeak/rest-api.html
+  - https://www.mathworks.com/help/thingspeak/mqtt-api.html
+  - https://www.mathworks.com/help/thingspeak/mqtt-basics.html
+  - https://thingspeak.mathworks.com/prices
+  updated: '2026-05-25'
+created: '2026-05-25T00:00:00.000Z'
+modified: '2026-05-25'
+position: Consuming
+description: ThingSpeak is an IoT analytics platform from MathWorks that lets
+  devices aggregate, visualize, and analyze live data streams in the cloud.
+  Devices push telemetry to channels via a REST update endpoint or the
+  `mqtt3.thingspeak.com` MQTT broker, and the platform layers in MATLAB Analysis
+  for compute, MATLAB Visualizations for plotting, React for rules, TalkBack
+  for cloud-to-device commands, ThingHTTP for outbound webhooks, and
+  TimeControl for scheduling. ThingSpeak is the only mainstream IoT platform
+  with first-class MATLAB and Simulink integration, making it widely used in
+  academic research, environmental monitoring, smart agriculture, and energy
+  applications. Compatible with Arduino, ESP8266/ESP32, Raspberry Pi,
+  Particle, LoRaWAN gateways, and industrial controllers.
+maintainers:
+- FN: Kin Lane
+  email: info@apievangelist.com
+  X: apievangelist
+  url: https://apievangelist.com
+specificationVersion: '0.16'

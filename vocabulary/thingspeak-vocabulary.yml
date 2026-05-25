@@ -1,0 +1,71 @@
+vocabulary: ThingSpeak
+version: '1.0'
+created: '2026-05-25'
+modified: '2026-05-25'
+description: Domain vocabulary for the ThingSpeak IoT analytics platform from
+  MathWorks. Maps platform terms to the SOSA/SSN sensor ontology and schema.org
+  where appropriate.
+terms:
+  - name: Channel
+    definition: A container for time-series IoT data; up to eight named numeric
+      fields plus latitude, longitude, elevation, and a status string.
+    aliases:
+      - data stream
+      - feed source
+    mapsTo: sosa:Platform
+  - name: Field
+    definition: A single named numeric data column on a channel (field1 through
+      field8).
+    mapsTo: sosa:ObservableProperty
+  - name: Feed
+    definition: The ordered series of entries posted to a channel.
+    mapsTo: sosa:ObservationCollection
+  - name: Entry
+    definition: A single timestamped row of field values written to a channel.
+    aliases:
+      - update
+      - message
+    mapsTo: sosa:Observation
+  - name: Read API Key
+    definition: A per-channel secret that authorizes reading the channel's feed
+      and subscribing to its MQTT topics.
+  - name: Write API Key
+    definition: A per-channel secret that authorizes posting new entries to the
+      channel.
+  - name: User API Key
+    definition: A per-account secret that authorizes channel CRUD and other
+      account-scoped operations. Passed in the `THINGSPEAKAPIKEY` header.
+  - name: TalkBack
+    definition: A FIFO command queue used to push cloud-originated instructions
+      to devices that poll the queue.
+  - name: Command
+    definition: A single string instruction in a TalkBack queue.
+    mapsTo: schema:ControlAction
+  - name: React
+    definition: A rule that watches channel data and fires a ThingHTTP request,
+      MATLAB Analysis, TalkBack command, or other action when a condition is met.
+  - name: ThingHTTP
+    definition: A named outbound HTTP request that ThingSpeak can fire via React,
+      TimeControl, or a polling device.
+  - name: TimeControl
+    definition: A scheduled action (one-shot or recurring) that triggers
+      ThingHTTP, TalkBack, or MATLAB Analysis.
+  - name: MATLAB Analysis
+    definition: A server-side MATLAB script that runs against channel data,
+      optionally on a schedule or React trigger, and can write results back via
+      `thingSpeakWrite`.
+  - name: MATLAB Visualizations
+    definition: A server-side MATLAB script that renders a plot embedded on a
+      channel view.
+  - name: Bulk Update
+    definition: A single HTTP request that contains many entries (up to 14,400
+      paid / 960 free) — used by devices that cache data offline.
+  - name: MQTT Device
+    definition: A ThingSpeak-managed credential set (Client ID, Username,
+      Password) provisioned for MQTT publish/subscribe.
+  - name: Inactivity Monitor
+    definition: An automatic trigger that fires when a channel has not received
+      an update for a configured interval.
+  - name: License Unit
+    definition: A pricing unit of 33M messages/year sold under one of four
+      license types (Standard, Home, Academic, Student). Stacks additively.

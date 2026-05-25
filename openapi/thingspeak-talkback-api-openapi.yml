@@ -1,0 +1,162 @@
+openapi: 3.0.3
+info:
+  title: ThingSpeak TalkBack API
+  version: '1.0'
+  description: Asynchronous command queue for cloud-to-device communication. Devices
+    poll for the next command and execute it; commands are added/updated/deleted via
+    REST.
+  contact:
+    name: MathWorks
+    url: https://www.mathworks.com/help/thingspeak/talkbackapp.html
+servers:
+- url: https://api.thingspeak.com
+security:
+- TalkBackKeyQuery: []
+paths:
+  /talkbacks/{talkback_id}/commands.json:
+    get:
+      summary: List Commands
+      operationId: listCommands
+      parameters:
+      - $ref: '#/components/parameters/TalkBackId'
+      - $ref: '#/components/parameters/ApiKey'
+      responses:
+        '200':
+          description: All commands in the queue (including executed ones).
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Command'
+    post:
+      summary: Add Command
+      operationId: addCommand
+      parameters:
+      - $ref: '#/components/parameters/TalkBackId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandInput'
+      responses:
+        '200':
+          description: Command added to the queue.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Command'
+  /talkbacks/{talkback_id}/commands/execute.json:
+    get:
+      summary: Execute Next Command
+      operationId: executeNextCommand
+      description: Devices call this endpoint to atomically receive and dequeue the
+        next pending command.
+      parameters:
+      - $ref: '#/components/parameters/TalkBackId'
+      - $ref: '#/components/parameters/ApiKey'
+      responses:
+        '200':
+          description: The next command (or empty if queue is empty).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Command'
+  /talkbacks/{talkback_id}/commands/{command_id}.json:
+    get:
+      summary: Read Command
+      operationId: readCommand
+      parameters:
+      - $ref: '#/components/parameters/TalkBackId'
+      - $ref: '#/components/parameters/CommandId'
+      - $ref: '#/components/parameters/ApiKey'
+      responses:
+        '200':
+          description: A specific command in the queue.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Command'
+    put:
+      summary: Update Command
+      operationId: updateCommand
+      parameters:
+      - $ref: '#/components/parameters/TalkBackId'
+      - $ref: '#/components/parameters/CommandId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandInput'
+      responses:
+        '200':
+          description: Command updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Command'
+    delete:
+      summary: Delete Command
+      operationId: deleteCommand
+      parameters:
+      - $ref: '#/components/parameters/TalkBackId'
+      - $ref: '#/components/parameters/CommandId'
+      - $ref: '#/components/parameters/ApiKey'
+      responses:
+        '200':
+          description: Command deleted.
+components:
+  securitySchemes:
+    TalkBackKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+  parameters:
+    TalkBackId:
+      in: path
+      name: talkback_id
+      required: true
+      schema:
+        type: integer
+    CommandId:
+      in: path
+      name: command_id
+      required: true
+      schema:
+        type: integer
+    ApiKey:
+      in: query
+      name: api_key
+      required: true
+      schema:
+        type: string
+  schemas:
+    CommandInput:
+      type: object
+      required:
+      - command_string
+      properties:
+        api_key:
+          type: string
+        command_string:
+          type: string
+        position:
+          type: integer
+    Command:
+      type: object
+      properties:
+        id:
+          type: integer
+        command_string:
+          type: string
+        position:
+          type: integer
+        executed_at:
+          type: string
+          format: date-time
+          nullable: true
+        created_at:
+          type: string
+          format: date-time

@@ -1,0 +1,49 @@
+{
+  "@context": {
+    "@vocab": "https://thingspeak.mathworks.com/vocab#",
+    "schema": "http://schema.org/",
+    "ssn": "http://www.w3.org/ns/ssn/",
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "qudt": "http://qudt.org/schema/qudt/",
+    "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Channel": "sosa:Platform",
+    "Feed": "sosa:ObservationCollection",
+    "Entry": "sosa:Observation",
+    "Field": "sosa:ObservableProperty",
+    "Device": "sosa:Sensor",
+    "TalkBack": "schema:Action",
+    "Command": "schema:ControlAction",
+    "id": "schema:identifier",
+    "name": "schema:name",
+    "description": "schema:description",
+    "created_at": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updated_at": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "entry_id": "schema:identifier",
+    "latitude": "geo:lat",
+    "longitude": "geo:long",
+    "elevation": "schema:elevation",
+    "field1": "sosa:hasSimpleResult",
+    "field2": "sosa:hasSimpleResult",
+    "field3": "sosa:hasSimpleResult",
+    "field4": "sosa:hasSimpleResult",
+    "field5": "sosa:hasSimpleResult",
+    "field6": "sosa:hasSimpleResult",
+    "field7": "sosa:hasSimpleResult",
+    "field8": "sosa:hasSimpleResult",
+    "status": "schema:status",
+    "tags": "schema:keywords",
+    "public_flag": "schema:isAccessibleForFree",
+    "api_keys": "schema:accessCode",
+    "channel_id": {
+      "@id": "schema:isPartOf",
+      "@type": "@id"
+    }
+  }
+}

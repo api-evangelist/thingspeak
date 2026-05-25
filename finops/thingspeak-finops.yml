@@ -1,0 +1,75 @@
+specification: FOCUS-aligned FinOps profile (API Commons)
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/FinOps
+provider: ThingSpeak
+providerId: thingspeak
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - FinOps
+  - IoT
+  - License
+description: FinOps view of ThingSpeak's commercial surface — annual license units
+  rather than usage-based metering, plus a non-commercial free tier capped at ~3M
+  messages/year.
+sources:
+  - https://thingspeak.mathworks.com/prices
+  - https://thingspeak.mathworks.com/pages/license_faq
+billingModel:
+  primary: annual-license-unit
+  description: Paid use is sold in annual license units; each unit grants 33M
+    messages/year and a fixed channel/user allowance. Units are restricted by
+    license type (Standard, Home, Academic, Student) to specific user populations.
+  meters:
+    - id: messages
+      name: Messages
+      unit: count
+      description: A "message" is a single channel feed entry (one update to one
+        channel — fields, location, status all count as a single message).
+      includedAllowance:
+        free: 3000000-per-year
+        paid-unit: 33000000-per-year
+    - id: channels
+      name: Channels
+      unit: count
+      description: Number of channels owned by the user.
+      includedAllowance:
+        free: limited
+        paid-unit: fixed
+    - id: users
+      name: Users
+      unit: count
+      description: Number of distinct ThingSpeak users covered by the license.
+      includedAllowance:
+        free: 1
+        paid-unit: fixed
+focusMapping:
+  ChargeCategory: Usage
+  PricingCategory: Committed
+  PricingUnit: messages-per-year
+  CommitmentDiscountCategory: Spend
+  CommitmentDiscountType: License Unit
+  BillingPeriodStart: license-anniversary
+  BillingPeriodEnd: license-anniversary-plus-1y
+  Region: global
+  ServiceCategory: Internet of Things
+  ServiceSubcategory: IoT Analytics Platform
+  ProviderName: MathWorks
+  PublisherName: MathWorks
+  InvoiceIssuerName: MathWorks
+guidance:
+  - Choose the license type that matches the user population — Standard for
+    commercial/government, Academic for institutional teaching/research, Student
+    for coursework, Home for personal hobbyists, Free for non-commercial small
+    projects.
+  - Right-size by counting projected messages/year (channels x updates-per-day x
+    365) and adding units in increments of 33M.
+  - Bulk-update aggregation (up to 14,400 messages per request on paid plans)
+    reduces HTTP overhead but does not reduce the message count for billing.
+  - The 1-second (paid) / 15-second (free) minimum update interval per channel
+    is the binding throughput limit for single-channel devices; for higher
+    rates, distribute across multiple channels.
+  - MATLAB Analysis runs against ThingSpeak channels count against the
+    license's MATLAB compute allowance, not the channel-message count.
+  - There is no observed overage charge — overruns are blocked, not billed.

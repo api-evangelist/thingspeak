@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/thingspeak/main/json-schema/thingspeak-feed-schema.json",
+  "title": "ThingSpeak Feed Entry",
+  "description": "A single time-series entry posted to a ThingSpeak channel.",
+  "type": "object",
+  "properties": {
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp at which the entry was created. Must be unique within the channel."
+    },
+    "entry_id": {
+      "type": "integer",
+      "description": "Monotonically increasing per-channel entry identifier."
+    },
+    "field1": {
+      "type": "string"
+    },
+    "field2": {
+      "type": "string"
+    },
+    "field3": {
+      "type": "string"
+    },
+    "field4": {
+      "type": "string"
+    },
+    "field5": {
+      "type": "string"
+    },
+    "field6": {
+      "type": "string"
+    },
+    "field7": {
+      "type": "string"
+    },
+    "field8": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "number"
+    },
+    "longitude": {
+      "type": "number"
+    },
+    "elevation": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string"
+    }
+  },
+  "required": ["created_at", "entry_id"]
+}

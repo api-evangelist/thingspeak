@@ -1,0 +1,42 @@
+extends:
+  - spectral:oas
+rules:
+  thingspeak-operation-summary-required:
+    description: Every operation MUST have a summary in Title Case.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: summary
+      function: truthy
+  thingspeak-operation-id-required:
+    description: Every operation MUST have an operationId.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: operationId
+      function: truthy
+  thingspeak-info-contact:
+    description: The info block SHOULD reference MathWorks documentation.
+    severity: info
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+  thingspeak-server-https:
+    description: Servers MUST use HTTPS for REST endpoints.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://'
+  thingspeak-channel-id-integer:
+    description: channel_id path parameters MUST be typed as integer.
+    severity: warn
+    given: $.paths[?(@property.match(/{channel_id}/))][*].parameters[?(@.name == 'channel_id')].schema
+    then:
+      field: type
+      function: enumeration
+      functionOptions:
+        values:
+          - integer

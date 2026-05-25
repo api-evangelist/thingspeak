@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/thingspeak/main/json-schema/thingspeak-channel-schema.json",
+  "title": "ThingSpeak Channel",
+  "description": "A ThingSpeak channel — the primary container for time-series IoT data. Holds up to eight named numeric fields plus optional location metadata.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Numeric channel identifier."
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "number",
+      "minimum": -90,
+      "maximum": 90
+    },
+    "longitude": {
+      "type": "number",
+      "minimum": -180,
+      "maximum": 180
+    },
+    "elevation": {
+      "type": "number"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "last_entry_id": {
+      "type": "integer"
+    },
+    "public_flag": {
+      "type": "boolean"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "field1": {
+      "type": "string"
+    },
+    "field2": {
+      "type": "string"
+    },
+    "field3": {
+      "type": "string"
+    },
+    "field4": {
+      "type": "string"
+    },
+    "field5": {
+      "type": "string"
+    },
+    "field6": {
+      "type": "string"
+    },
+    "field7": {
+      "type": "string"
+    },
+    "field8": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "api_keys": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "api_key": {
+            "type": "string"
+          },
+          "write_flag": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "required": ["id", "name"]
+}

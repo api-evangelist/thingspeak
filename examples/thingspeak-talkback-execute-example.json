@@ -1,0 +1,19 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.thingspeak.com/talkbacks/7890/commands/execute.json?api_key=YOUR_TALKBACK_API_KEY"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "id": 5512,
+      "command_string": "RELAY_ON",
+      "position": 1,
+      "executed_at": "2026-05-25T14:32:17Z",
+      "created_at": "2026-05-25T14:30:02Z"
+    }
+  }
+}

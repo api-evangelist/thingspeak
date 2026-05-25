@@ -1,0 +1,173 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: ThingSpeak
+providerId: thingspeak
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - IoT
+  - Analytics
+  - MQTT
+  - MathWorks
+description: ThingSpeak plans reconciled from thingspeak.mathworks.com/prices.
+  Free plan is non-commercial and capped at ~3M messages/year. Paid licenses are
+  sold in annual units of 33M messages/year (~90,400/day) under four license
+  types — Standard (commercial/government), Home (personal), Academic
+  (teaching/research), and Student.
+sources:
+  - https://thingspeak.mathworks.com/prices
+  - https://thingspeak.mathworks.com/pages/license_faq
+plans:
+  - id: thingspeak-free
+    name: Free
+    type: free
+    description: Non-commercial use only. ~3M messages per year (~8,200/day) across
+      a limited number of channels per user.
+    entries:
+      - label: Messages
+        name: messages
+        type: included
+        metric: message
+        limit: 3000000
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Daily message rate
+        name: daily-messages
+        type: included
+        metric: message
+        limit: 8200
+        timeFrame: day
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - REST + MQTT access for non-commercial projects
+      - MATLAB Analysis (limited compute)
+      - MATLAB Visualizations
+      - Public and private channels with read/write API keys
+      - React, ThingHTTP, TalkBack, TimeControl apps
+  - id: thingspeak-standard
+    name: Standard
+    type: license-unit
+    description: Commercial, government, or other organizational use. Sold per
+      annual unit. Each unit grants 33M messages/year (~90,400 messages/day) and a
+      fixed number of channels/users.
+    entries:
+      - label: Annual unit
+        name: standard-unit
+        type: license
+        metric: unit
+        limit: 1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact-sales
+        userMultiplied: false
+      - label: Messages per unit
+        name: messages-per-unit
+        type: included
+        metric: message
+        limit: 33000000
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - 33M messages/year per unit (~90,400/day)
+      - Commercial license
+      - Stacks across multiple units for higher throughput
+      - Full REST + MQTT access
+      - MATLAB Analysis & Visualizations
+  - id: thingspeak-home
+    name: Home
+    type: license-unit
+    description: Personal use only. Same unit specification as Standard but
+      restricted to non-commercial, non-academic, non-government use.
+    entries:
+      - label: Annual unit
+        name: home-unit
+        type: license
+        metric: unit
+        limit: 1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact-sales
+        userMultiplied: false
+      - label: Messages per unit
+        name: messages-per-unit
+        type: included
+        metric: message
+        limit: 33000000
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - 33M messages/year per unit
+      - Personal/hobbyist use only
+  - id: thingspeak-academic
+    name: Academic
+    type: license-unit
+    description: Teaching and academic research at a degree-granting institution.
+    entries:
+      - label: Annual unit
+        name: academic-unit
+        type: license
+        metric: unit
+        limit: 1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact-sales
+        userMultiplied: false
+      - label: Messages per unit
+        name: messages-per-unit
+        type: included
+        metric: message
+        limit: 33000000
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - 33M messages/year per unit
+      - Restricted to degree-granting institutions
+  - id: thingspeak-student
+    name: Student
+    type: license-unit
+    description: Use in conjunction with courses offered at a degree-granting
+      institution.
+    entries:
+      - label: Annual unit
+        name: student-unit
+        type: license
+        metric: unit
+        limit: 1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact-sales
+        userMultiplied: false
+      - label: Messages per unit
+        name: messages-per-unit
+        type: included
+        metric: message
+        limit: 33000000
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - 33M messages/year per unit
+      - Tied to coursework at a degree-granting institution

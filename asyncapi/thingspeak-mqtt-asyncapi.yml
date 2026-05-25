@@ -1,0 +1,137 @@
+asyncapi: 2.6.0
+info:
+  title: ThingSpeak MQTT API
+  version: '1.0'
+  description: |
+    ThingSpeak's MQTT broker at `mqtt3.thingspeak.com`. Devices publish channel
+    updates and subscribe to channel/field feeds using MQTT credentials (Client ID,
+    Username, Password) provisioned in the ThingSpeak portal.
+
+    Available transports:
+    - TCP on port 1883 (unencrypted)
+    - TCP on port 8883 (TLS)
+    - WebSocket on port 80 (path `/mqtt`, unencrypted)
+    - WebSocket on port 443 (path `/mqtt`, TLS)
+
+    QoS 0 only. Connections time out after one hour of inactivity.
+servers:
+  production-tcp:
+    url: mqtt3.thingspeak.com:1883
+    protocol: mqtt
+    description: Production MQTT broker (unencrypted TCP).
+  production-tcp-tls:
+    url: mqtt3.thingspeak.com:8883
+    protocol: mqtts
+    description: Production MQTT broker (TLS TCP).
+  production-ws:
+    url: mqtt3.thingspeak.com:80/mqtt
+    protocol: ws
+    description: Production MQTT broker (unencrypted WebSocket).
+  production-wss:
+    url: mqtt3.thingspeak.com:443/mqtt
+    protocol: wss
+    description: Production MQTT broker (TLS WebSocket).
+channels:
+  channels/{channelID}/publish:
+    description: Publish multi-field updates to a channel. Payload is form-encoded
+      (`field1=value&field2=value&status=...`).
+    parameters:
+      channelID:
+        schema:
+          type: integer
+    publish:
+      operationId: publishChannelFeed
+      message:
+        $ref: '#/components/messages/ChannelUpdate'
+  channels/{channelID}/publish/fields/field{fieldNumber}:
+    description: Publish a single field's value.
+    parameters:
+      channelID:
+        schema:
+          type: integer
+      fieldNumber:
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 8
+    publish:
+      operationId: publishFieldValue
+      message:
+        $ref: '#/components/messages/FieldValue'
+  channels/{channelID}/subscribe/fields/field{fieldNumber}/{readAPIKey}:
+    description: Subscribe to a specific field on a channel. Requires the channel's
+      Read API Key in the topic.
+    parameters:
+      channelID:
+        schema:
+          type: integer
+      fieldNumber:
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 8
+      readAPIKey:
+        schema:
+          type: string
+    subscribe:
+      operationId: subscribeFieldFeed
+      message:
+        $ref: '#/components/messages/FieldValue'
+  channels/{channelID}/subscribe/json/{readAPIKey}:
+    description: Subscribe to all channel updates as JSON.
+    parameters:
+      channelID:
+        schema:
+          type: integer
+      readAPIKey:
+        schema:
+          type: string
+    subscribe:
+      operationId: subscribeChannelFeedJson
+      message:
+        $ref: '#/components/messages/ChannelUpdateJson'
+components:
+  messages:
+    ChannelUpdate:
+      contentType: application/x-www-form-urlencoded
+      payload:
+        type: string
+        example: field1=23.5&field2=45.2&status=ok
+    FieldValue:
+      contentType: text/plain
+      payload:
+        type: string
+        example: '23.5'
+    ChannelUpdateJson:
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          channel_id:
+            type: integer
+          created_at:
+            type: string
+            format: date-time
+          entry_id:
+            type: integer
+          field1:
+            type: string
+          field2:
+            type: string
+          field3:
+            type: string
+          field4:
+            type: string
+          field5:
+            type: string
+          field6:
+            type: string
+          field7:
+            type: string
+          field8:
+            type: string
+  securitySchemes:
+    MqttUserPassword:
+      type: userPassword
+      description: MQTT device credentials (Client ID, Username, Password) created
+        in the ThingSpeak portal under Devices > MQTT.

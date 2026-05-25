@@ -1,0 +1,145 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ThingSpeak Feeds API — Feeds
+  description: ThingSpeak Feeds API — Feeds. 4 operations. Lead operation — Read
+    Channel Feed. Self-contained Naftiko capability covering ThingSpeak's read
+    surface.
+  tags:
+  - ThingSpeak
+  - Feeds
+  - IoT
+  - Time Series
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    THINGSPEAK_READ_API_KEY: THINGSPEAK_READ_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: feeds-feeds
+    baseUri: https://api.thingspeak.com
+    description: ThingSpeak Feeds API — read time-series channel data.
+    resources:
+    - name: channel-feeds
+      path: /channels/{channel_id}/feeds.json
+      operations:
+      - name: readchannelfeed
+        method: GET
+        description: Read the most recent N entries from a channel.
+        inputParameters:
+        - name: channel_id
+          in: path
+          type: integer
+          required: true
+        - name: results
+          in: query
+          type: integer
+        - name: days
+          in: query
+          type: integer
+        - name: api_key
+          in: query
+          type: string
+    - name: field-feed
+      path: /channels/{channel_id}/fields/{field_id}.json
+      operations:
+      - name: readfieldfeed
+        method: GET
+        description: Read entries for a single field.
+        inputParameters:
+        - name: channel_id
+          in: path
+          type: integer
+          required: true
+        - name: field_id
+          in: path
+          type: integer
+          required: true
+        - name: results
+          in: query
+          type: integer
+        - name: api_key
+          in: query
+          type: string
+    - name: channel-last
+      path: /channels/{channel_id}/feeds/last.json
+      operations:
+      - name: readlastentry
+        method: GET
+        description: Read the last channel entry.
+        inputParameters:
+        - name: channel_id
+          in: path
+          type: integer
+          required: true
+        - name: api_key
+          in: query
+          type: string
+    - name: field-last
+      path: /channels/{channel_id}/fields/{field_id}/last.json
+      operations:
+      - name: readlastfieldentry
+        method: GET
+        description: Read the last value for a field.
+        inputParameters:
+        - name: channel_id
+          in: path
+          type: integer
+          required: true
+        - name: field_id
+          in: path
+          type: integer
+          required: true
+        - name: api_key
+          in: query
+          type: string
+  exposes:
+  - type: mcp
+    namespace: feeds-feeds-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ThingSpeak Feeds API.
+    tools:
+    - name: thingspeak-read-channel-feed
+      description: Read recent entries from a channel.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: feeds-feeds.readchannelfeed
+      with:
+        channel_id: tools.channel_id
+        results: tools.results
+        days: tools.days
+        api_key: tools.api_key
+    - name: thingspeak-read-field-feed
+      description: Read entries for a single field.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: feeds-feeds.readfieldfeed
+      with:
+        channel_id: tools.channel_id
+        field_id: tools.field_id
+        results: tools.results
+        api_key: tools.api_key
+    - name: thingspeak-read-last-entry
+      description: Read the last channel entry.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: feeds-feeds.readlastentry
+      with:
+        channel_id: tools.channel_id
+        api_key: tools.api_key
+    - name: thingspeak-read-last-field-entry
+      description: Read the last value for a field.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: feeds-feeds.readlastfieldentry
+      with:
+        channel_id: tools.channel_id
+        field_id: tools.field_id
+        api_key: tools.api_key
