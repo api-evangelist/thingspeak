@@ -1,0 +1,88 @@
+arazzo: 1.0.1
+info:
+  title: ThingSpeak Inspect Channel and Aggregate Feed
+  summary: Read a channel's settings, then pull an averaged feed over a recent window.
+  description: >-
+    A reporting flow that first reads a channel's metadata to confirm it exists and
+    capture its last entry id, then reads its feed over a recent day window with
+    server-side averaging applied so a dashboard can plot a smoothed series. Every
+    step spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: channelsApi
+  url: ../openapi/thingspeak-channels-api-openapi.yml
+  type: openapi
+- name: feedsApi
+  url: ../openapi/thingspeak-feeds-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: inspect-channel-and-aggregate-feed
+  summary: Read channel settings, then read an averaged feed over a day window.
+  description: >-
+    Reads channel metadata, then reads its feed for the last N days with an
+    averaging interval applied server-side.
+  inputs:
+    type: object
+    required:
+    - userApiKey
+    - channelId
+    properties:
+      userApiKey:
+        type: string
+        description: User API Key on the THINGSPEAKAPIKEY header to read channel settings.
+      channelId:
+        type: integer
+        description: Numeric id of the channel to inspect and aggregate.
+      readApiKey:
+        type: string
+        description: Optional Channel Read API Key for reading a private feed.
+      days:
+        type: integer
+        description: Number of days of history to include.
+      average:
+        type: string
+        description: Averaging interval in minutes (10, 15, 20, 30, 60, 240, 1440, daily).
+  steps:
+  - stepId: readChannel
+    description: >-
+      Read the channel metadata to confirm it exists and capture its last entry id.
+    operationId: readChannel
+    parameters:
+    - name: channel_id
+      in: path
+      value: $inputs.channelId
+    - name: THINGSPEAKAPIKEY
+      in: header
+      value: $inputs.userApiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      channelName: $response.body#/name
+      lastEntryId: $response.body#/last_entry_id
+  - stepId: readAggregatedFeed
+    description: >-
+      Read the channel feed over the recent window with averaging applied.
+    operationId: readChannelFeed
+    parameters:
+    - name: channel_id
+      in: path
+      value: $inputs.channelId
+    - name: api_key
+      in: query
+      value: $inputs.readApiKey
+    - name: days
+      in: query
+      value: $inputs.days
+    - name: average
+      in: query
+      value: $inputs.average
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      channel: $response.body#/channel
+      feeds: $response.body#/feeds
+  outputs:
+    channelName: $steps.readChannel.outputs.channelName
+    lastEntryId: $steps.readChannel.outputs.lastEntryId
+    feeds: $steps.readAggregatedFeed.outputs.feeds

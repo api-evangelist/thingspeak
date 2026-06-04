@@ -1,0 +1,107 @@
+arazzo: 1.0.1
+info:
+  title: ThingSpeak Revise Queued TalkBack Command
+  summary: Queue a command, revise its text before a device runs it, then read it back.
+  description: >-
+    A correction flow for a command that is still pending in a TalkBack queue. It
+    adds a command, updates that same command's text while it is still queued, and
+    reads the command back to confirm the revision. This lets an operator fix a
+    mistyped instruction before any device executes it. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: talkbackApi
+  url: ../openapi/thingspeak-talkback-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: revise-queued-talkback-command
+  summary: Queue a command, update its text, then read the revised command.
+  description: >-
+    Adds a command, captures its id, updates the command text, and reads the
+    command back to confirm the change.
+  inputs:
+    type: object
+    required:
+    - talkbackId
+    - apiKey
+    - commandString
+    - revisedCommandString
+    properties:
+      talkbackId:
+        type: integer
+        description: Numeric id of the TalkBack queue.
+      apiKey:
+        type: string
+        description: TalkBack API Key (api_key query parameter).
+      commandString:
+        type: string
+        description: Initial command text to queue.
+      revisedCommandString:
+        type: string
+        description: Corrected command text to write over the queued command.
+      position:
+        type: integer
+        description: Optional position in the queue for the command.
+  steps:
+  - stepId: addCommand
+    description: >-
+      Add the initial command to the TalkBack queue.
+    operationId: addCommand
+    parameters:
+    - name: talkback_id
+      in: path
+      value: $inputs.talkbackId
+    requestBody:
+      contentType: application/json
+      payload:
+        api_key: $inputs.apiKey
+        command_string: $inputs.commandString
+        position: $inputs.position
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      commandId: $response.body#/id
+  - stepId: updateCommand
+    description: >-
+      Update the queued command with the corrected command text.
+    operationId: updateCommand
+    parameters:
+    - name: talkback_id
+      in: path
+      value: $inputs.talkbackId
+    - name: command_id
+      in: path
+      value: $steps.addCommand.outputs.commandId
+    requestBody:
+      contentType: application/json
+      payload:
+        api_key: $inputs.apiKey
+        command_string: $inputs.revisedCommandString
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      commandString: $response.body#/command_string
+  - stepId: readCommand
+    description: >-
+      Read the command back to confirm the revised text was stored.
+    operationId: readCommand
+    parameters:
+    - name: talkback_id
+      in: path
+      value: $inputs.talkbackId
+    - name: command_id
+      in: path
+      value: $steps.addCommand.outputs.commandId
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      commandId: $response.body#/id
+      commandString: $response.body#/command_string
+      executedAt: $response.body#/executed_at
+  outputs:
+    commandId: $steps.addCommand.outputs.commandId
+    revisedCommandString: $steps.readCommand.outputs.commandString

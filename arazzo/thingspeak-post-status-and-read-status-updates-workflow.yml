@@ -1,0 +1,82 @@
+arazzo: 1.0.1
+info:
+  title: ThingSpeak Post Status and Read Status Updates
+  summary: Write an entry carrying a status message, then read the channel's status update feed.
+  description: >-
+    A flow for annotating a channel timeline with human-readable status messages.
+    It writes an entry that carries a status string alongside an optional field
+    value, then reads the channel's status update feed to confirm the message was
+    recorded. Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: updateApi
+  url: ../openapi/thingspeak-update-api-openapi.yml
+  type: openapi
+- name: feedsApi
+  url: ../openapi/thingspeak-feeds-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: post-status-and-read-status-updates
+  summary: Attach a status message to an entry and read the status feed back.
+  description: >-
+    Posts an update with a status message, then reads the channel status update
+    feed to verify the annotation was stored.
+  inputs:
+    type: object
+    required:
+    - channelId
+    - writeApiKey
+    - status
+    properties:
+      channelId:
+        type: integer
+        description: Numeric id of the channel to annotate and read status from.
+      writeApiKey:
+        type: string
+        description: Channel Write API Key used to authorize the update.
+      readApiKey:
+        type: string
+        description: Optional Channel Read API Key used to read status updates.
+      status:
+        type: string
+        description: Status message to attach to the new entry.
+      field1Value:
+        type: string
+        description: Optional value to write into field1 alongside the status.
+  steps:
+  - stepId: postStatus
+    description: >-
+      Write an entry that carries a status message and an optional field value.
+    operationId: updateChannelFeedGet
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.writeApiKey
+    - name: field1
+      in: query
+      value: $inputs.field1Value
+    - name: status
+      in: query
+      value: $inputs.status
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      response: $response.body
+  - stepId: readStatusUpdates
+    description: >-
+      Read the channel status update feed to confirm the status message landed.
+    operationId: readStatusUpdates
+    parameters:
+    - name: channel_id
+      in: path
+      value: $inputs.channelId
+    - name: api_key
+      in: query
+      value: $inputs.readApiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      statusFeed: $response.body
+  outputs:
+    statusFeed: $steps.readStatusUpdates.outputs.statusFeed

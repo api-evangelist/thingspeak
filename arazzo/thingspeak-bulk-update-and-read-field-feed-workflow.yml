@@ -1,0 +1,96 @@
+arazzo: 1.0.1
+info:
+  title: ThingSpeak Bulk Update and Read Field Feed
+  summary: Upload a batch of cached readings, then read a single field's recent feed.
+  description: >-
+    The flow an offline-caching device uses to flush buffered readings. It uploads
+    a batch of messages to the channel in one bulk request, then reads back the
+    recent history of one field to confirm the batch was ingested. The bulk
+    endpoint returns 202 Accepted because entries are queued for ingestion. Every
+    step spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: updateApi
+  url: ../openapi/thingspeak-update-api-openapi.yml
+  type: openapi
+- name: feedsApi
+  url: ../openapi/thingspeak-feeds-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: bulk-update-and-read-field-feed
+  summary: Upload a batch of readings and read one field's recent feed back.
+  description: >-
+    Posts a bulk update of cached entries, then reads the recent history for a
+    single field to verify ingestion.
+  inputs:
+    type: object
+    required:
+    - channelId
+    - writeApiKey
+    - updates
+    - fieldId
+    properties:
+      channelId:
+        type: integer
+        description: Numeric id of the channel to bulk-write and then read.
+      writeApiKey:
+        type: string
+        description: Channel Write API Key used inside the bulk update payload.
+      readApiKey:
+        type: string
+        description: Optional Channel Read API Key for reading the field feed.
+      updates:
+        type: array
+        description: Array of update objects, each with field values and optional created_at.
+        items:
+          type: object
+      fieldId:
+        type: integer
+        description: Field number (1-8) whose feed to read back.
+      results:
+        type: integer
+        description: Number of field entries to retrieve.
+  steps:
+  - stepId: bulkUpdate
+    description: >-
+      Upload the buffered readings to the channel in a single bulk request.
+    operationId: bulkUpdateChannel
+    parameters:
+    - name: channel_id
+      in: path
+      value: $inputs.channelId
+    requestBody:
+      contentType: application/json
+      payload:
+        write_api_key: $inputs.writeApiKey
+        updates: $inputs.updates
+    successCriteria:
+    - condition: $statusCode == 202
+    outputs:
+      statusCode: $statusCode
+  - stepId: readFieldFeed
+    description: >-
+      Read the recent history of a single field to confirm the batch landed.
+    operationId: readFieldFeed
+    parameters:
+    - name: channel_id
+      in: path
+      value: $inputs.channelId
+    - name: field_id
+      in: path
+      value: $inputs.fieldId
+    - name: api_key
+      in: query
+      value: $inputs.readApiKey
+    - name: results
+      in: query
+      value: $inputs.results
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      channel: $response.body#/channel
+      feeds: $response.body#/feeds
+  outputs:
+    bulkStatusCode: $steps.bulkUpdate.outputs.statusCode
+    feeds: $steps.readFieldFeed.outputs.feeds

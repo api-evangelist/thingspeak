@@ -1,0 +1,81 @@
+arazzo: 1.0.1
+info:
+  title: ThingSpeak Discover Public Channel and Read Feed
+  summary: Search public channels by tag, then read the feed of the first match.
+  description: >-
+    A discovery flow for consuming open IoT data. It searches the public channel
+    directory by tag, selects the first matching channel, and reads its recent feed
+    entries. Public channels are readable without a channel read key, so the feed
+    read carries only the result count. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: channelsApi
+  url: ../openapi/thingspeak-channels-api-openapi.yml
+  type: openapi
+- name: feedsApi
+  url: ../openapi/thingspeak-feeds-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: discover-public-channel-and-read-feed
+  summary: Find a public channel by tag and read its recent feed.
+  description: >-
+    Searches public channels by tag, takes the first result's id, and reads its
+    most recent feed entries.
+  inputs:
+    type: object
+    required:
+    - tag
+    properties:
+      tag:
+        type: string
+        description: Tag to filter the public channel directory by.
+      username:
+        type: string
+        description: Optional username to further filter public channels.
+      page:
+        type: integer
+        description: Optional page number for the public channel listing.
+      results:
+        type: integer
+        description: Number of feed entries to retrieve from the matched channel.
+  steps:
+  - stepId: listPublicChannels
+    description: >-
+      Search the public channel directory by tag and optional username.
+    operationId: listPublicChannels
+    parameters:
+    - name: tag
+      in: query
+      value: $inputs.tag
+    - name: username
+      in: query
+      value: $inputs.username
+    - name: page
+      in: query
+      value: $inputs.page
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstChannelId: $response.body#/channels/0/id
+      channels: $response.body#/channels
+  - stepId: readFeed
+    description: >-
+      Read the recent feed entries of the first matching public channel.
+    operationId: readChannelFeed
+    parameters:
+    - name: channel_id
+      in: path
+      value: $steps.listPublicChannels.outputs.firstChannelId
+    - name: results
+      in: query
+      value: $inputs.results
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      channel: $response.body#/channel
+      feeds: $response.body#/feeds
+  outputs:
+    firstChannelId: $steps.listPublicChannels.outputs.firstChannelId
+    feeds: $steps.readFeed.outputs.feeds

@@ -1,0 +1,67 @@
+arazzo: 1.0.1
+info:
+  title: ThingSpeak Decommission Channel
+  summary: Clear all feed entries from a channel, then delete the channel itself.
+  description: >-
+    The teardown flow for retiring an IoT channel. It first clears every feed entry
+    from the channel so no stored data lingers, then deletes the channel itself.
+    Both operations require the User API Key on the THINGSPEAKAPIKEY header. Every
+    step spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: channelsApi
+  url: ../openapi/thingspeak-channels-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: decommission-channel
+  summary: Clear a channel's feed and then delete the channel.
+  description: >-
+    Clears all entries from the channel feed, then deletes the channel using the
+    user API key.
+  inputs:
+    type: object
+    required:
+    - userApiKey
+    - channelId
+    properties:
+      userApiKey:
+        type: string
+        description: User API Key sent on the THINGSPEAKAPIKEY header.
+      channelId:
+        type: integer
+        description: Numeric id of the channel to clear and delete.
+  steps:
+  - stepId: clearChannelFeed
+    description: >-
+      Delete all feed entries from the channel before removing it.
+    operationId: clearChannelFeed
+    parameters:
+    - name: channel_id
+      in: path
+      value: $inputs.channelId
+    - name: THINGSPEAKAPIKEY
+      in: header
+      value: $inputs.userApiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      clearStatus: $statusCode
+  - stepId: deleteChannel
+    description: >-
+      Delete the now-empty channel.
+    operationId: deleteChannel
+    parameters:
+    - name: channel_id
+      in: path
+      value: $inputs.channelId
+    - name: THINGSPEAKAPIKEY
+      in: header
+      value: $inputs.userApiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deleteStatus: $statusCode
+  outputs:
+    clearStatus: $steps.clearChannelFeed.outputs.clearStatus
+    deleteStatus: $steps.deleteChannel.outputs.deleteStatus

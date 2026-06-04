@@ -1,0 +1,74 @@
+arazzo: 1.0.1
+info:
+  title: ThingSpeak List Channels and Read Feed
+  summary: List the user's channels, then read recent feed entries from the first channel.
+  description: >-
+    A discovery-then-read flow for dashboards and exports. It lists the channels
+    the authenticated user owns, selects the first channel from the list, and
+    reads its most recent feed entries with a bounded result count. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: channelsApi
+  url: ../openapi/thingspeak-channels-api-openapi.yml
+  type: openapi
+- name: feedsApi
+  url: ../openapi/thingspeak-feeds-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: list-channels-and-read-feed
+  summary: List owned channels and read the first channel's recent feed.
+  description: >-
+    Lists the user's channels, takes the id of the first one, and reads the most
+    recent N feed entries from it.
+  inputs:
+    type: object
+    required:
+    - userApiKey
+    properties:
+      userApiKey:
+        type: string
+        description: User API Key sent on the THINGSPEAKAPIKEY header to list channels.
+      readApiKey:
+        type: string
+        description: Optional Channel Read API Key for reading a private channel feed.
+      results:
+        type: integer
+        description: Number of feed entries to retrieve (max 8000).
+  steps:
+  - stepId: listChannels
+    description: >-
+      List all channels owned by the authenticated user.
+    operationId: listChannels
+    parameters:
+    - name: THINGSPEAKAPIKEY
+      in: header
+      value: $inputs.userApiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstChannelId: $response.body#/0/id
+      channels: $response.body
+  - stepId: readFeed
+    description: >-
+      Read the most recent feed entries from the first channel in the list.
+    operationId: readChannelFeed
+    parameters:
+    - name: channel_id
+      in: path
+      value: $steps.listChannels.outputs.firstChannelId
+    - name: api_key
+      in: query
+      value: $inputs.readApiKey
+    - name: results
+      in: query
+      value: $inputs.results
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      channel: $response.body#/channel
+      feeds: $response.body#/feeds
+  outputs:
+    firstChannelId: $steps.listChannels.outputs.firstChannelId
+    feeds: $steps.readFeed.outputs.feeds

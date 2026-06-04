@@ -1,0 +1,70 @@
+arazzo: 1.0.1
+info:
+  title: ThingSpeak Sweep Executed TalkBack Commands
+  summary: List a TalkBack queue, then delete the first command to keep the queue tidy.
+  description: >-
+    A housekeeping flow for a TalkBack queue. It lists all commands in the queue,
+    including executed ones, takes the first command's id, and deletes it so stale
+    commands do not accumulate. Every step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: talkbackApi
+  url: ../openapi/thingspeak-talkback-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: sweep-executed-talkback-commands
+  summary: List a TalkBack queue and delete its first command.
+  description: >-
+    Lists the commands in the queue, captures the first command id, and deletes
+    that command.
+  inputs:
+    type: object
+    required:
+    - talkbackId
+    - apiKey
+    properties:
+      talkbackId:
+        type: integer
+        description: Numeric id of the TalkBack queue.
+      apiKey:
+        type: string
+        description: TalkBack API Key (api_key query parameter).
+  steps:
+  - stepId: listCommands
+    description: >-
+      List all commands in the queue, including executed ones.
+    operationId: listCommands
+    parameters:
+    - name: talkback_id
+      in: path
+      value: $inputs.talkbackId
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstCommandId: $response.body#/0/id
+      commands: $response.body
+  - stepId: deleteCommand
+    description: >-
+      Delete the first command in the queue to keep it tidy.
+    operationId: deleteCommand
+    parameters:
+    - name: talkback_id
+      in: path
+      value: $inputs.talkbackId
+    - name: command_id
+      in: path
+      value: $steps.listCommands.outputs.firstCommandId
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deleteStatus: $statusCode
+  outputs:
+    deletedCommandId: $steps.listCommands.outputs.firstCommandId
+    deleteStatus: $steps.deleteCommand.outputs.deleteStatus

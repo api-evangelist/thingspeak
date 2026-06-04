@@ -1,0 +1,95 @@
+arazzo: 1.0.1
+info:
+  title: ThingSpeak Relabel Field and Read Last Field Entry
+  summary: Update a channel's field label, then read the last value for that field.
+  description: >-
+    A maintenance flow for renaming a measurement on an existing channel. It
+    updates the channel settings to give a field a new label, then reads the most
+    recent value for that same field so an operator can confirm the field is still
+    receiving data after the relabel. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: channelsApi
+  url: ../openapi/thingspeak-channels-api-openapi.yml
+  type: openapi
+- name: feedsApi
+  url: ../openapi/thingspeak-feeds-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: relabel-field-and-read-last-field-entry
+  summary: Rename a channel field, then read that field's most recent value.
+  description: >-
+    Updates a channel field label via the channel settings endpoint, then reads
+    the last entry for that field.
+  inputs:
+    type: object
+    required:
+    - userApiKey
+    - channelId
+    - fieldId
+    - field1Label
+    properties:
+      userApiKey:
+        type: string
+        description: User API Key on the THINGSPEAKAPIKEY header to update the channel.
+      channelId:
+        type: integer
+        description: Numeric id of the channel to relabel and read.
+      readApiKey:
+        type: string
+        description: Optional Channel Read API Key for reading the field's last entry.
+      fieldId:
+        type: integer
+        description: Field number (1-8) whose last value to read after relabeling.
+      name:
+        type: string
+        description: Channel name to preserve on the update.
+      field1Label:
+        type: string
+        description: New label to assign to field1.
+  steps:
+  - stepId: updateChannel
+    description: >-
+      Update the channel settings to apply the new field label.
+    operationId: updateChannel
+    parameters:
+    - name: channel_id
+      in: path
+      value: $inputs.channelId
+    - name: THINGSPEAKAPIKEY
+      in: header
+      value: $inputs.userApiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.name
+        field1: $inputs.field1Label
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      channelId: $response.body#/id
+      updatedAt: $response.body#/updated_at
+  - stepId: readLastFieldEntry
+    description: >-
+      Read the most recent value for the field to confirm it still has data.
+    operationId: readLastFieldEntry
+    parameters:
+    - name: channel_id
+      in: path
+      value: $inputs.channelId
+    - name: field_id
+      in: path
+      value: $inputs.fieldId
+    - name: api_key
+      in: query
+      value: $inputs.readApiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      entryId: $response.body#/entry_id
+      createdAt: $response.body#/created_at
+  outputs:
+    updatedAt: $steps.updateChannel.outputs.updatedAt
+    lastFieldEntryId: $steps.readLastFieldEntry.outputs.entryId

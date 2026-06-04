@@ -232,6 +232,45 @@ kind: contract
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/thingspeak-bulk-update-and-read-field-feed-workflow.yml
+    name: ThingSpeak Bulk Update and Read Field Feed
+    summary: Upload a batch of cached readings, then read a single field's recent feed.
+  - url: arazzo/thingspeak-decommission-channel-workflow.yml
+    name: ThingSpeak Decommission Channel
+    summary: Clear all feed entries from a channel, then delete the channel itself.
+  - url: arazzo/thingspeak-discover-public-channel-and-read-feed-workflow.yml
+    name: ThingSpeak Discover Public Channel and Read Feed
+    summary: Search public channels by tag, then read the feed of the first match.
+  - url: arazzo/thingspeak-inspect-channel-and-aggregate-feed-workflow.yml
+    name: ThingSpeak Inspect Channel and Aggregate Feed
+    summary: Read a channel's settings, then pull an averaged feed over a recent window.
+  - url: arazzo/thingspeak-list-channels-and-read-feed-workflow.yml
+    name: ThingSpeak List Channels and Read Feed
+    summary: List the user's channels, then read recent feed entries from the first channel.
+  - url: arazzo/thingspeak-post-status-and-read-status-updates-workflow.yml
+    name: ThingSpeak Post Status and Read Status Updates
+    summary: Write an entry carrying a status message, then read the channel's status update feed.
+  - url: arazzo/thingspeak-provision-channel-and-seed-reading-workflow.yml
+    name: ThingSpeak Provision Channel and Seed First Reading
+    summary: Create a new channel, write an initial entry to it, then read that entry back.
+  - url: arazzo/thingspeak-queue-and-execute-talkback-command-workflow.yml
+    name: ThingSpeak Queue and Execute TalkBack Command
+    summary: Add a command to a TalkBack queue, then dequeue it as a device would.
+  - url: arazzo/thingspeak-relabel-field-and-read-last-field-entry-workflow.yml
+    name: ThingSpeak Relabel Field and Read Last Field Entry
+    summary: Update a channel's field label, then read the last value for that field.
+  - url: arazzo/thingspeak-revise-queued-talkback-command-workflow.yml
+    name: ThingSpeak Revise Queued TalkBack Command
+    summary: Queue a command, revise its text before a device runs it, then read it back.
+  - url: arazzo/thingspeak-sweep-executed-talkback-commands-workflow.yml
+    name: ThingSpeak Sweep Executed TalkBack Commands
+    summary: List a TalkBack queue, then delete the first command to keep the queue tidy.
+  - url: arazzo/thingspeak-write-update-and-read-last-entry-workflow.yml
+    name: ThingSpeak Write Update and Read Last Entry
+    summary: Post a new feed entry via the form-encoded update endpoint, then read the last entry back.
 - url: https://thingspeak.mathworks.com/
   name: ThingSpeak Portal
   type: Portal

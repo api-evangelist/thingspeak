@@ -1,0 +1,104 @@
+arazzo: 1.0.1
+info:
+  title: ThingSpeak Provision Channel and Seed First Reading
+  summary: Create a new channel, write an initial entry to it, then read that entry back.
+  description: >-
+    The canonical bootstrap flow for a new IoT device on ThingSpeak. It creates a
+    fresh channel with named fields, captures the generated channel id and its
+    write API key, writes a first reading into the channel using that write key,
+    and finally reads the most recent entry back to confirm the data landed. Every
+    step spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: channelsApi
+  url: ../openapi/thingspeak-channels-api-openapi.yml
+  type: openapi
+- name: updateApi
+  url: ../openapi/thingspeak-update-api-openapi.yml
+  type: openapi
+- name: feedsApi
+  url: ../openapi/thingspeak-feeds-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-channel-and-seed-reading
+  summary: Create a channel, write its first reading, and read the entry back.
+  description: >-
+    Creates a channel, extracts the write API key from the channel response,
+    writes a single entry with that key, and reads the last entry to verify.
+  inputs:
+    type: object
+    required:
+    - userApiKey
+    - name
+    - field1Value
+    properties:
+      userApiKey:
+        type: string
+        description: User API Key sent on the THINGSPEAKAPIKEY header to manage channels.
+      name:
+        type: string
+        description: Display name for the new channel.
+      description:
+        type: string
+        description: Human-readable description of what the channel measures.
+      field1Label:
+        type: string
+        description: Label for field1 (e.g. "Temperature").
+      field1Value:
+        type: string
+        description: First reading to write into field1.
+  steps:
+  - stepId: createChannel
+    description: >-
+      Create the channel with a name, description, and a labeled first field.
+    operationId: createChannel
+    parameters:
+    - name: THINGSPEAKAPIKEY
+      in: header
+      value: $inputs.userApiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.name
+        description: $inputs.description
+        field1: $inputs.field1Label
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      channelId: $response.body#/id
+      writeApiKey: $response.body#/api_keys/0/api_key
+  - stepId: writeReading
+    description: >-
+      Write the first reading into field1 using the channel write API key
+      returned by the create step.
+    operationId: updateChannelFeedGet
+    parameters:
+    - name: api_key
+      in: query
+      value: $steps.createChannel.outputs.writeApiKey
+    - name: field1
+      in: query
+      value: $inputs.field1Value
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      response: $response.body
+  - stepId: readLastEntry
+    description: >-
+      Read the most recent entry on the channel to confirm the reading was stored.
+    operationId: readLastEntry
+    parameters:
+    - name: channel_id
+      in: path
+      value: $steps.createChannel.outputs.channelId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      entryId: $response.body#/entry_id
+      field1: $response.body#/field1
+      createdAt: $response.body#/created_at
+  outputs:
+    channelId: $steps.createChannel.outputs.channelId
+    writeApiKey: $steps.createChannel.outputs.writeApiKey
+    lastEntryId: $steps.readLastEntry.outputs.entryId

@@ -1,0 +1,88 @@
+arazzo: 1.0.1
+info:
+  title: ThingSpeak Write Update and Read Last Entry
+  summary: Post a new feed entry via the form-encoded update endpoint, then read the last entry back.
+  description: >-
+    A read-after-write confirmation loop for a single device update. The flow
+    posts a multi-field reading to the channel using the form-encoded update
+    endpoint so the write API key never appears in a URL, then reads the most
+    recent entry on the channel to confirm the values were ingested. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: updateApi
+  url: ../openapi/thingspeak-update-api-openapi.yml
+  type: openapi
+- name: feedsApi
+  url: ../openapi/thingspeak-feeds-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: write-update-and-read-last-entry
+  summary: Post a reading with the update endpoint and verify it as the last entry.
+  description: >-
+    Posts a form-encoded update with up to three field values, then reads the
+    channel's last entry to confirm the write.
+  inputs:
+    type: object
+    required:
+    - channelId
+    - writeApiKey
+    - readApiKey
+    - field1Value
+    properties:
+      channelId:
+        type: integer
+        description: Numeric id of the channel being written to and read from.
+      writeApiKey:
+        type: string
+        description: Channel Write API Key used to authorize the update.
+      readApiKey:
+        type: string
+        description: Channel Read API Key used to read the last entry back.
+      field1Value:
+        type: string
+        description: Value to write into field1.
+      field2Value:
+        type: string
+        description: Optional value to write into field2.
+      status:
+        type: string
+        description: Optional status message to attach to the entry.
+  steps:
+  - stepId: postUpdate
+    description: >-
+      Write a single entry to the channel via the form-encoded update endpoint.
+    operationId: updateChannelFeedPost
+    requestBody:
+      contentType: application/x-www-form-urlencoded
+      payload:
+        api_key: $inputs.writeApiKey
+        field1: $inputs.field1Value
+        field2: $inputs.field2Value
+        status: $inputs.status
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      entryId: $response.body#/entry_id
+      createdAt: $response.body#/created_at
+  - stepId: readLastEntry
+    description: >-
+      Read the most recent entry on the channel to confirm the posted values.
+    operationId: readLastEntry
+    parameters:
+    - name: channel_id
+      in: path
+      value: $inputs.channelId
+    - name: api_key
+      in: query
+      value: $inputs.readApiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      entryId: $response.body#/entry_id
+      field1: $response.body#/field1
+      field2: $response.body#/field2
+  outputs:
+    writtenEntryId: $steps.postUpdate.outputs.entryId
+    confirmedEntryId: $steps.readLastEntry.outputs.entryId
