@@ -1,0 +1,228 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ThingSpeak Feeds API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Read Channel Feed",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.thingspeak.com/channels/:channel_id/feeds.json",
+        "params": [
+          {
+            "name": "channel_id",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "results",
+            "value": "",
+            "type": "query",
+            "description": "Number of entries to retrieve (max 8000)."
+          },
+          {
+            "name": "days",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "minutes",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "start",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "end",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "timezone",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "offset",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "location",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "min",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "max",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "round",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "average",
+            "value": "",
+            "type": "query",
+            "description": "Get average of x minutes (10, 15, 20, 30, 60, 240, 1440, daily)."
+          },
+          {
+            "name": "median",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "sum",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "Read Channel Feed"
+    },
+    {
+      "info": {
+        "name": "Read Field Feed",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.thingspeak.com/channels/:channel_id/fields/:field_id.json",
+        "params": [
+          {
+            "name": "channel_id",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "field_id",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "results",
+            "value": "",
+            "type": "query",
+            "description": "Number of entries to retrieve (max 8000)."
+          },
+          {
+            "name": "days",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "minutes",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "Read Field Feed"
+    },
+    {
+      "info": {
+        "name": "Read Last Channel Entry",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.thingspeak.com/channels/:channel_id/feeds/last.json",
+        "params": [
+          {
+            "name": "channel_id",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "Read Last Channel Entry"
+    },
+    {
+      "info": {
+        "name": "Read Last Field Entry",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.thingspeak.com/channels/:channel_id/fields/:field_id/last.json",
+        "params": [
+          {
+            "name": "channel_id",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "field_id",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "Read Last Field Entry"
+    },
+    {
+      "info": {
+        "name": "Read Status Updates",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.thingspeak.com/channels/:channel_id/status.json",
+        "params": [
+          {
+            "name": "channel_id",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "Read Status Updates"
+    }
+  ],
+  "bundled": true
+}

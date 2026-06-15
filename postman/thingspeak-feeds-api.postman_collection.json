@@ -1,0 +1,761 @@
+{
+  "info": {
+    "_postman_id": "2e438305-d3dd-4e6e-bbaf-a6594bd30a05",
+    "name": "ThingSpeak Feeds API",
+    "description": "Read channel feed entries with rich query support \u2014 by date range, last N, by field, with averaging/median/sum aggregation and timezone control.\n\nContact Support:\n Name: MathWorks",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:19:13.000Z",
+    "updatedAt": "2026-06-05T15:19:13.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2e438305-d3dd-4e6e-bbaf-a6594bd30a05"
+  },
+  "item": [
+    {
+      "name": "channels",
+      "item": [
+        {
+          "name": "{channel_id}",
+          "item": [
+            {
+              "name": "feeds.json",
+              "item": [
+                {
+                  "name": "Read Channel Feed",
+                  "id": "b4999d96-bb8e-4969-a889-343295ebb8eb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/channels/:channel_id/feeds.json?api_key=<string>&results=<integer>&days=<integer>&minutes=<integer>&start=<dateTime>&end=<dateTime>&timezone=<string>&offset=<integer>&status=<boolean>&location=<boolean>&min=<number>&max=<number>&round=<integer>&average=<string>&median=<string>&sum=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "channels",
+                        ":channel_id",
+                        "feeds.json"
+                      ],
+                      "query": [
+                        {
+                          "key": "api_key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of entries to retrieve (max 8000).",
+                          "key": "results",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "days",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "minutes",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "start",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "key": "end",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "key": "timezone",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "offset",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "status",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "key": "location",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "key": "min",
+                          "value": "<number>"
+                        },
+                        {
+                          "key": "max",
+                          "value": "<number>"
+                        },
+                        {
+                          "key": "round",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Get average of x minutes (10, 15, 20, 30, 60, 240, 1440, daily).",
+                          "key": "average",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "median",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "sum",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "732baf71-967b-4c06-b3f8-11ca5bd38e00",
+                          "key": "channel_id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "ed8ec8a5-35fd-4ff3-9519-0afddfa8bc92",
+                      "name": "Channel + feeds.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/channels/:channel_id/feeds.json?api_key=<string>&results=<integer>&days=<integer>&minutes=<integer>&start=<dateTime>&end=<dateTime>&timezone=<string>&offset=<integer>&status=<boolean>&location=<boolean>&min=<number>&max=<number>&round=<integer>&average=<string>&median=<string>&sum=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "channels",
+                            ":channel_id",
+                            "feeds.json"
+                          ],
+                          "query": [
+                            {
+                              "key": "api_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of entries to retrieve (max 8000).",
+                              "key": "results",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "days",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "minutes",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "start",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "key": "end",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "key": "timezone",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "status",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "key": "location",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "key": "min",
+                              "value": "<number>"
+                            },
+                            {
+                              "key": "max",
+                              "value": "<number>"
+                            },
+                            {
+                              "key": "round",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Get average of x minutes (10, 15, 20, 30, 60, 240, 1440, daily).",
+                              "key": "average",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "median",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "sum",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "channel_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"channel\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"latitude\": \"<number>\",\n    \"longitude\": \"<number>\",\n    \"field1\": \"<string>\",\n    \"field2\": \"<string>\",\n    \"field3\": \"<string>\",\n    \"field4\": \"<string>\",\n    \"field5\": \"<string>\",\n    \"field6\": \"<string>\",\n    \"field7\": \"<string>\",\n    \"field8\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"last_entry_id\": \"<integer>\"\n  },\n  \"feeds\": [\n    {\n      \"created_at\": \"<dateTime>\",\n      \"entry_id\": \"<integer>\",\n      \"field1\": \"<string>\",\n      \"field2\": \"<string>\",\n      \"field3\": \"<string>\",\n      \"field4\": \"<string>\",\n      \"field5\": \"<string>\",\n      \"field6\": \"<string>\",\n      \"field7\": \"<string>\",\n      \"field8\": \"<string>\"\n    },\n    {\n      \"created_at\": \"<dateTime>\",\n      \"entry_id\": \"<integer>\",\n      \"field1\": \"<string>\",\n      \"field2\": \"<string>\",\n      \"field3\": \"<string>\",\n      \"field4\": \"<string>\",\n      \"field5\": \"<string>\",\n      \"field6\": \"<string>\",\n      \"field7\": \"<string>\",\n      \"field8\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:19:14.000Z",
+                      "updatedAt": "2026-06-05T15:19:14.000Z",
+                      "uid": "35240-ed8ec8a5-35fd-4ff3-9519-0afddfa8bc92"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:19:14.000Z",
+                  "updatedAt": "2026-06-05T15:19:14.000Z",
+                  "uid": "35240-b4999d96-bb8e-4969-a889-343295ebb8eb"
+                }
+              ],
+              "id": "bee0e645-5e59-481c-b82a-d4a14cf3c9ac",
+              "createdAt": "2026-06-05T15:19:14.000Z",
+              "updatedAt": "2026-06-05T15:19:14.000Z",
+              "uid": "35240-bee0e645-5e59-481c-b82a-d4a14cf3c9ac"
+            },
+            {
+              "name": "fields",
+              "item": [
+                {
+                  "name": "{field_id}.json",
+                  "item": [
+                    {
+                      "name": "Read Field Feed",
+                      "id": "db0becf4-9a99-48d8-aec2-79e078aea4d4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/channels/:channel_id/fields/{{field_id}}.json?api_key=<string>&results=<integer>&days=<integer>&minutes=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "channels",
+                            ":channel_id",
+                            "fields",
+                            "{{field_id}}.json"
+                          ],
+                          "query": [
+                            {
+                              "key": "api_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of entries to retrieve (max 8000).",
+                              "key": "results",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "days",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "minutes",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "c561e5e7-01fa-4cb6-83a7-5955cab575f1",
+                              "key": "channel_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "597cd8e7-bedd-4c0f-8339-2f4e715f2cdf",
+                          "name": "Channel + field-scoped feeds.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/channels/:channel_id/fields/{{field_id}}.json?api_key=<string>&results=<integer>&days=<integer>&minutes=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "channels",
+                                ":channel_id",
+                                "fields",
+                                "{{field_id}}.json"
+                              ],
+                              "query": [
+                                {
+                                  "key": "api_key",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Number of entries to retrieve (max 8000).",
+                                  "key": "results",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "key": "days",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "key": "minutes",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "channel_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"channel\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"latitude\": \"<number>\",\n    \"longitude\": \"<number>\",\n    \"field1\": \"<string>\",\n    \"field2\": \"<string>\",\n    \"field3\": \"<string>\",\n    \"field4\": \"<string>\",\n    \"field5\": \"<string>\",\n    \"field6\": \"<string>\",\n    \"field7\": \"<string>\",\n    \"field8\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"last_entry_id\": \"<integer>\"\n  },\n  \"feeds\": [\n    {\n      \"created_at\": \"<dateTime>\",\n      \"entry_id\": \"<integer>\",\n      \"field1\": \"<string>\",\n      \"field2\": \"<string>\",\n      \"field3\": \"<string>\",\n      \"field4\": \"<string>\",\n      \"field5\": \"<string>\",\n      \"field6\": \"<string>\",\n      \"field7\": \"<string>\",\n      \"field8\": \"<string>\"\n    },\n    {\n      \"created_at\": \"<dateTime>\",\n      \"entry_id\": \"<integer>\",\n      \"field1\": \"<string>\",\n      \"field2\": \"<string>\",\n      \"field3\": \"<string>\",\n      \"field4\": \"<string>\",\n      \"field5\": \"<string>\",\n      \"field6\": \"<string>\",\n      \"field7\": \"<string>\",\n      \"field8\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T15:19:14.000Z",
+                          "updatedAt": "2026-06-05T15:19:14.000Z",
+                          "uid": "35240-597cd8e7-bedd-4c0f-8339-2f4e715f2cdf"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:19:14.000Z",
+                      "updatedAt": "2026-06-05T15:19:14.000Z",
+                      "uid": "35240-db0becf4-9a99-48d8-aec2-79e078aea4d4"
+                    }
+                  ],
+                  "id": "fa37f779-75a7-4593-a9e3-7b0becb60995",
+                  "createdAt": "2026-06-05T15:19:14.000Z",
+                  "updatedAt": "2026-06-05T15:19:14.000Z",
+                  "uid": "35240-fa37f779-75a7-4593-a9e3-7b0becb60995"
+                },
+                {
+                  "name": "{field_id}",
+                  "item": [
+                    {
+                      "name": "last.json",
+                      "item": [
+                        {
+                          "name": "Read Last Field Entry",
+                          "id": "5e14eae8-3e32-4a53-908e-db72d50f5f4d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/channels/:channel_id/fields/:field_id/last.json?api_key=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "channels",
+                                ":channel_id",
+                                "fields",
+                                ":field_id",
+                                "last.json"
+                              ],
+                              "query": [
+                                {
+                                  "key": "api_key",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "19e8c0e3-ce41-461c-8797-252bda0a8a0a",
+                                  "key": "channel_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "f60a26ee-5c04-4ee4-92da-b1c58e61ebf6",
+                                  "key": "field_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "03292dc0-ad1d-496b-ae3b-6eec729071b3",
+                              "name": "The most recent value for the field.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/channels/:channel_id/fields/:field_id/last.json?api_key=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "channels",
+                                    ":channel_id",
+                                    "fields",
+                                    ":field_id",
+                                    "last.json"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "api_key",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "channel_id"
+                                    },
+                                    {
+                                      "key": "field_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"created_at\": \"<dateTime>\",\n  \"entry_id\": \"<integer>\",\n  \"field1\": \"<string>\",\n  \"field2\": \"<string>\",\n  \"field3\": \"<string>\",\n  \"field4\": \"<string>\",\n  \"field5\": \"<string>\",\n  \"field6\": \"<string>\",\n  \"field7\": \"<string>\",\n  \"field8\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:19:14.000Z",
+                              "updatedAt": "2026-06-05T15:19:14.000Z",
+                              "uid": "35240-03292dc0-ad1d-496b-ae3b-6eec729071b3"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:19:14.000Z",
+                          "updatedAt": "2026-06-05T15:19:14.000Z",
+                          "uid": "35240-5e14eae8-3e32-4a53-908e-db72d50f5f4d"
+                        }
+                      ],
+                      "id": "c664b87b-9e8d-478f-9e35-c7496c6c5c1d",
+                      "createdAt": "2026-06-05T15:19:14.000Z",
+                      "updatedAt": "2026-06-05T15:19:14.000Z",
+                      "uid": "35240-c664b87b-9e8d-478f-9e35-c7496c6c5c1d"
+                    }
+                  ],
+                  "id": "f26897b9-a650-43ed-b577-dc0cae99a19e",
+                  "createdAt": "2026-06-05T15:19:14.000Z",
+                  "updatedAt": "2026-06-05T15:19:14.000Z",
+                  "uid": "35240-f26897b9-a650-43ed-b577-dc0cae99a19e"
+                }
+              ],
+              "id": "b08ab9ce-48e1-4496-a4b4-e5b06620ca1d",
+              "createdAt": "2026-06-05T15:19:14.000Z",
+              "updatedAt": "2026-06-05T15:19:14.000Z",
+              "uid": "35240-b08ab9ce-48e1-4496-a4b4-e5b06620ca1d"
+            },
+            {
+              "name": "feeds",
+              "item": [
+                {
+                  "name": "last.json",
+                  "item": [
+                    {
+                      "name": "Read Last Channel Entry",
+                      "id": "19fb0230-3bed-4c6f-b5e3-a6c165ef63f5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/channels/:channel_id/feeds/last.json?api_key=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "channels",
+                            ":channel_id",
+                            "feeds",
+                            "last.json"
+                          ],
+                          "query": [
+                            {
+                              "key": "api_key",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "e3fdb3fd-7d7b-4e50-9c8f-2a25119800be",
+                              "key": "channel_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "725246b4-9e13-40de-b35b-951cec6a20d1",
+                          "name": "The most recent entry on the channel.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/channels/:channel_id/feeds/last.json?api_key=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "channels",
+                                ":channel_id",
+                                "feeds",
+                                "last.json"
+                              ],
+                              "query": [
+                                {
+                                  "key": "api_key",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "channel_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"created_at\": \"<dateTime>\",\n  \"entry_id\": \"<integer>\",\n  \"field1\": \"<string>\",\n  \"field2\": \"<string>\",\n  \"field3\": \"<string>\",\n  \"field4\": \"<string>\",\n  \"field5\": \"<string>\",\n  \"field6\": \"<string>\",\n  \"field7\": \"<string>\",\n  \"field8\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:19:14.000Z",
+                          "updatedAt": "2026-06-05T15:19:14.000Z",
+                          "uid": "35240-725246b4-9e13-40de-b35b-951cec6a20d1"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:19:14.000Z",
+                      "updatedAt": "2026-06-05T15:19:14.000Z",
+                      "uid": "35240-19fb0230-3bed-4c6f-b5e3-a6c165ef63f5"
+                    }
+                  ],
+                  "id": "88c71627-46d9-449e-afe6-20fb6c643d98",
+                  "createdAt": "2026-06-05T15:19:14.000Z",
+                  "updatedAt": "2026-06-05T15:19:14.000Z",
+                  "uid": "35240-88c71627-46d9-449e-afe6-20fb6c643d98"
+                }
+              ],
+              "id": "2a7cabeb-9c62-4f02-9018-9bba7091849e",
+              "createdAt": "2026-06-05T15:19:14.000Z",
+              "updatedAt": "2026-06-05T15:19:14.000Z",
+              "uid": "35240-2a7cabeb-9c62-4f02-9018-9bba7091849e"
+            },
+            {
+              "name": "status.json",
+              "item": [
+                {
+                  "name": "Read Status Updates",
+                  "id": "42900abd-bcd5-43eb-a4db-0313d4534d0a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/channels/:channel_id/status.json?api_key=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "channels",
+                        ":channel_id",
+                        "status.json"
+                      ],
+                      "query": [
+                        {
+                          "key": "api_key",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "294c524f-d7e3-40b7-b5e1-e28b887bad8a",
+                          "key": "channel_id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "e307c5b2-683c-4c7f-8816-4376012afeca",
+                      "name": "Channel status updates.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/channels/:channel_id/status.json?api_key=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "channels",
+                            ":channel_id",
+                            "status.json"
+                          ],
+                          "query": [
+                            {
+                              "key": "api_key",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "channel_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-06-05T15:19:14.000Z",
+                      "updatedAt": "2026-06-05T15:19:14.000Z",
+                      "uid": "35240-e307c5b2-683c-4c7f-8816-4376012afeca"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:19:14.000Z",
+                  "updatedAt": "2026-06-05T15:19:14.000Z",
+                  "uid": "35240-42900abd-bcd5-43eb-a4db-0313d4534d0a"
+                }
+              ],
+              "id": "d9e29339-3ce4-40ef-a621-212db64a1c71",
+              "createdAt": "2026-06-05T15:19:14.000Z",
+              "updatedAt": "2026-06-05T15:19:14.000Z",
+              "uid": "35240-d9e29339-3ce4-40ef-a621-212db64a1c71"
+            }
+          ],
+          "id": "c119d6da-c34b-48a3-8236-bcee35695d7e",
+          "createdAt": "2026-06-05T15:19:14.000Z",
+          "updatedAt": "2026-06-05T15:19:14.000Z",
+          "uid": "35240-c119d6da-c34b-48a3-8236-bcee35695d7e"
+        }
+      ],
+      "id": "b37137b2-b2cc-460e-9486-d479b4bdaa60",
+      "createdAt": "2026-06-05T15:19:14.000Z",
+      "updatedAt": "2026-06-05T15:19:14.000Z",
+      "uid": "35240-b37137b2-b2cc-460e-9486-d479b4bdaa60"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.thingspeak.com"
+    },
+    {
+      "key": "field_id",
+      "value": "<integer>"
+    }
+  ]
+}

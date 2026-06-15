@@ -1,0 +1,652 @@
+{
+  "item": [
+    {
+      "id": "80f5434e-ffec-4cfa-b969-7f922dac9e3f",
+      "name": "List User Channels",
+      "request": {
+        "name": "List User Channels",
+        "description": {},
+        "url": {
+          "path": [
+            "channels.json"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "71f98c7f-8c68-4e4a-a37c-69aeda037f02",
+          "name": "List of channels the authenticated user owns.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "channels.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "THINGSPEAKAPIKEY",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "[\n  {\n    \"id\": 2883,\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"latitude\": 1578.009865478467,\n    \"longitude\": 7173.983586775912,\n    \"elevation\": 9236.154544938858,\n    \"created_at\": \"2026-05-05T23:38:01.625Z\",\n    \"updated_at\": \"2000-01-08T11:49:49.352Z\",\n    \"last_entry_id\": 9916,\n    \"public_flag\": false,\n    \"url\": \"string\",\n    \"tags\": [\n      {\n        \"id\": 502,\n        \"name\": \"string\"\n      },\n      {\n        \"id\": 6953,\n        \"name\": \"string\"\n      }\n    ],\n    \"api_keys\": [\n      {\n        \"api_key\": \"string\",\n        \"write_flag\": false\n      },\n      {\n        \"api_key\": \"string\",\n        \"write_flag\": false\n      }\n    ]\n  },\n  {\n    \"id\": 6278,\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"latitude\": 2591.952103312605,\n    \"longitude\": 9462.961603194337,\n    \"elevation\": 8843.149113256492,\n    \"created_at\": \"1963-03-29T06:56:48.013Z\",\n    \"updated_at\": \"1961-10-18T09:47:57.266Z\",\n    \"last_entry_id\": 3411,\n    \"public_flag\": false,\n    \"url\": \"string\",\n    \"tags\": [\n      {\n        \"id\": 2665,\n        \"name\": \"string\"\n      },\n      {\n        \"id\": 3937,\n        \"name\": \"string\"\n      }\n    ],\n    \"api_keys\": [\n      {\n        \"api_key\": \"string\",\n        \"write_flag\": true\n      },\n      {\n        \"api_key\": \"string\",\n        \"write_flag\": true\n      }\n    ]\n  }\n]",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "c6c4ce1a-a090-406a-99fc-664dc2a5eb63",
+      "name": "Create Channel",
+      "request": {
+        "name": "Create Channel",
+        "description": {},
+        "url": {
+          "path": [
+            "channels.json"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"public_flag\": \"<boolean>\",\n  \"tags\": \"<string>\",\n  \"latitude\": \"<number>\",\n  \"longitude\": \"<number>\",\n  \"elevation\": \"<number>\",\n  \"url\": \"<string>\",\n  \"field1\": \"<string>\",\n  \"field2\": \"<string>\",\n  \"field3\": \"<string>\",\n  \"field4\": \"<string>\",\n  \"field5\": \"<string>\",\n  \"field6\": \"<string>\",\n  \"field7\": \"<string>\",\n  \"field8\": \"<string>\",\n  \"metadata\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "1a3e61d2-c97d-4627-b8f3-b7cff2de9edb",
+          "name": "Channel created.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "channels.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "THINGSPEAKAPIKEY",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"public_flag\": \"<boolean>\",\n  \"tags\": \"<string>\",\n  \"latitude\": \"<number>\",\n  \"longitude\": \"<number>\",\n  \"elevation\": \"<number>\",\n  \"url\": \"<string>\",\n  \"field1\": \"<string>\",\n  \"field2\": \"<string>\",\n  \"field3\": \"<string>\",\n  \"field4\": \"<string>\",\n  \"field5\": \"<string>\",\n  \"field6\": \"<string>\",\n  \"field7\": \"<string>\",\n  \"field8\": \"<string>\",\n  \"metadata\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"id\": 553,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"latitude\": 2840.8174743844406,\n  \"longitude\": 2419.838896716201,\n  \"elevation\": 3726.879751983294,\n  \"created_at\": \"1983-10-26T13:25:28.404Z\",\n  \"updated_at\": \"1957-08-30T22:48:11.388Z\",\n  \"last_entry_id\": 8287,\n  \"public_flag\": true,\n  \"url\": \"string\",\n  \"tags\": [\n    {\n      \"id\": 2,\n      \"name\": \"string\"\n    },\n    {\n      \"id\": 4684,\n      \"name\": \"string\"\n    }\n  ],\n  \"api_keys\": [\n    {\n      \"api_key\": \"string\",\n      \"write_flag\": true\n    },\n    {\n      \"api_key\": \"string\",\n      \"write_flag\": true\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "9c903626-a065-4281-b60f-98aa9fd0b6ba",
+      "name": "List Public Channels",
+      "request": {
+        "name": "List Public Channels",
+        "description": {},
+        "url": {
+          "path": [
+            "channels",
+            "public.json"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "tag",
+              "value": "<string>"
+            },
+            {
+              "disabled": false,
+              "key": "username",
+              "value": "<string>"
+            },
+            {
+              "disabled": false,
+              "key": "page",
+              "value": "<integer>"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "efa5b824-06c1-4f42-8166-2be1af1bde91",
+          "name": "Public channels matching the filter.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "channels",
+                "public.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "tag",
+                  "value": "<string>"
+                },
+                {
+                  "key": "username",
+                  "value": "<string>"
+                },
+                {
+                  "key": "page",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "THINGSPEAKAPIKEY",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "ffe3f035-a6ec-47c9-8fd5-37513a413142",
+      "name": "Read Channel Settings",
+      "request": {
+        "name": "Read Channel Settings",
+        "description": {},
+        "url": {
+          "path": [
+            "channels",
+            "{{channel_id}}.json"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "1350591e-ca4b-4d0c-b396-7417db699ab1",
+          "name": "Channel metadata.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "channels",
+                "{{channel_id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "THINGSPEAKAPIKEY",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"id\": 553,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"latitude\": 2840.8174743844406,\n  \"longitude\": 2419.838896716201,\n  \"elevation\": 3726.879751983294,\n  \"created_at\": \"1983-10-26T13:25:28.404Z\",\n  \"updated_at\": \"1957-08-30T22:48:11.388Z\",\n  \"last_entry_id\": 8287,\n  \"public_flag\": true,\n  \"url\": \"string\",\n  \"tags\": [\n    {\n      \"id\": 2,\n      \"name\": \"string\"\n    },\n    {\n      \"id\": 4684,\n      \"name\": \"string\"\n    }\n  ],\n  \"api_keys\": [\n    {\n      \"api_key\": \"string\",\n      \"write_flag\": true\n    },\n    {\n      \"api_key\": \"string\",\n      \"write_flag\": true\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "78ace7d8-25ae-40b1-a760-607264768873",
+      "name": "Update Channel Settings",
+      "request": {
+        "name": "Update Channel Settings",
+        "description": {},
+        "url": {
+          "path": [
+            "channels",
+            "{{channel_id}}.json"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "PUT",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"public_flag\": \"<boolean>\",\n  \"tags\": \"<string>\",\n  \"latitude\": \"<number>\",\n  \"longitude\": \"<number>\",\n  \"elevation\": \"<number>\",\n  \"url\": \"<string>\",\n  \"field1\": \"<string>\",\n  \"field2\": \"<string>\",\n  \"field3\": \"<string>\",\n  \"field4\": \"<string>\",\n  \"field5\": \"<string>\",\n  \"field6\": \"<string>\",\n  \"field7\": \"<string>\",\n  \"field8\": \"<string>\",\n  \"metadata\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "aeff2037-f185-47ec-a955-a740ed818dc6",
+          "name": "Channel updated.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "channels",
+                "{{channel_id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "THINGSPEAKAPIKEY",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"public_flag\": \"<boolean>\",\n  \"tags\": \"<string>\",\n  \"latitude\": \"<number>\",\n  \"longitude\": \"<number>\",\n  \"elevation\": \"<number>\",\n  \"url\": \"<string>\",\n  \"field1\": \"<string>\",\n  \"field2\": \"<string>\",\n  \"field3\": \"<string>\",\n  \"field4\": \"<string>\",\n  \"field5\": \"<string>\",\n  \"field6\": \"<string>\",\n  \"field7\": \"<string>\",\n  \"field8\": \"<string>\",\n  \"metadata\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"id\": 553,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"latitude\": 2840.8174743844406,\n  \"longitude\": 2419.838896716201,\n  \"elevation\": 3726.879751983294,\n  \"created_at\": \"1983-10-26T13:25:28.404Z\",\n  \"updated_at\": \"1957-08-30T22:48:11.388Z\",\n  \"last_entry_id\": 8287,\n  \"public_flag\": true,\n  \"url\": \"string\",\n  \"tags\": [\n    {\n      \"id\": 2,\n      \"name\": \"string\"\n    },\n    {\n      \"id\": 4684,\n      \"name\": \"string\"\n    }\n  ],\n  \"api_keys\": [\n    {\n      \"api_key\": \"string\",\n      \"write_flag\": true\n    },\n    {\n      \"api_key\": \"string\",\n      \"write_flag\": true\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "754c8c54-e782-4e42-aadd-7849a8932f88",
+      "name": "Delete Channel",
+      "request": {
+        "name": "Delete Channel",
+        "description": {},
+        "url": {
+          "path": [
+            "channels",
+            "{{channel_id}}.json"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "method": "DELETE",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "22f0b6ba-64c9-4420-8e5c-17fb13bdeb3c",
+          "name": "Channel deleted.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "channels",
+                "{{channel_id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "THINGSPEAKAPIKEY",
+                "value": "<API Key>"
+              }
+            ],
+            "method": "DELETE",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "9ed9d788-43e4-4f42-a8d9-72d018f9d364",
+      "name": "Clear Channel Feed",
+      "request": {
+        "name": "Clear Channel Feed",
+        "description": {},
+        "url": {
+          "path": [
+            "channels",
+            ":channel_id",
+            "feeds.json"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<integer>",
+              "key": "channel_id",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "method": "DELETE",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "93024bc6-5ec8-45e5-9894-2211732f5879",
+          "name": "All entries deleted.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "channels",
+                ":channel_id",
+                "feeds.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "channel_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "THINGSPEAKAPIKEY",
+                "value": "<API Key>"
+              }
+            ],
+            "method": "DELETE",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.thingspeak.com",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) ",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<integer>",
+      "key": "channel_id"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "THINGSPEAKAPIKEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "584c1661-0bd0-4039-8469-22966eeee9e6",
+    "name": "ThingSpeak Channels API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Create, list, update, and delete ThingSpeak channels — the primary container for time-series IoT data. Requires a User API Key on the `THINGSPEAKAPIKEY` header.\n\nContact Support:\n Name: MathWorks",
+      "type": "text/plain"
+    }
+  }
+}

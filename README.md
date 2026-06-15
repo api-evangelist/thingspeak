@@ -1,117 +1,363 @@
 # ThingSpeak (thingspeak)
-ThingSpeak is an IoT analytics platform from MathWorks that lets devices aggregate, visualize, and analyze live data streams in the cloud. Devices push telemetry to channels via a REST update endpoint or the `mqtt3.thingspeak.com` MQTT broker, and the platform layers in MATLAB Analysis for compute, MATLAB Visualizations for plotting, React for rules, TalkBack for cloud-to-device commands, ThingHTTP for outbound webhooks, and TimeControl for scheduling. ThingSpeak is the only mainstream IoT platform with first-class MATLAB and Simulink integration.
 
-**URL:** [Visit APIs.json](https://raw.githubusercontent.com/api-evangelist/thingspeak/refs/heads/main/apis.yml)
+ThingSpeak is an IoT analytics platform from MathWorks that lets devices aggregate, visualize, and analyze live data streams in the cloud. Devices push telemetry to channels via a REST update endpoint or the `mqtt3.thingspeak.com` MQTT broker, and the platform layers in MATLAB Analysis for compute, MATLAB Visualizations for plotting, React for rules, TalkBack for cloud-to-device commands, ThingHTTP for outbound webhooks, and TimeControl for scheduling. ThingSpeak is the only mainstream IoT platform with first-class MATLAB and Simulink integration, making it widely used in academic research, environmental monitoring, smart agriculture, and energy applications. Compatible with Arduino, ESP8266/ESP32, Raspberry Pi, Particle, LoRaWAN gateways, and industrial controllers.
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/thingspeak/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/thingspeak/refs/heads/main/apis.yml)
+
+## Scope
+
+- **Position:** Consuming
+- **Access:** 3rd-Party
 
 ## Tags
 
- - IoT, Internet of Things, Analytics, Time Series, MQTT, MATLAB, Sensors, Telemetry
+- IoT
+- Internet of Things
+- Analytics
+- Time Series
+- MQTT
+- MATLAB
+- Sensors
+- Telemetry
 
 ## Timestamps
 
-- **Created:** 2026-05-25
+- **Created:** 2026-05-25T00:00:00.000Z
 - **Modified:** 2026-05-25
 
 ## APIs
 
 ### ThingSpeak Channels API
-Create, list, update, and delete channels — the primary container for time-series IoT data. Each channel holds up to eight numeric fields plus latitude, longitude, elevation, and a status string.
 
-**Human URL:** [https://www.mathworks.com/help/thingspeak/channelsapi.html](https://www.mathworks.com/help/thingspeak/channelsapi.html)
+List, create, read, update, and delete ThingSpeak channels — the primary container for time-series IoT data. Each channel holds up to eight numeric fields plus latitude, longitude, elevation, and a status string. Channels can be public, private, or shared via read API keys.
+
+- **Human URL:** [https://www.mathworks.com/help/thingspeak/channelsapi.html](https://www.mathworks.com/help/thingspeak/channelsapi.html)
+- **Base URL:** `https://api.thingspeak.com/`
+
+#### Tags
+
+- IoT
+- Channels
+- Data
+- Analytics
+
+#### Properties
 
 - [Documentation](https://www.mathworks.com/help/thingspeak/channelsapi.html)
-- [OpenAPI](openapi/thingspeak-channels-api-openapi.yml)
-- [JSON Schema — Channel](json-schema/thingspeak-channel-schema.json)
-- [JSON-LD](json-ld/thingspeak-context.jsonld)
-- [Naftiko Capability — Channels](capabilities/channels-channels.yaml)
+- [OpenAPI](openapi/thingspeak-channels-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/thingspeak-channels-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-channels-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [JSON Schema](json-schema/thingspeak-channel-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON-LD](json-ld/thingspeak-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
 
 ### ThingSpeak Feeds API
-Read channel feed entries with rich query support — last N, by date range, by field, with averaging/median/sum aggregation and timezone control. Supports JSON, XML, and CSV.
 
-**Human URL:** [https://www.mathworks.com/help/thingspeak/readdata.html](https://www.mathworks.com/help/thingspeak/readdata.html)
+Read channel feed entries with rich querying — last N results, by date range, by field, with timezone, rounding, averaging, and median/sum aggregation. Supports JSON, XML, and CSV response formats and works with both public channels and private channels via Read API Keys.
 
-- [OpenAPI](openapi/thingspeak-feeds-api-openapi.yml)
-- [JSON Schema — Feed Entry](json-schema/thingspeak-feed-schema.json)
-- [Naftiko Capability — Feeds](capabilities/feeds-feeds.yaml)
+- **Human URL:** [https://www.mathworks.com/help/thingspeak/readdata.html](https://www.mathworks.com/help/thingspeak/readdata.html)
+- **Base URL:** `https://api.thingspeak.com/`
+
+#### Tags
+
+- IoT
+- Feeds
+- Time Series
+- Read
+
+#### Properties
+
+- [Documentation](https://www.mathworks.com/help/thingspeak/readdata.html)
+- [OpenAPI](openapi/thingspeak-feeds-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/thingspeak-feeds-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-feeds-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [JSON Schema](json-schema/thingspeak-feed-schema.json) — [JSON Schema](https://json-schema.org/specification)
 
 ### ThingSpeak Update API
+
 Write a single channel entry via `/update` or push high-volume telemetry via `/channels/{channel_id}/bulk_update.json` (CSV or JSON batches). The write surface is the workhorse of every ThingSpeak device — Arduino, ESP32, Raspberry Pi, Particle, and any HTTP-capable sensor node.
 
-**Human URL:** [https://www.mathworks.com/help/thingspeak/writedata.html](https://www.mathworks.com/help/thingspeak/writedata.html)
+- **Human URL:** [https://www.mathworks.com/help/thingspeak/writedata.html](https://www.mathworks.com/help/thingspeak/writedata.html)
+- **Base URL:** `https://api.thingspeak.com/`
 
-- [OpenAPI](openapi/thingspeak-update-api-openapi.yml)
-- [Naftiko Capability — Update](capabilities/update-update.yaml)
+#### Tags
+
+- IoT
+- Write
+- Telemetry
+
+#### Properties
+
+- [Documentation](https://www.mathworks.com/help/thingspeak/writedata.html)
+- [Documentation](https://www.mathworks.com/help/thingspeak/bulkwritejsondata.html)
+- [OpenAPI](openapi/thingspeak-update-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/thingspeak-update-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-update-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### ThingSpeak MQTT API
-Lightweight pub/sub broker at `mqtt3.thingspeak.com` over TCP (1883), TLS (8883), WebSocket (80), and secure WebSocket (443, path `/mqtt`). Publish to `channels/{channelID}/publish` and subscribe via `channels/{channelID}/subscribe/fields/field{n}/{readAPIKey}`. QoS 0 only; one-hour inactivity timeout.
 
-**Human URL:** [https://www.mathworks.com/help/thingspeak/mqtt-api.html](https://www.mathworks.com/help/thingspeak/mqtt-api.html)
+Lightweight pub/sub MQTT broker at `mqtt3.thingspeak.com` over TCP (1883), TLS (8883), WebSocket (80), and secure WebSocket (443, path `/mqtt`). Publish to `channels/{channelID}/publish` and subscribe via `channels/{channelID}/subscribe/fields/field{n}/{readAPIKey}`. QoS 0 only; connections time out after one hour of inactivity. Devices use MQTT-specific Client ID / Username / Password credentials provisioned in ThingSpeak.
 
-- [AsyncAPI](asyncapi/thingspeak-mqtt-asyncapi.yml)
+- **Human URL:** [https://www.mathworks.com/help/thingspeak/mqtt-api.html](https://www.mathworks.com/help/thingspeak/mqtt-api.html)
+- **Base URL:** `mqtt3.thingspeak.com`
+
+#### Tags
+
+- IoT
+- MQTT
+- Pub/Sub
+- Real-Time
+
+#### Properties
+
+- [Documentation](https://www.mathworks.com/help/thingspeak/mqtt-api.html)
+- [Documentation](https://www.mathworks.com/help/thingspeak/mqtt-basics.html)
+- [AsyncAPI](asyncapi/thingspeak-mqtt-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
+- [Postman Collection](collections/thingspeak-channels-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-channels-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-feeds-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-feeds-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-talkback-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-talkback-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-update-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-update-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### ThingSpeak TalkBack API
-Asynchronous command queue letting cloud-side logic push instructions to remote devices. Devices poll `talkbacks/{id}/commands` and execute the next command.
 
-**Human URL:** [https://www.mathworks.com/help/thingspeak/talkbackapp.html](https://www.mathworks.com/help/thingspeak/talkbackapp.html)
+Asynchronous command queue letting cloud-side logic or humans push instructions to remote devices. Devices poll `talkbacks/{id}/commands` and execute the next command; commands can be added, updated, executed, or deleted via the REST surface. Pairs naturally with React for closed-loop automation.
 
-- [OpenAPI](openapi/thingspeak-talkback-api-openapi.yml)
-- [Naftiko Capability — Commands](capabilities/talkback-commands.yaml)
+- **Human URL:** [https://www.mathworks.com/help/thingspeak/talkbackapp.html](https://www.mathworks.com/help/thingspeak/talkbackapp.html)
+- **Base URL:** `https://api.thingspeak.com/`
+
+#### Tags
+
+- IoT
+- Commands
+- Queue
+- Device Management
+
+#### Properties
+
+- [Documentation](https://www.mathworks.com/help/thingspeak/talkbackapp.html)
+- [OpenAPI](openapi/thingspeak-talkback-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/thingspeak-talkback-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-talkback-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### ThingSpeak React API
-React watches channel data and fires ThingHTTP, MATLAB Analysis, TalkBack, or social posts when threshold, string-match, or no-data conditions are met. The platform's primary rules engine.
 
-**Human URL:** [https://www.mathworks.com/help/thingspeak/react-app.html](https://www.mathworks.com/help/thingspeak/react-app.html)
+React lets channels react to incoming data — running ThingHTTP requests, MATLAB Analysis snippets, TalkBack commands, or Twitter/Tweet posts when conditions (numeric threshold, string match, no-data) are met. Configured via the React app UI, this is ThingSpeak's primary rules engine.
+
+- **Human URL:** [https://www.mathworks.com/help/thingspeak/react-app.html](https://www.mathworks.com/help/thingspeak/react-app.html)
+- **Base URL:** `https://api.thingspeak.com/`
+
+#### Tags
+
+- IoT
+- Automation
+- Triggers
+- Events
+
+#### Properties
+
+- [Documentation](https://www.mathworks.com/help/thingspeak/react-app.html)
+- [Postman Collection](collections/thingspeak-channels-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-channels-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-feeds-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-feeds-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-talkback-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-talkback-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-update-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-update-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### ThingSpeak Alerts API
-Send email alerts from channels via the alerts API or React, and retrieve alert history.
 
-**Human URL:** [https://www.mathworks.com/help/thingspeak/alerts.html](https://www.mathworks.com/help/thingspeak/alerts.html)
+Send email alerts from a channel via the alerts API or React, and retrieve alert history. Useful for environmental monitoring, threshold-based warnings, and inactivity notifications.
+
+- **Human URL:** [https://www.mathworks.com/help/thingspeak/alerts.html](https://www.mathworks.com/help/thingspeak/alerts.html)
+- **Base URL:** `https://api.thingspeak.com/`
+
+#### Tags
+
+- IoT
+- Alerts
+- Email
+- Notifications
+
+#### Properties
+
+- [Documentation](https://www.mathworks.com/help/thingspeak/alerts.html)
+- [Postman Collection](collections/thingspeak-channels-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-channels-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-feeds-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-feeds-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-talkback-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-talkback-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-update-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-update-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### ThingSpeak Charts API
-Server-rendered chart embeds for any channel/field — line, bar, column, spline — with color, scale, axis, timezone, and dynamic options.
 
-**Human URL:** [https://www.mathworks.com/help/thingspeak/charts.html](https://www.mathworks.com/help/thingspeak/charts.html)
+Server-rendered chart embeds for any channel/field — line, bar, column, spline — with parameters for color, scale, axis, timezone, title, bgcolor, transparent, and dynamic options. Returns embeddable HTML/SVG.
+
+- **Human URL:** [https://www.mathworks.com/help/thingspeak/charts.html](https://www.mathworks.com/help/thingspeak/charts.html)
+- **Base URL:** `https://api.thingspeak.com/`
+
+#### Tags
+
+- IoT
+- Charts
+- Visualization
+
+#### Properties
+
+- [Documentation](https://www.mathworks.com/help/thingspeak/charts.html)
+- [Postman Collection](collections/thingspeak-channels-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-channels-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-feeds-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-feeds-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-talkback-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-talkback-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-update-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-update-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### ThingSpeak MATLAB Analysis API
-The differentiator that separates ThingSpeak from generic MQTT brokers. Run scheduled or React-triggered MATLAB code against channel data, read with `thingSpeakRead`, write back with `thingSpeakWrite`, and access signal-processing, statistics, and machine-learning toolboxes inside a managed sandbox.
 
-**Human URL:** [https://www.mathworks.com/help/thingspeak/matlab-analysis-app.html](https://www.mathworks.com/help/thingspeak/matlab-analysis-app.html)
+Run scheduled or React-triggered MATLAB code against channel data — the differentiator that separates ThingSpeak from generic MQTT brokers. Read channel data with `thingSpeakRead`, write results back with `thingSpeakWrite`, and access the standard MATLAB toolboxes (signal processing, statistics, machine learning) inside a managed sandbox.
+
+- **Human URL:** [https://www.mathworks.com/help/thingspeak/matlab-analysis-app.html](https://www.mathworks.com/help/thingspeak/matlab-analysis-app.html)
+- **Base URL:** `https://api.thingspeak.com/`
+
+#### Tags
+
+- IoT
+- MATLAB
+- Analysis
+- Compute
+
+#### Properties
+
+- [Documentation](https://www.mathworks.com/help/thingspeak/matlab-analysis-app.html)
+- [Postman Collection](collections/thingspeak-channels-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-channels-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-feeds-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-feeds-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-talkback-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-talkback-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-update-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-update-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### ThingSpeak MATLAB Visualization API
-Generate custom plots from MATLAB code and embed them on ThingSpeak channel pages or external dashboards.
 
-**Human URL:** [https://www.mathworks.com/help/thingspeak/matlab-visualizations-app.html](https://www.mathworks.com/help/thingspeak/matlab-visualizations-app.html)
+Generate custom plots from MATLAB code and embed them on ThingSpeak channel pages or external dashboards. Supports `plotyy`, `geoplot`, `histogram`, custom colormaps, and any other MATLAB plotting primitive against channel feed data.
+
+- **Human URL:** [https://www.mathworks.com/help/thingspeak/matlab-visualizations-app.html](https://www.mathworks.com/help/thingspeak/matlab-visualizations-app.html)
+- **Base URL:** `https://api.thingspeak.com/`
+
+#### Tags
+
+- IoT
+- MATLAB
+- Visualization
+
+#### Properties
+
+- [Documentation](https://www.mathworks.com/help/thingspeak/matlab-visualizations-app.html)
+- [Postman Collection](collections/thingspeak-channels-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-channels-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-feeds-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-feeds-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-talkback-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-talkback-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-update-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-update-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### ThingSpeak ThingHTTP API
-Outbound HTTP requests stored as named ThingHTTP actions and fired by React, TimeControl, or device pollers. Push data into Twilio, IFTTT, or any webhook target without a backend.
 
-**Human URL:** [https://www.mathworks.com/help/thingspeak/thinghttp-app.html](https://www.mathworks.com/help/thingspeak/thinghttp-app.html)
+Outbound HTTP requests stored as named "ThingHTTP" actions and fired by React, TimeControl, or device pollers. Lets ThingSpeak push data into third-party services (Twilio, IFTTT, custom webhooks) without a backend server.
+
+- **Human URL:** [https://www.mathworks.com/help/thingspeak/thinghttp-app.html](https://www.mathworks.com/help/thingspeak/thinghttp-app.html)
+- **Base URL:** `https://api.thingspeak.com/`
+
+#### Tags
+
+- IoT
+- Webhooks
+- Integrations
+
+#### Properties
+
+- [Documentation](https://www.mathworks.com/help/thingspeak/thinghttp-app.html)
+- [Postman Collection](collections/thingspeak-channels-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-channels-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-feeds-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-feeds-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-talkback-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-talkback-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-update-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-update-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### ThingSpeak TimeControl API
-Cron-style scheduler that fires ThingHTTP, TalkBack, or MATLAB Analysis at a chosen time, recurring frequency, or after a delay. Closes the IoT control loop with React and TalkBack.
 
-**Human URL:** [https://www.mathworks.com/help/thingspeak/timecontrolapp.html](https://www.mathworks.com/help/thingspeak/timecontrolapp.html)
+Cron-style scheduler that fires ThingHTTP, TalkBack, or MATLAB Analysis actions at a chosen time, recurring frequency, or after a delay. Pairs with React and TalkBack to close the IoT control loop.
 
-## Plans
+- **Human URL:** [https://www.mathworks.com/help/thingspeak/timecontrolapp.html](https://www.mathworks.com/help/thingspeak/timecontrolapp.html)
+- **Base URL:** `https://api.thingspeak.com/`
 
-| Plan | Annual Messages | Audience |
-|---|---|---|
-| Free | ~3M (~8,200/day) | Non-commercial small projects |
-| Standard | 33M per unit (~90,400/day) | Commercial, government, organizational |
-| Home | 33M per unit | Personal use only |
-| Academic | 33M per unit | Teaching/research at degree-granting institutions |
-| Student | 33M per unit | Coursework at degree-granting institutions |
+#### Tags
 
-See [plans/thingspeak-plans-pricing.yml](plans/thingspeak-plans-pricing.yml), [rate-limits/thingspeak-rate-limits.yml](rate-limits/thingspeak-rate-limits.yml), and [finops/thingspeak-finops.yml](finops/thingspeak-finops.yml).
+- IoT
+- Scheduling
+- Cron
 
-## SDKs and Tools
+#### Properties
 
-- [thingspeak-arduino](https://github.com/mathworks/thingspeak-arduino) — Communication library for Arduino, ESP8266, and ESP32 (C++)
-- [thingspeak-particle](https://github.com/mathworks/thingspeak-particle) — Communication library for Particle devices (C++)
-- [ThingSpeak Support from Desktop MATLAB](https://www.mathworks.com/matlabcentral/fileexchange/52244-thingspeak-support-from-desktop-matlab) — Read/write from MATLAB on the desktop
+- [Documentation](https://www.mathworks.com/help/thingspeak/timecontrolapp.html)
+- [Postman Collection](collections/thingspeak-channels-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-channels-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-feeds-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-feeds-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-talkback-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-talkback-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/thingspeak-update-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thingspeak-update-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+## Common Properties
+
+- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
+- [Portal](https://thingspeak.mathworks.com/)
+- [Documentation](https://www.mathworks.com/help/thingspeak/)
+- [Documentation](https://www.mathworks.com/help/thingspeak/rest-api.html)
+- [Documentation](https://www.mathworks.com/help/thingspeak/mqtt-api.html)
+- [Getting Started](https://www.mathworks.com/help/thingspeak/get-started-with-thingspeak.html)
+- [Sign Up](https://thingspeak.mathworks.com/login)
+- [Sign Up](https://www.mathworks.com/mwaccount/register)
+- [Pricing](https://thingspeak.mathworks.com/prices)
+- [Terms of Service](https://thingspeak.mathworks.com/pages/license_faq)
+- [Terms of Service](https://www.mathworks.com/company/aboutus/policies_statements/)
+- [Privacy Policy](https://www.mathworks.com/company/aboutus/policies_statements/privacy-policy.html)
+- [Support](https://www.mathworks.com/support/contact_us.html)
+- [GitHub Organization](https://github.com/mathworks)
+- [SDK](https://github.com/mathworks/thingspeak-arduino)
+- [SDK](https://github.com/mathworks/thingspeak-particle)
+- [SDK](https://www.mathworks.com/matlabcentral/fileexchange/52244-thingspeak-support-from-desktop-matlab)
+- [Tutorials](https://www.mathworks.com/help/thingspeak/use-arduino-client-to-publish-to-a-channel.html)
+- [Tutorials](https://www.mathworks.com/help/thingspeak/raspberry-pi-tutorials.html)
+- [Tutorials](https://www.mathworks.com/help/thingspeak/esp32-tutorials.html)
+- [Tutorials](https://www.mathworks.com/help/thingspeak/esp8266-tutorials.html)
+- [Tutorials](https://www.mathworks.com/help/thingspeak/particle-photon-tutorials.html)
+- [Forum](https://www.mathworks.com/matlabcentral/answers/index?term=tag%3Athingspeak)
+- [Community](https://www.mathworks.com/matlabcentral/communitycontests/contests/4/entries)
+- [Blog](https://blogs.mathworks.com/iot/)
+- [Product Page](https://www.mathworks.com/products/thingspeak.html)
+- [LinkedIn](https://www.linkedin.com/company/the-mathworks_2/)
+- [X (Twitter)](https://x.com/MATLAB)
+- [YouTube](https://www.youtube.com/user/MATLAB)
+- [Plans](https://plans/thingspeak-plans-pricing.yml)
+- [Rate Limits](https://rate-limits/thingspeak-rate-limits.yml)
+- [Fin Ops](https://finops/thingspeak-finops.yml)
+- [Features](undefined)
 
 ## Maintainers
 
-- **Kin Lane** — [API Evangelist](https://apievangelist.com) — info@apievangelist.com
+**FN:** Kin Lane
+**Email:** info@apievangelist.com
+**URL:** https://apievangelist.com

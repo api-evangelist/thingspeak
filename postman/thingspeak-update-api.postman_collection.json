@@ -1,0 +1,718 @@
+{
+  "info": {
+    "_postman_id": "f68dc3be-424e-4138-a683-9187e4982496",
+    "name": "ThingSpeak Update API",
+    "description": "Write entries to a ThingSpeak channel \u2014 single update via /update or high-volume batches via /channels/{channel_id}/bulk_update.json.\n\nContact Support:\n Name: MathWorks",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:19:14.000Z",
+    "updatedAt": "2026-06-05T15:19:15.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f68dc3be-424e-4138-a683-9187e4982496"
+  },
+  "item": [
+    {
+      "name": "update",
+      "item": [
+        {
+          "name": "Update Channel Feed (GET)",
+          "id": "046b9ff2-7a62-4fc6-9d21-e430906f157f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/update?api_key=<string>&field1=<string>&field2=<string>&field3=<string>&field4=<string>&field5=<string>&field6=<string>&field7=<string>&field8=<string>&lat=<double>&long=<double>&elevation=<number>&status=<string>&created_at=<dateTime>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "update"
+              ],
+              "query": [
+                {
+                  "description": "(Required) ",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "key": "field1",
+                  "value": "<string>"
+                },
+                {
+                  "key": "field2",
+                  "value": "<string>"
+                },
+                {
+                  "key": "field3",
+                  "value": "<string>"
+                },
+                {
+                  "key": "field4",
+                  "value": "<string>"
+                },
+                {
+                  "key": "field5",
+                  "value": "<string>"
+                },
+                {
+                  "key": "field6",
+                  "value": "<string>"
+                },
+                {
+                  "key": "field7",
+                  "value": "<string>"
+                },
+                {
+                  "key": "field8",
+                  "value": "<string>"
+                },
+                {
+                  "key": "lat",
+                  "value": "<double>"
+                },
+                {
+                  "key": "long",
+                  "value": "<double>"
+                },
+                {
+                  "key": "elevation",
+                  "value": "<number>"
+                },
+                {
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "key": "created_at",
+                  "value": "<dateTime>"
+                }
+              ]
+            },
+            "description": "Write a single entry to a channel via query parameters. Returns the new entry_id (text) or the full entry (json/xml)."
+          },
+          "response": [
+            {
+              "id": "c9cd05b7-c372-47a1-a92e-04ceea4fa892",
+              "name": "Entry written. Body is the new entry_id (text) or the entry object.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/update?api_key=<API Key>&field1=<string>&field2=<string>&field3=<string>&field4=<string>&field5=<string>&field6=<string>&field7=<string>&field8=<string>&lat=<double>&long=<double>&elevation=<number>&status=<string>&created_at=<dateTime>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "update"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "key": "field1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field3",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field4",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field5",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field6",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field7",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field8",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "long",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "elevation",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"channel_id\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"entry_id\": \"<integer>\",\n  \"field1\": \"<string>\",\n  \"field2\": \"<string>\",\n  \"field3\": \"<string>\",\n  \"field4\": \"<string>\",\n  \"field5\": \"<string>\",\n  \"field6\": \"<string>\",\n  \"field7\": \"<string>\",\n  \"field8\": \"<string>\",\n  \"latitude\": \"<number>\",\n  \"longitude\": \"<number>\",\n  \"elevation\": \"<number>\",\n  \"status\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:19:15.000Z",
+              "updatedAt": "2026-06-05T15:19:15.000Z",
+              "uid": "35240-c9cd05b7-c372-47a1-a92e-04ceea4fa892"
+            },
+            {
+              "id": "a44261fb-2b1a-4267-9ee8-d8f5df1858b8",
+              "name": "Bad request \u2014 invalid parameters or duplicate timestamp.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/update?api_key=<API Key>&field1=<string>&field2=<string>&field3=<string>&field4=<string>&field5=<string>&field6=<string>&field7=<string>&field8=<string>&lat=<double>&long=<double>&elevation=<number>&status=<string>&created_at=<dateTime>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "update"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "key": "field1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field3",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field4",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field5",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field6",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field7",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field8",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "long",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "elevation",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:19:15.000Z",
+              "updatedAt": "2026-06-05T15:19:15.000Z",
+              "uid": "35240-a44261fb-2b1a-4267-9ee8-d8f5df1858b8"
+            }
+          ],
+          "createdAt": "2026-06-05T15:19:15.000Z",
+          "updatedAt": "2026-06-05T15:19:15.000Z",
+          "uid": "35240-046b9ff2-7a62-4fc6-9d21-e430906f157f"
+        },
+        {
+          "name": "Update Channel Feed (POST)",
+          "id": "78fae7b0-5c04-4933-a1bc-2ce705e421bd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "description": "(Required) ",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "key": "field1",
+                  "value": "<string>"
+                },
+                {
+                  "key": "field2",
+                  "value": "<string>"
+                },
+                {
+                  "key": "field3",
+                  "value": "<string>"
+                },
+                {
+                  "key": "field4",
+                  "value": "<string>"
+                },
+                {
+                  "key": "field5",
+                  "value": "<string>"
+                },
+                {
+                  "key": "field6",
+                  "value": "<string>"
+                },
+                {
+                  "key": "field7",
+                  "value": "<string>"
+                },
+                {
+                  "key": "field8",
+                  "value": "<string>"
+                },
+                {
+                  "key": "lat",
+                  "value": "<number>"
+                },
+                {
+                  "key": "long",
+                  "value": "<number>"
+                },
+                {
+                  "key": "elevation",
+                  "value": "<number>"
+                },
+                {
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "key": "created_at",
+                  "value": "<dateTime>"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/update",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "update"
+              ]
+            },
+            "description": "Identical to GET /update but accepts form-encoded body. Preferred for write API keys that should not appear in URLs."
+          },
+          "response": [
+            {
+              "id": "d77ea3f7-9fbe-4c98-b235-505299ce3208",
+              "name": "Entry written.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) ",
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field3",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field4",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field5",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field6",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field7",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field8",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "long",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "elevation",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/update?api_key=<API Key>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "update"
+                  ],
+                  "query": [
+                    {
+                      "description": "Added as a part of security scheme: apikey",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"channel_id\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"entry_id\": \"<integer>\",\n  \"field1\": \"<string>\",\n  \"field2\": \"<string>\",\n  \"field3\": \"<string>\",\n  \"field4\": \"<string>\",\n  \"field5\": \"<string>\",\n  \"field6\": \"<string>\",\n  \"field7\": \"<string>\",\n  \"field8\": \"<string>\",\n  \"latitude\": \"<number>\",\n  \"longitude\": \"<number>\",\n  \"elevation\": \"<number>\",\n  \"status\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:19:15.000Z",
+              "updatedAt": "2026-06-05T15:19:15.000Z",
+              "uid": "35240-d77ea3f7-9fbe-4c98-b235-505299ce3208"
+            }
+          ],
+          "createdAt": "2026-06-05T15:19:15.000Z",
+          "updatedAt": "2026-06-05T15:19:15.000Z",
+          "uid": "35240-78fae7b0-5c04-4933-a1bc-2ce705e421bd"
+        }
+      ],
+      "id": "e75cc5ac-0b1a-41d5-aa68-535555b1281f",
+      "createdAt": "2026-06-05T15:19:15.000Z",
+      "updatedAt": "2026-06-05T15:19:15.000Z",
+      "uid": "35240-e75cc5ac-0b1a-41d5-aa68-535555b1281f"
+    },
+    {
+      "name": "channels",
+      "item": [
+        {
+          "name": "{channel_id}",
+          "item": [
+            {
+              "name": "bulk_update.json",
+              "item": [
+                {
+                  "name": "Bulk Update Channel",
+                  "id": "61969ded-ccb0-435d-baab-8b362917d0b0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"write_api_key\": \"<string>\",\n  \"updates\": [\n    {\n      \"api_key\": \"<string>\",\n      \"field1\": \"<string>\",\n      \"field2\": \"<string>\",\n      \"field3\": \"<string>\",\n      \"field4\": \"<string>\",\n      \"field5\": \"<string>\",\n      \"field6\": \"<string>\",\n      \"field7\": \"<string>\",\n      \"field8\": \"<string>\",\n      \"lat\": \"<number>\",\n      \"long\": \"<number>\",\n      \"elevation\": \"<number>\",\n      \"status\": \"<string>\",\n      \"created_at\": \"<dateTime>\"\n    },\n    {\n      \"api_key\": \"<string>\",\n      \"field1\": \"<string>\",\n      \"field2\": \"<string>\",\n      \"field3\": \"<string>\",\n      \"field4\": \"<string>\",\n      \"field5\": \"<string>\",\n      \"field6\": \"<string>\",\n      \"field7\": \"<string>\",\n      \"field8\": \"<string>\",\n      \"lat\": \"<number>\",\n      \"long\": \"<number>\",\n      \"elevation\": \"<number>\",\n      \"status\": \"<string>\",\n      \"created_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/channels/:channel_id/bulk_update.json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "channels",
+                        ":channel_id",
+                        "bulk_update.json"
+                      ],
+                      "variable": [
+                        {
+                          "id": "3f91416d-225a-4ee0-a378-c3a258b43491",
+                          "key": "channel_id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Upload up to 960 messages per request (free) or 14,400 (paid) for high-volume devices that cache data offline."
+                  },
+                  "response": [
+                    {
+                      "id": "ca14585e-f66f-4b61-9f15-2899ce62b26b",
+                      "name": "Accepted \u2014 entries are queued for ingestion.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"write_api_key\": \"<string>\",\n  \"updates\": [\n    {\n      \"api_key\": \"<string>\",\n      \"field1\": \"<string>\",\n      \"field2\": \"<string>\",\n      \"field3\": \"<string>\",\n      \"field4\": \"<string>\",\n      \"field5\": \"<string>\",\n      \"field6\": \"<string>\",\n      \"field7\": \"<string>\",\n      \"field8\": \"<string>\",\n      \"lat\": \"<number>\",\n      \"long\": \"<number>\",\n      \"elevation\": \"<number>\",\n      \"status\": \"<string>\",\n      \"created_at\": \"<dateTime>\"\n    },\n    {\n      \"api_key\": \"<string>\",\n      \"field1\": \"<string>\",\n      \"field2\": \"<string>\",\n      \"field3\": \"<string>\",\n      \"field4\": \"<string>\",\n      \"field5\": \"<string>\",\n      \"field6\": \"<string>\",\n      \"field7\": \"<string>\",\n      \"field8\": \"<string>\",\n      \"lat\": \"<number>\",\n      \"long\": \"<number>\",\n      \"elevation\": \"<number>\",\n      \"status\": \"<string>\",\n      \"created_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/channels/:channel_id/bulk_update.json?api_key=<API Key>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "channels",
+                            ":channel_id",
+                            "bulk_update.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "Added as a part of security scheme: apikey",
+                              "key": "api_key",
+                              "value": "<API Key>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "channel_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:19:15.000Z",
+                      "updatedAt": "2026-06-05T15:19:15.000Z",
+                      "uid": "35240-ca14585e-f66f-4b61-9f15-2899ce62b26b"
+                    },
+                    {
+                      "id": "8cca81b8-7e4e-4d2b-bd41-3c63d8b4bbab",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"write_api_key\": \"<string>\",\n  \"updates\": [\n    {\n      \"api_key\": \"<string>\",\n      \"field1\": \"<string>\",\n      \"field2\": \"<string>\",\n      \"field3\": \"<string>\",\n      \"field4\": \"<string>\",\n      \"field5\": \"<string>\",\n      \"field6\": \"<string>\",\n      \"field7\": \"<string>\",\n      \"field8\": \"<string>\",\n      \"lat\": \"<number>\",\n      \"long\": \"<number>\",\n      \"elevation\": \"<number>\",\n      \"status\": \"<string>\",\n      \"created_at\": \"<dateTime>\"\n    },\n    {\n      \"api_key\": \"<string>\",\n      \"field1\": \"<string>\",\n      \"field2\": \"<string>\",\n      \"field3\": \"<string>\",\n      \"field4\": \"<string>\",\n      \"field5\": \"<string>\",\n      \"field6\": \"<string>\",\n      \"field7\": \"<string>\",\n      \"field8\": \"<string>\",\n      \"lat\": \"<number>\",\n      \"long\": \"<number>\",\n      \"elevation\": \"<number>\",\n      \"status\": \"<string>\",\n      \"created_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/channels/:channel_id/bulk_update.json?api_key=<API Key>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "channels",
+                            ":channel_id",
+                            "bulk_update.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "Added as a part of security scheme: apikey",
+                              "key": "api_key",
+                              "value": "<API Key>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "channel_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:19:15.000Z",
+                      "updatedAt": "2026-06-05T15:19:15.000Z",
+                      "uid": "35240-8cca81b8-7e4e-4d2b-bd41-3c63d8b4bbab"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:19:15.000Z",
+                  "updatedAt": "2026-06-05T15:19:15.000Z",
+                  "uid": "35240-61969ded-ccb0-435d-baab-8b362917d0b0"
+                }
+              ],
+              "id": "023d8160-5b76-4de2-9301-75a9739d9373",
+              "createdAt": "2026-06-05T15:19:15.000Z",
+              "updatedAt": "2026-06-05T15:19:15.000Z",
+              "uid": "35240-023d8160-5b76-4de2-9301-75a9739d9373"
+            }
+          ],
+          "id": "90e16f87-be72-401d-b25c-cdfb1a4e7e66",
+          "createdAt": "2026-06-05T15:19:15.000Z",
+          "updatedAt": "2026-06-05T15:19:15.000Z",
+          "uid": "35240-90e16f87-be72-401d-b25c-cdfb1a4e7e66"
+        }
+      ],
+      "id": "a47c86e7-575c-47da-aecd-d7c0f9b07baa",
+      "createdAt": "2026-06-05T15:19:15.000Z",
+      "updatedAt": "2026-06-05T15:19:15.000Z",
+      "uid": "35240-a47c86e7-575c-47da-aecd-d7c0f9b07baa"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.thingspeak.com"
+    }
+  ]
+}
