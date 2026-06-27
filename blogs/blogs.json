@@ -2,14 +2,13 @@
   "repo": "thingspeak",
   "feeds": [
     {
-      "source": "https://blogs.mathworks.com/iot/feed/",
-      "error": "HTTPError"
-    },
-    {
       "source": "https://blogs.mathworks.com/iot/",
-      "error": "HTTPError"
+      "feed_url": "",
+      "saved": 0,
+      "method": "agent-scrape"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T13:15:36Z",
+  "agent_pulled": "2026-06-27"
 }
