@@ -1,0 +1,25 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/thingspeak-channels-api-openapi.yml, openapi/thingspeak-talkback-api-openapi.yml,
+  openapi/thingspeak-update-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  - query
+schemes:
+- name: UserApiKeyHeader
+  type: apiKey
+  in: header
+  parameter: THINGSPEAKAPIKEY
+  sources:
+  - openapi/thingspeak-channels-api-openapi.yml
+  - openapi/thingspeak-update-api-openapi.yml
+- name: TalkBackKeyQuery
+  type: apiKey
+  in: query
+  parameter: api_key
+  sources:
+  - openapi/thingspeak-talkback-api-openapi.yml
+  - openapi/thingspeak-update-api-openapi.yml
