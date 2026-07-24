@@ -1,25 +1,23 @@
 openapi: 3.0.3
 info:
-  title: ThingSpeak Update API
+  title: ThingSpeak Channels Update API
   version: '1.0'
-  description: Write entries to a ThingSpeak channel — single update via /update or
-    high-volume batches via /channels/{channel_id}/bulk_update.json.
+  description: Create, list, update, and delete ThingSpeak channels — the primary container for time-series IoT data. Requires a User API Key on the `THINGSPEAKAPIKEY` header.
   contact:
     name: MathWorks
-    url: https://www.mathworks.com/help/thingspeak/writedata.html
+    url: https://www.mathworks.com/help/thingspeak/channelsapi.html
 servers:
 - url: https://api.thingspeak.com
-  description: ThingSpeak production REST API
 security:
-- WriteApiKeyQuery: []
-- WriteApiKeyHeader: []
+- UserApiKeyHeader: []
+tags:
+- name: Update
 paths:
   /update:
     get:
       summary: Update Channel Feed (GET)
       operationId: updateChannelFeedGet
-      description: Write a single entry to a channel via query parameters. Returns
-        the new entry_id (text) or the full entry (json/xml).
+      description: Write a single entry to a channel via query parameters. Returns the new entry_id (text) or the full entry (json/xml).
       parameters:
       - $ref: '#/components/parameters/ApiKeyQuery'
       - in: query
@@ -89,11 +87,12 @@ paths:
                 $ref: '#/components/schemas/Entry'
         '400':
           description: Bad request — invalid parameters or duplicate timestamp.
+      tags:
+      - Update
     post:
       summary: Update Channel Feed (POST)
       operationId: updateChannelFeedPost
-      description: Identical to GET /update but accepts form-encoded body. Preferred
-        for write API keys that should not appear in URLs.
+      description: Identical to GET /update but accepts form-encoded body. Preferred for write API keys that should not appear in URLs.
       requestBody:
         required: true
         content:
@@ -107,39 +106,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Entry'
-  /channels/{channel_id}/bulk_update.json:
-    post:
-      summary: Bulk Update Channel
-      operationId: bulkUpdateChannel
-      description: Upload up to 960 messages per request (free) or 14,400 (paid) for
-        high-volume devices that cache data offline.
-      parameters:
-      - in: path
-        name: channel_id
-        required: true
-        schema:
-          type: integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/BulkUpdateRequest'
-      responses:
-        '202':
-          description: Accepted — entries are queued for ingestion.
-        '400':
-          description: Bad request.
+      tags:
+      - Update
 components:
-  securitySchemes:
-    WriteApiKeyQuery:
-      type: apiKey
-      in: query
-      name: api_key
-    WriteApiKeyHeader:
-      type: apiKey
-      in: header
-      name: THINGSPEAKAPIKEY
   parameters:
     ApiKeyQuery:
       in: query
@@ -148,52 +117,6 @@ components:
       schema:
         type: string
   schemas:
-    UpdateRequest:
-      type: object
-      required:
-      - api_key
-      properties:
-        api_key:
-          type: string
-        field1:
-          type: string
-        field2:
-          type: string
-        field3:
-          type: string
-        field4:
-          type: string
-        field5:
-          type: string
-        field6:
-          type: string
-        field7:
-          type: string
-        field8:
-          type: string
-        lat:
-          type: number
-        long:
-          type: number
-        elevation:
-          type: number
-        status:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-    BulkUpdateRequest:
-      type: object
-      required:
-      - write_api_key
-      - updates
-      properties:
-        write_api_key:
-          type: string
-        updates:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateRequest'
     Entry:
       type: object
       properties:
@@ -228,3 +151,42 @@ components:
           type: number
         status:
           type: string
+    UpdateRequest:
+      type: object
+      required:
+      - api_key
+      properties:
+        api_key:
+          type: string
+        field1:
+          type: string
+        field2:
+          type: string
+        field3:
+          type: string
+        field4:
+          type: string
+        field5:
+          type: string
+        field6:
+          type: string
+        field7:
+          type: string
+        field8:
+          type: string
+        lat:
+          type: number
+        long:
+          type: number
+        elevation:
+          type: number
+        status:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    UserApiKeyHeader:
+      type: apiKey
+      in: header
+      name: THINGSPEAKAPIKEY

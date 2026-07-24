@@ -2,9 +2,7 @@ openapi: 3.0.3
 info:
   title: ThingSpeak Channels API
   version: '1.0'
-  description: Create, list, update, and delete ThingSpeak channels — the primary
-    container for time-series IoT data. Requires a User API Key on the
-    `THINGSPEAKAPIKEY` header.
+  description: Create, list, update, and delete ThingSpeak channels — the primary container for time-series IoT data. Requires a User API Key on the `THINGSPEAKAPIKEY` header.
   contact:
     name: MathWorks
     url: https://www.mathworks.com/help/thingspeak/channelsapi.html
@@ -12,36 +10,9 @@ servers:
 - url: https://api.thingspeak.com
 security:
 - UserApiKeyHeader: []
+tags:
+- name: Channels
 paths:
-  /channels.json:
-    get:
-      summary: List User Channels
-      operationId: listChannels
-      responses:
-        '200':
-          description: List of channels the authenticated user owns.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Channel'
-    post:
-      summary: Create Channel
-      operationId: createChannel
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ChannelInput'
-      responses:
-        '200':
-          description: Channel created.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Channel'
   /channels/public.json:
     get:
       summary: List Public Channels
@@ -66,6 +37,8 @@ paths:
             application/json:
               schema:
                 type: object
+      tags:
+      - Channels
   /channels/{channel_id}.json:
     get:
       summary: Read Channel Settings
@@ -79,6 +52,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Channel'
+      tags:
+      - Channels
     put:
       summary: Update Channel Settings
       operationId: updateChannel
@@ -97,6 +72,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Channel'
+      tags:
+      - Channels
     delete:
       summary: Delete Channel
       operationId: deleteChannel
@@ -105,6 +82,8 @@ paths:
       responses:
         '200':
           description: Channel deleted.
+      tags:
+      - Channels
   /channels/{channel_id}/feeds.json:
     delete:
       summary: Clear Channel Feed
@@ -114,58 +93,236 @@ paths:
       responses:
         '200':
           description: All entries deleted.
+      tags:
+      - Channels
+    get:
+      summary: Read Channel Feed
+      operationId: readChannelFeed
+      parameters:
+      - $ref: '#/components/parameters/ChannelId'
+      - $ref: '#/components/parameters/ReadApiKey'
+      - $ref: '#/components/parameters/Results'
+      - $ref: '#/components/parameters/Days'
+      - $ref: '#/components/parameters/Minutes'
+      - $ref: '#/components/parameters/Start'
+      - $ref: '#/components/parameters/End'
+      - $ref: '#/components/parameters/Timezone'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Status'
+      - $ref: '#/components/parameters/Location'
+      - $ref: '#/components/parameters/Min'
+      - $ref: '#/components/parameters/Max'
+      - $ref: '#/components/parameters/Round'
+      - $ref: '#/components/parameters/Average'
+      - $ref: '#/components/parameters/Median'
+      - $ref: '#/components/parameters/Sum'
+      responses:
+        '200':
+          description: Channel + feeds.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedResponse'
+      tags:
+      - Channels
+  /channels/{channel_id}/fields/{field_id}.json:
+    get:
+      summary: Read Field Feed
+      operationId: readFieldFeed
+      parameters:
+      - $ref: '#/components/parameters/ChannelId'
+      - in: path
+        name: field_id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 8
+      - $ref: '#/components/parameters/ReadApiKey'
+      - $ref: '#/components/parameters/Results'
+      - $ref: '#/components/parameters/Days'
+      - $ref: '#/components/parameters/Minutes'
+      responses:
+        '200':
+          description: Channel + field-scoped feeds.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedResponse'
+      tags:
+      - Channels
+  /channels/{channel_id}/feeds/last.json:
+    get:
+      summary: Read Last Channel Entry
+      operationId: readLastEntry
+      parameters:
+      - $ref: '#/components/parameters/ChannelId'
+      - $ref: '#/components/parameters/ReadApiKey'
+      responses:
+        '200':
+          description: The most recent entry on the channel.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entry'
+      tags:
+      - Channels
+  /channels/{channel_id}/fields/{field_id}/last.json:
+    get:
+      summary: Read Last Field Entry
+      operationId: readLastFieldEntry
+      parameters:
+      - $ref: '#/components/parameters/ChannelId'
+      - in: path
+        name: field_id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 8
+      - $ref: '#/components/parameters/ReadApiKey'
+      responses:
+        '200':
+          description: The most recent value for the field.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entry'
+      tags:
+      - Channels
+  /channels/{channel_id}/status.json:
+    get:
+      summary: Read Status Updates
+      operationId: readStatusUpdates
+      parameters:
+      - $ref: '#/components/parameters/ChannelId'
+      - $ref: '#/components/parameters/ReadApiKey'
+      responses:
+        '200':
+          description: Channel status updates.
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Channels
+  /channels/{channel_id}/bulk_update.json:
+    post:
+      summary: Bulk Update Channel
+      operationId: bulkUpdateChannel
+      description: Upload up to 960 messages per request (free) or 14,400 (paid) for high-volume devices that cache data offline.
+      parameters:
+      - in: path
+        name: channel_id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkUpdateRequest'
+      responses:
+        '202':
+          description: Accepted — entries are queued for ingestion.
+        '400':
+          description: Bad request.
+      tags:
+      - Channels
 components:
-  securitySchemes:
-    UserApiKeyHeader:
-      type: apiKey
-      in: header
-      name: THINGSPEAKAPIKEY
   parameters:
+    ReadApiKey:
+      in: query
+      name: api_key
+      schema:
+        type: string
+    Minutes:
+      in: query
+      name: minutes
+      schema:
+        type: integer
+    Location:
+      in: query
+      name: location
+      schema:
+        type: boolean
+    Timezone:
+      in: query
+      name: timezone
+      schema:
+        type: string
+    Round:
+      in: query
+      name: round
+      schema:
+        type: integer
+    End:
+      in: query
+      name: end
+      schema:
+        type: string
+        format: date-time
+    Min:
+      in: query
+      name: min
+      schema:
+        type: number
+    Status:
+      in: query
+      name: status
+      schema:
+        type: boolean
     ChannelId:
       in: path
       name: channel_id
       required: true
       schema:
         type: integer
+    Average:
+      in: query
+      name: average
+      description: Get average of x minutes (10, 15, 20, 30, 60, 240, 1440, daily).
+      schema:
+        type: string
+    Days:
+      in: query
+      name: days
+      schema:
+        type: integer
+    Offset:
+      in: query
+      name: offset
+      schema:
+        type: integer
+    Median:
+      in: query
+      name: median
+      schema:
+        type: string
+    Max:
+      in: query
+      name: max
+      schema:
+        type: number
+    Sum:
+      in: query
+      name: sum
+      schema:
+        type: string
+    Results:
+      in: query
+      name: results
+      description: Number of entries to retrieve (max 8000).
+      schema:
+        type: integer
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        format: date-time
   schemas:
-    ChannelInput:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        public_flag:
-          type: boolean
-        tags:
-          type: string
-          description: Comma-separated list of tags.
-        latitude:
-          type: number
-        longitude:
-          type: number
-        elevation:
-          type: number
-        url:
-          type: string
-        field1:
-          type: string
-        field2:
-          type: string
-        field3:
-          type: string
-        field4:
-          type: string
-        field5:
-          type: string
-        field6:
-          type: string
-        field7:
-          type: string
-        field8:
-          type: string
-        metadata:
-          type: string
     Channel:
       type: object
       properties:
@@ -211,3 +368,162 @@ components:
                 type: string
               write_flag:
                 type: boolean
+    Entry:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        entry_id:
+          type: integer
+        field1:
+          type: string
+        field2:
+          type: string
+        field3:
+          type: string
+        field4:
+          type: string
+        field5:
+          type: string
+        field6:
+          type: string
+        field7:
+          type: string
+        field8:
+          type: string
+    BulkUpdateRequest:
+      type: object
+      required:
+      - write_api_key
+      - updates
+      properties:
+        write_api_key:
+          type: string
+        updates:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateRequest'
+    ChannelInput:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        public_flag:
+          type: boolean
+        tags:
+          type: string
+          description: Comma-separated list of tags.
+        latitude:
+          type: number
+        longitude:
+          type: number
+        elevation:
+          type: number
+        url:
+          type: string
+        field1:
+          type: string
+        field2:
+          type: string
+        field3:
+          type: string
+        field4:
+          type: string
+        field5:
+          type: string
+        field6:
+          type: string
+        field7:
+          type: string
+        field8:
+          type: string
+        metadata:
+          type: string
+    FeedResponse:
+      type: object
+      properties:
+        channel:
+          $ref: '#/components/schemas/Channel_2'
+        feeds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entry'
+    UpdateRequest:
+      type: object
+      required:
+      - api_key
+      properties:
+        api_key:
+          type: string
+        field1:
+          type: string
+        field2:
+          type: string
+        field3:
+          type: string
+        field4:
+          type: string
+        field5:
+          type: string
+        field6:
+          type: string
+        field7:
+          type: string
+        field8:
+          type: string
+        lat:
+          type: number
+        long:
+          type: number
+        elevation:
+          type: number
+        status:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    Channel_2:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        field1:
+          type: string
+        field2:
+          type: string
+        field3:
+          type: string
+        field4:
+          type: string
+        field5:
+          type: string
+        field6:
+          type: string
+        field7:
+          type: string
+        field8:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        last_entry_id:
+          type: integer
+  securitySchemes:
+    UserApiKeyHeader:
+      type: apiKey
+      in: header
+      name: THINGSPEAKAPIKEY

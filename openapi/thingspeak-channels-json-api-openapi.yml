@@ -1,0 +1,138 @@
+openapi: 3.0.3
+info:
+  title: ThingSpeak Channels Channels.json API
+  version: '1.0'
+  description: Create, list, update, and delete ThingSpeak channels — the primary container for time-series IoT data. Requires a User API Key on the `THINGSPEAKAPIKEY` header.
+  contact:
+    name: MathWorks
+    url: https://www.mathworks.com/help/thingspeak/channelsapi.html
+servers:
+- url: https://api.thingspeak.com
+security:
+- UserApiKeyHeader: []
+tags:
+- name: Channels.json
+paths:
+  /channels.json:
+    get:
+      summary: List User Channels
+      operationId: listChannels
+      responses:
+        '200':
+          description: List of channels the authenticated user owns.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Channel'
+      tags:
+      - Channels.json
+    post:
+      summary: Create Channel
+      operationId: createChannel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelInput'
+      responses:
+        '200':
+          description: Channel created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Channel'
+      tags:
+      - Channels.json
+components:
+  schemas:
+    Channel:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        elevation:
+          type: number
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        last_entry_id:
+          type: integer
+        public_flag:
+          type: boolean
+        url:
+          type: string
+        tags:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+        api_keys:
+          type: array
+          items:
+            type: object
+            properties:
+              api_key:
+                type: string
+              write_flag:
+                type: boolean
+    ChannelInput:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        public_flag:
+          type: boolean
+        tags:
+          type: string
+          description: Comma-separated list of tags.
+        latitude:
+          type: number
+        longitude:
+          type: number
+        elevation:
+          type: number
+        url:
+          type: string
+        field1:
+          type: string
+        field2:
+          type: string
+        field3:
+          type: string
+        field4:
+          type: string
+        field5:
+          type: string
+        field6:
+          type: string
+        field7:
+          type: string
+        field8:
+          type: string
+        metadata:
+          type: string
+  securitySchemes:
+    UserApiKeyHeader:
+      type: apiKey
+      in: header
+      name: THINGSPEAKAPIKEY

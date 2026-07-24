@@ -1,17 +1,17 @@
 openapi: 3.0.3
 info:
-  title: ThingSpeak TalkBack API
+  title: ThingSpeak Channels Talkbacks API
   version: '1.0'
-  description: Asynchronous command queue for cloud-to-device communication. Devices
-    poll for the next command and execute it; commands are added/updated/deleted via
-    REST.
+  description: Create, list, update, and delete ThingSpeak channels — the primary container for time-series IoT data. Requires a User API Key on the `THINGSPEAKAPIKEY` header.
   contact:
     name: MathWorks
-    url: https://www.mathworks.com/help/thingspeak/talkbackapp.html
+    url: https://www.mathworks.com/help/thingspeak/channelsapi.html
 servers:
 - url: https://api.thingspeak.com
 security:
-- TalkBackKeyQuery: []
+- UserApiKeyHeader: []
+tags:
+- name: Talkbacks
 paths:
   /talkbacks/{talkback_id}/commands.json:
     get:
@@ -29,6 +29,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Command'
+      tags:
+      - Talkbacks
     post:
       summary: Add Command
       operationId: addCommand
@@ -47,12 +49,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Command'
+      tags:
+      - Talkbacks
   /talkbacks/{talkback_id}/commands/execute.json:
     get:
       summary: Execute Next Command
       operationId: executeNextCommand
-      description: Devices call this endpoint to atomically receive and dequeue the
-        next pending command.
+      description: Devices call this endpoint to atomically receive and dequeue the next pending command.
       parameters:
       - $ref: '#/components/parameters/TalkBackId'
       - $ref: '#/components/parameters/ApiKey'
@@ -63,6 +66,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Command'
+      tags:
+      - Talkbacks
   /talkbacks/{talkback_id}/commands/{command_id}.json:
     get:
       summary: Read Command
@@ -78,6 +83,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Command'
+      tags:
+      - Talkbacks
     put:
       summary: Update Command
       operationId: updateCommand
@@ -97,6 +104,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Command'
+      tags:
+      - Talkbacks
     delete:
       summary: Delete Command
       operationId: deleteCommand
@@ -107,22 +116,19 @@ paths:
       responses:
         '200':
           description: Command deleted.
+      tags:
+      - Talkbacks
 components:
-  securitySchemes:
-    TalkBackKeyQuery:
-      type: apiKey
-      in: query
-      name: api_key
   parameters:
-    TalkBackId:
-      in: path
-      name: talkback_id
-      required: true
-      schema:
-        type: integer
     CommandId:
       in: path
       name: command_id
+      required: true
+      schema:
+        type: integer
+    TalkBackId:
+      in: path
+      name: talkback_id
       required: true
       schema:
         type: integer
@@ -160,3 +166,8 @@ components:
         created_at:
           type: string
           format: date-time
+  securitySchemes:
+    UserApiKeyHeader:
+      type: apiKey
+      in: header
+      name: THINGSPEAKAPIKEY
