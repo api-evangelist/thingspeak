@@ -1,0 +1,277 @@
+openapi: 3.0.3
+info:
+  title: ThingSpeak Feeds API
+  version: '1.0'
+  description: Read channel feed entries with rich query support — by date range,
+    last N, by field, with averaging/median/sum aggregation and timezone control.
+  contact:
+    name: MathWorks
+    url: https://www.mathworks.com/help/thingspeak/readdata.html
+servers:
+- url: https://api.thingspeak.com
+paths:
+  /channels/{channel_id}/feeds.json:
+    get:
+      summary: Read Channel Feed
+      operationId: readChannelFeed
+      parameters:
+      - $ref: '#/components/parameters/ChannelId'
+      - $ref: '#/components/parameters/ReadApiKey'
+      - $ref: '#/components/parameters/Results'
+      - $ref: '#/components/parameters/Days'
+      - $ref: '#/components/parameters/Minutes'
+      - $ref: '#/components/parameters/Start'
+      - $ref: '#/components/parameters/End'
+      - $ref: '#/components/parameters/Timezone'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Status'
+      - $ref: '#/components/parameters/Location'
+      - $ref: '#/components/parameters/Min'
+      - $ref: '#/components/parameters/Max'
+      - $ref: '#/components/parameters/Round'
+      - $ref: '#/components/parameters/Average'
+      - $ref: '#/components/parameters/Median'
+      - $ref: '#/components/parameters/Sum'
+      responses:
+        '200':
+          description: Channel + feeds.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedResponse'
+  /channels/{channel_id}/fields/{field_id}.json:
+    get:
+      summary: Read Field Feed
+      operationId: readFieldFeed
+      parameters:
+      - $ref: '#/components/parameters/ChannelId'
+      - in: path
+        name: field_id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 8
+      - $ref: '#/components/parameters/ReadApiKey'
+      - $ref: '#/components/parameters/Results'
+      - $ref: '#/components/parameters/Days'
+      - $ref: '#/components/parameters/Minutes'
+      responses:
+        '200':
+          description: Channel + field-scoped feeds.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedResponse'
+  /channels/{channel_id}/feeds/last.json:
+    get:
+      summary: Read Last Channel Entry
+      operationId: readLastEntry
+      parameters:
+      - $ref: '#/components/parameters/ChannelId'
+      - $ref: '#/components/parameters/ReadApiKey'
+      responses:
+        '200':
+          description: The most recent entry on the channel.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entry'
+  /channels/{channel_id}/fields/{field_id}/last.json:
+    get:
+      summary: Read Last Field Entry
+      operationId: readLastFieldEntry
+      parameters:
+      - $ref: '#/components/parameters/ChannelId'
+      - in: path
+        name: field_id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 8
+      - $ref: '#/components/parameters/ReadApiKey'
+      responses:
+        '200':
+          description: The most recent value for the field.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entry'
+  /channels/{channel_id}/status.json:
+    get:
+      summary: Read Status Updates
+      operationId: readStatusUpdates
+      parameters:
+      - $ref: '#/components/parameters/ChannelId'
+      - $ref: '#/components/parameters/ReadApiKey'
+      responses:
+        '200':
+          description: Channel status updates.
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  parameters:
+    ChannelId:
+      in: path
+      name: channel_id
+      required: true
+      schema:
+        type: integer
+    ReadApiKey:
+      in: query
+      name: api_key
+      schema:
+        type: string
+    Results:
+      in: query
+      name: results
+      description: Number of entries to retrieve (max 8000).
+      schema:
+        type: integer
+    Days:
+      in: query
+      name: days
+      schema:
+        type: integer
+    Minutes:
+      in: query
+      name: minutes
+      schema:
+        type: integer
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        format: date-time
+    End:
+      in: query
+      name: end
+      schema:
+        type: string
+        format: date-time
+    Timezone:
+      in: query
+      name: timezone
+      schema:
+        type: string
+    Offset:
+      in: query
+      name: offset
+      schema:
+        type: integer
+    Status:
+      in: query
+      name: status
+      schema:
+        type: boolean
+    Location:
+      in: query
+      name: location
+      schema:
+        type: boolean
+    Min:
+      in: query
+      name: min
+      schema:
+        type: number
+    Max:
+      in: query
+      name: max
+      schema:
+        type: number
+    Round:
+      in: query
+      name: round
+      schema:
+        type: integer
+    Average:
+      in: query
+      name: average
+      description: Get average of x minutes (10, 15, 20, 30, 60, 240, 1440, daily).
+      schema:
+        type: string
+    Median:
+      in: query
+      name: median
+      schema:
+        type: string
+    Sum:
+      in: query
+      name: sum
+      schema:
+        type: string
+  schemas:
+    FeedResponse:
+      type: object
+      properties:
+        channel:
+          $ref: '#/components/schemas/Channel'
+        feeds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entry'
+    Channel:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        field1:
+          type: string
+        field2:
+          type: string
+        field3:
+          type: string
+        field4:
+          type: string
+        field5:
+          type: string
+        field6:
+          type: string
+        field7:
+          type: string
+        field8:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        last_entry_id:
+          type: integer
+    Entry:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        entry_id:
+          type: integer
+        field1:
+          type: string
+        field2:
+          type: string
+        field3:
+          type: string
+        field4:
+          type: string
+        field5:
+          type: string
+        field6:
+          type: string
+        field7:
+          type: string
+        field8:
+          type: string

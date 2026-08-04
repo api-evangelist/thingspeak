@@ -1,0 +1,20 @@
+{
+  "provider": "thingspeak",
+  "sources": [
+    "thingspeak-channels-api-openapi.yml",
+    "thingspeak-channels-json-api-openapi.yml",
+    "thingspeak-talkbacks-api-openapi.yml",
+    "thingspeak-update-api-openapi.yml"
+  ],
+  "outputs": [
+    "thingspeak-channels-api-openapi.yml",
+    "thingspeak-channels-json-api-openapi.yml",
+    "thingspeak-talkbacks-api-openapi.yml",
+    "thingspeak-update-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
