@@ -15,133 +15,355 @@
   "items": [
     {
       "info": {
-        "name": "List User Channels",
-        "type": "http"
+        "name": "Channels",
+        "type": "folder"
       },
-      "http": {
-        "method": "GET",
-        "url": "https://api.thingspeak.com/channels.json"
-      },
-      "docs": "List User Channels"
-    },
-    {
-      "info": {
-        "name": "Create Channel",
-        "type": "http"
-      },
-      "http": {
-        "method": "POST",
-        "url": "https://api.thingspeak.com/channels.json",
-        "body": {
-          "type": "json",
-          "data": "{}"
-        }
-      },
-      "docs": "Create Channel"
-    },
-    {
-      "info": {
-        "name": "List Public Channels",
-        "type": "http"
-      },
-      "http": {
-        "method": "GET",
-        "url": "https://api.thingspeak.com/channels/public.json",
-        "params": [
-          {
-            "name": "tag",
-            "value": "",
-            "type": "query"
+      "items": [
+        {
+          "info": {
+            "name": "List Public Channels",
+            "type": "http"
           },
-          {
-            "name": "username",
-            "value": "",
-            "type": "query"
+          "http": {
+            "method": "GET",
+            "url": "https://api.thingspeak.com/channels/public.json",
+            "params": [
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              }
+            ]
           },
-          {
-            "name": "page",
-            "value": "",
-            "type": "query"
-          }
-        ]
-      },
-      "docs": "List Public Channels"
-    },
-    {
-      "info": {
-        "name": "Read Channel Settings",
-        "type": "http"
-      },
-      "http": {
-        "method": "GET",
-        "url": "https://api.thingspeak.com/channels/:channel_id.json",
-        "params": [
-          {
-            "name": "channel_id",
-            "value": "",
-            "type": "path"
-          }
-        ]
-      },
-      "docs": "Read Channel Settings"
-    },
-    {
-      "info": {
-        "name": "Update Channel Settings",
-        "type": "http"
-      },
-      "http": {
-        "method": "PUT",
-        "url": "https://api.thingspeak.com/channels/:channel_id.json",
-        "params": [
-          {
-            "name": "channel_id",
-            "value": "",
-            "type": "path"
-          }
-        ],
-        "body": {
-          "type": "json",
-          "data": "{}"
+          "docs": "List Public Channels"
+        },
+        {
+          "info": {
+            "name": "Read Channel Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.thingspeak.com/channels/:channel_id.json",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Read Channel Settings"
+        },
+        {
+          "info": {
+            "name": "Update Channel Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.thingspeak.com/channels/:channel_id.json",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Channel Settings"
+        },
+        {
+          "info": {
+            "name": "Delete Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.thingspeak.com/channels/:channel_id.json",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Channel"
+        },
+        {
+          "info": {
+            "name": "Read Channel Feed",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.thingspeak.com/channels/:channel_id/feeds.json",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "results",
+                "value": "",
+                "type": "query",
+                "description": "Number of entries to retrieve (max 8000)."
+              },
+              {
+                "name": "days",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "minutes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timezone",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "min",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "round",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "average",
+                "value": "",
+                "type": "query",
+                "description": "Get average of x minutes (10, 15, 20, 30, 60, 240, 1440, daily)."
+              },
+              {
+                "name": "median",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sum",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Read Channel Feed"
+        },
+        {
+          "info": {
+            "name": "Clear Channel Feed",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.thingspeak.com/channels/:channel_id/feeds.json",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Clear Channel Feed"
+        },
+        {
+          "info": {
+            "name": "Read Field Feed",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.thingspeak.com/channels/:channel_id/fields/:field_id.json",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "field_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "results",
+                "value": "",
+                "type": "query",
+                "description": "Number of entries to retrieve (max 8000)."
+              },
+              {
+                "name": "days",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "minutes",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Read Field Feed"
+        },
+        {
+          "info": {
+            "name": "Read Last Channel Entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.thingspeak.com/channels/:channel_id/feeds/last.json",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Read Last Channel Entry"
+        },
+        {
+          "info": {
+            "name": "Read Last Field Entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.thingspeak.com/channels/:channel_id/fields/:field_id/last.json",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "field_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Read Last Field Entry"
+        },
+        {
+          "info": {
+            "name": "Read Status Updates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.thingspeak.com/channels/:channel_id/status.json",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Read Status Updates"
+        },
+        {
+          "info": {
+            "name": "Bulk Update Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.thingspeak.com/channels/:channel_id/bulk_update.json",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upload up to 960 messages per request (free) or 14,400 (paid) for high-volume devices that cache data offline."
         }
-      },
-      "docs": "Update Channel Settings"
-    },
-    {
-      "info": {
-        "name": "Delete Channel",
-        "type": "http"
-      },
-      "http": {
-        "method": "DELETE",
-        "url": "https://api.thingspeak.com/channels/:channel_id.json",
-        "params": [
-          {
-            "name": "channel_id",
-            "value": "",
-            "type": "path"
-          }
-        ]
-      },
-      "docs": "Delete Channel"
-    },
-    {
-      "info": {
-        "name": "Clear Channel Feed",
-        "type": "http"
-      },
-      "http": {
-        "method": "DELETE",
-        "url": "https://api.thingspeak.com/channels/:channel_id/feeds.json",
-        "params": [
-          {
-            "name": "channel_id",
-            "value": "",
-            "type": "path"
-          }
-        ]
-      },
-      "docs": "Clear Channel Feed"
+      ]
     }
   ],
   "bundled": true

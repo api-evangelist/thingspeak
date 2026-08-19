@@ -1,0 +1,720 @@
+{
+  "item": [
+    {
+      "id": "6d5b03da-22d4-41f8-86d5-efbacde3b8da",
+      "name": "Talkbacks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d8bbd6b2-cf77-41c4-a0de-01a6221e1c90",
+          "name": "List Commands",
+          "request": {
+            "name": "List Commands",
+            "description": {},
+            "url": {
+              "path": [
+                "talkbacks",
+                ":talkback_id",
+                "commands.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "talkback_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e291cd28-d0a4-4af0-b6b5-3e836d881dbf",
+              "name": "All commands in the queue (including executed ones).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "talkbacks",
+                    ":talkback_id",
+                    "commands.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "talkback_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "THINGSPEAKAPIKEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 670,\n    \"command_string\": \"string\",\n    \"position\": 2545,\n    \"executed_at\": \"2020-11-10T18:54:19.638Z\",\n    \"created_at\": \"1991-06-25T09:23:22.587Z\"\n  },\n  {\n    \"id\": 849,\n    \"command_string\": \"string\",\n    \"position\": 5783,\n    \"executed_at\": \"1959-11-22T21:33:03.236Z\",\n    \"created_at\": \"1970-08-14T22:44:28.422Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b9849c96-9409-4d88-9767-3499091bf1ae",
+          "name": "Add Command",
+          "request": {
+            "name": "Add Command",
+            "description": {},
+            "url": {
+              "path": [
+                "talkbacks",
+                ":talkback_id",
+                "commands.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "talkback_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"command_string\": \"<string>\",\n  \"api_key\": \"<string>\",\n  \"position\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "35e13956-e956-40f5-a6ab-0234b317e486",
+              "name": "Command added to the queue.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "talkbacks",
+                    ":talkback_id",
+                    "commands.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "talkback_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "THINGSPEAKAPIKEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"command_string\": \"<string>\",\n  \"api_key\": \"<string>\",\n  \"position\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 6931,\n  \"command_string\": \"string\",\n  \"position\": 1486,\n  \"executed_at\": \"1953-05-21T11:01:18.042Z\",\n  \"created_at\": \"1971-05-06T03:45:05.822Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "df731bcc-6b82-43bf-b329-3eaf95c36a8a",
+          "name": "Execute Next Command",
+          "request": {
+            "name": "Execute Next Command",
+            "description": {
+              "content": "Devices call this endpoint to atomically receive and dequeue the next pending command.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "talkbacks",
+                ":talkback_id",
+                "commands",
+                "execute.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "talkback_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3c8ec4a4-34f6-43e3-8a91-c8a1b387aa42",
+              "name": "The next command (or empty if queue is empty).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "talkbacks",
+                    ":talkback_id",
+                    "commands",
+                    "execute.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "talkback_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "THINGSPEAKAPIKEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 6931,\n  \"command_string\": \"string\",\n  \"position\": 1486,\n  \"executed_at\": \"1953-05-21T11:01:18.042Z\",\n  \"created_at\": \"1971-05-06T03:45:05.822Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c45b043-96b9-4011-b9b1-4702634f9569",
+          "name": "Read Command",
+          "request": {
+            "name": "Read Command",
+            "description": {},
+            "url": {
+              "path": [
+                "talkbacks",
+                ":talkback_id",
+                "commands",
+                "{{command_id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "talkback_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "442e9734-c4ed-40bc-b0fc-f02482876345",
+              "name": "A specific command in the queue.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "talkbacks",
+                    ":talkback_id",
+                    "commands",
+                    "{{command_id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "talkback_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "THINGSPEAKAPIKEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 6931,\n  \"command_string\": \"string\",\n  \"position\": 1486,\n  \"executed_at\": \"1953-05-21T11:01:18.042Z\",\n  \"created_at\": \"1971-05-06T03:45:05.822Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "057f52fc-7855-4fd9-9f9f-31b7864bd6e4",
+          "name": "Update Command",
+          "request": {
+            "name": "Update Command",
+            "description": {},
+            "url": {
+              "path": [
+                "talkbacks",
+                ":talkback_id",
+                "commands",
+                "{{command_id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "talkback_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"command_string\": \"<string>\",\n  \"api_key\": \"<string>\",\n  \"position\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e7ffe63-4ac4-41b8-bf43-84d9294aeb25",
+              "name": "Command updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "talkbacks",
+                    ":talkback_id",
+                    "commands",
+                    "{{command_id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "talkback_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "THINGSPEAKAPIKEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"command_string\": \"<string>\",\n  \"api_key\": \"<string>\",\n  \"position\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 6931,\n  \"command_string\": \"string\",\n  \"position\": 1486,\n  \"executed_at\": \"1953-05-21T11:01:18.042Z\",\n  \"created_at\": \"1971-05-06T03:45:05.822Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6efdc40b-6f4a-4cbd-ab09-c24836211747",
+          "name": "Delete Command",
+          "request": {
+            "name": "Delete Command",
+            "description": {},
+            "url": {
+              "path": [
+                "talkbacks",
+                ":talkback_id",
+                "commands",
+                "{{command_id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "talkback_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c0491bb5-0f58-43e6-af4f-97b2500b18c5",
+              "name": "Command deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "talkbacks",
+                    ":talkback_id",
+                    "commands",
+                    "{{command_id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "talkback_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "THINGSPEAKAPIKEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.thingspeak.com",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) ",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<integer>",
+      "key": "command_id"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "THINGSPEAKAPIKEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e79d8c3e-5027-4a14-aa19-2f77bd0a3c84",
+    "name": "ThingSpeak Channels Talkbacks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Create, list, update, and delete ThingSpeak channels — the primary container for time-series IoT data. Requires a User API Key on the `THINGSPEAKAPIKEY` header.\n\nContact Support:\n Name: MathWorks",
+      "type": "text/plain"
+    }
+  }
+}

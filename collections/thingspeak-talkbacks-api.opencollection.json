@@ -1,0 +1,177 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ThingSpeak Channels Talkbacks API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "THINGSPEAKAPIKEY",
+      "value": "{{THINGSPEAKAPIKEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Talkbacks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Commands",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.thingspeak.com/talkbacks/:talkback_id/commands.json",
+            "params": [
+              {
+                "name": "talkback_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Commands"
+        },
+        {
+          "info": {
+            "name": "Add Command",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.thingspeak.com/talkbacks/:talkback_id/commands.json",
+            "params": [
+              {
+                "name": "talkback_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add Command"
+        },
+        {
+          "info": {
+            "name": "Execute Next Command",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.thingspeak.com/talkbacks/:talkback_id/commands/execute.json",
+            "params": [
+              {
+                "name": "talkback_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Devices call this endpoint to atomically receive and dequeue the next pending command."
+        },
+        {
+          "info": {
+            "name": "Read Command",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.thingspeak.com/talkbacks/:talkback_id/commands/:command_id.json",
+            "params": [
+              {
+                "name": "talkback_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "command_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Read Command"
+        },
+        {
+          "info": {
+            "name": "Update Command",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.thingspeak.com/talkbacks/:talkback_id/commands/:command_id.json",
+            "params": [
+              {
+                "name": "talkback_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "command_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Command"
+        },
+        {
+          "info": {
+            "name": "Delete Command",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.thingspeak.com/talkbacks/:talkback_id/commands/:command_id.json",
+            "params": [
+              {
+                "name": "talkback_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "command_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Delete Command"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

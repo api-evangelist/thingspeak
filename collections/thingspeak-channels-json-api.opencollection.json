@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ThingSpeak Channels Channels.json API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "THINGSPEAKAPIKEY",
+      "value": "{{THINGSPEAKAPIKEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Channels.json",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List User Channels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.thingspeak.com/channels.json"
+          },
+          "docs": "List User Channels"
+        },
+        {
+          "info": {
+            "name": "Create Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.thingspeak.com/channels.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Channel"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

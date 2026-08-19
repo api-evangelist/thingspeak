@@ -1,137 +1,123 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "ThingSpeak Update API",
+    "name": "ThingSpeak Channels Update API",
     "version": "1.0"
   },
   "request": {
     "auth": {
       "type": "apikey",
-      "key": "api_key",
-      "value": "{{api_key}}",
-      "placement": "query"
+      "key": "THINGSPEAKAPIKEY",
+      "value": "{{THINGSPEAKAPIKEY}}",
+      "placement": "header"
     }
   },
   "items": [
     {
       "info": {
-        "name": "Update Channel Feed (GET)",
-        "type": "http"
+        "name": "Update",
+        "type": "folder"
       },
-      "http": {
-        "method": "GET",
-        "url": "https://api.thingspeak.com/update",
-        "params": [
-          {
-            "name": "api_key",
-            "value": "",
-            "type": "query"
+      "items": [
+        {
+          "info": {
+            "name": "Update Channel Feed (GET)",
+            "type": "http"
           },
-          {
-            "name": "field1",
-            "value": "",
-            "type": "query"
+          "http": {
+            "method": "GET",
+            "url": "https://api.thingspeak.com/update",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "field1",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "field2",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "field3",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "field4",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "field5",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "field6",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "field7",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "field8",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "long",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "elevation",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at",
+                "value": "",
+                "type": "query"
+              }
+            ]
           },
-          {
-            "name": "field2",
-            "value": "",
-            "type": "query"
+          "docs": "Write a single entry to a channel via query parameters. Returns the new entry_id (text) or the full entry (json/xml)."
+        },
+        {
+          "info": {
+            "name": "Update Channel Feed (POST)",
+            "type": "http"
           },
-          {
-            "name": "field3",
-            "value": "",
-            "type": "query"
+          "http": {
+            "method": "POST",
+            "url": "https://api.thingspeak.com/update",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
           },
-          {
-            "name": "field4",
-            "value": "",
-            "type": "query"
-          },
-          {
-            "name": "field5",
-            "value": "",
-            "type": "query"
-          },
-          {
-            "name": "field6",
-            "value": "",
-            "type": "query"
-          },
-          {
-            "name": "field7",
-            "value": "",
-            "type": "query"
-          },
-          {
-            "name": "field8",
-            "value": "",
-            "type": "query"
-          },
-          {
-            "name": "lat",
-            "value": "",
-            "type": "query"
-          },
-          {
-            "name": "long",
-            "value": "",
-            "type": "query"
-          },
-          {
-            "name": "elevation",
-            "value": "",
-            "type": "query"
-          },
-          {
-            "name": "status",
-            "value": "",
-            "type": "query"
-          },
-          {
-            "name": "created_at",
-            "value": "",
-            "type": "query"
-          }
-        ]
-      },
-      "docs": "Write a single entry to a channel via query parameters. Returns the new entry_id (text) or the full entry (json/xml)."
-    },
-    {
-      "info": {
-        "name": "Update Channel Feed (POST)",
-        "type": "http"
-      },
-      "http": {
-        "method": "POST",
-        "url": "https://api.thingspeak.com/update",
-        "body": {
-          "type": "form-urlencoded",
-          "data": []
+          "docs": "Identical to GET /update but accepts form-encoded body. Preferred for write API keys that should not appear in URLs."
         }
-      },
-      "docs": "Identical to GET /update but accepts form-encoded body. Preferred for write API keys that should not appear in URLs."
-    },
-    {
-      "info": {
-        "name": "Bulk Update Channel",
-        "type": "http"
-      },
-      "http": {
-        "method": "POST",
-        "url": "https://api.thingspeak.com/channels/:channel_id/bulk_update.json",
-        "params": [
-          {
-            "name": "channel_id",
-            "value": "",
-            "type": "path"
-          }
-        ],
-        "body": {
-          "type": "json",
-          "data": "{}"
-        }
-      },
-      "docs": "Upload up to 960 messages per request (free) or 14,400 (paid) for high-volume devices that cache data offline."
+      ]
     }
   ],
   "bundled": true
