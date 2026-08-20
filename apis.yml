@@ -27,6 +27,9 @@ apis:
   name: ThingSpeak Update API
   tags:
   - IoT
+  - Telemetry
+  tags_raw:
+  - IoT
   - Write
   - Telemetry
   humanURL: https://www.mathworks.com/help/thingspeak/writedata.html
@@ -45,6 +48,11 @@ apis:
 - aid: thingspeak:thingspeak-mqtt-api
   name: ThingSpeak MQTT API
   tags:
+  - IoT
+  - MQTT
+  - Pub-Sub
+  - Real-Time
+  tags_raw:
   - IoT
   - MQTT
   - Pub/Sub
@@ -70,6 +78,11 @@ apis:
   - IoT
   - Automation
   - Triggers
+  - Event
+  tags_raw:
+  - IoT
+  - Automation
+  - Triggers
   - Events
   humanURL: https://www.mathworks.com/help/thingspeak/react-app.html
   baseURL: https://api.thingspeak.com/
@@ -83,6 +96,11 @@ apis:
 - aid: thingspeak:thingspeak-alerts-api
   name: ThingSpeak Alerts API
   tags:
+  - IoT
+  - Alerts
+  - Email
+  - Notification
+  tags_raw:
   - IoT
   - Alerts
   - Email
@@ -145,6 +163,10 @@ apis:
 - aid: thingspeak:thingspeak-thinghttp-api
   name: ThingSpeak ThingHTTP API
   tags:
+  - IoT
+  - Webhook
+  - Integration
+  tags_raw:
   - IoT
   - Webhooks
   - Integrations
