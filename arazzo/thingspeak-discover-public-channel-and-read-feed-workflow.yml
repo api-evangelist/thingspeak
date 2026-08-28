@@ -14,9 +14,6 @@ sourceDescriptions:
 - name: channelsApi
   url: ../openapi/thingspeak-channels-api-openapi.yml
   type: openapi
-- name: feedsApi
-  url: ../openapi/thingspeak-feeds-api-openapi.yml
-  type: openapi
 workflows:
 - workflowId: discover-public-channel-and-read-feed
   summary: Find a public channel by tag and read its recent feed.

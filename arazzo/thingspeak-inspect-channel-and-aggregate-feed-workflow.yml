@@ -13,9 +13,6 @@ sourceDescriptions:
 - name: channelsApi
   url: ../openapi/thingspeak-channels-api-openapi.yml
   type: openapi
-- name: feedsApi
-  url: ../openapi/thingspeak-feeds-api-openapi.yml
-  type: openapi
 workflows:
 - workflowId: inspect-channel-and-aggregate-feed
   summary: Read channel settings, then read an averaged feed over a day window.

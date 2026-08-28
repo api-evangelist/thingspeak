@@ -14,9 +14,6 @@ sourceDescriptions:
 - name: channelsApi
   url: ../openapi/thingspeak-channels-api-openapi.yml
   type: openapi
-- name: feedsApi
-  url: ../openapi/thingspeak-feeds-api-openapi.yml
-  type: openapi
 workflows:
 - workflowId: relabel-field-and-read-last-field-entry
   summary: Rename a channel field, then read that field's most recent value.

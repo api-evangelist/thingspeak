@@ -11,8 +11,8 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: talkbackApi
-  url: ../openapi/thingspeak-talkback-api-openapi.yml
+- name: talkbacksApi
+  url: ../openapi/thingspeak-talkbacks-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: revise-queued-talkback-command

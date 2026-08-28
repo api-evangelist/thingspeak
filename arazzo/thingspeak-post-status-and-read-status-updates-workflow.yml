@@ -10,11 +10,11 @@ info:
     executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
+- name: channelsApi
+  url: ../openapi/thingspeak-channels-api-openapi.yml
+  type: openapi
 - name: updateApi
   url: ../openapi/thingspeak-update-api-openapi.yml
-  type: openapi
-- name: feedsApi
-  url: ../openapi/thingspeak-feeds-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: post-status-and-read-status-updates
