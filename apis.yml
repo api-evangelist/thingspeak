@@ -50,7 +50,7 @@ apis:
   tags:
   - IoT
   - MQTT
-  - Pub/Sub
+  - Pub-Sub
   - Real-Time
   tags_raw:
   - IoT
