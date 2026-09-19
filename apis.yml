@@ -228,6 +228,14 @@ apis:
 name: ThingSpeak
 tags:
   - IoT
+  - Analytics
+  - Time Series
+  - MQTT
+  - MATLAB
+  - Sensors
+  - Telemetry
+tags_raw:
+  - IoT
   - Internet of Things
   - Analytics
   - Time Series
