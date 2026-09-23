@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: ThingSpeak Channels Update API
   version: '1.0'
@@ -117,40 +117,6 @@ components:
       schema:
         type: string
   schemas:
-    Entry:
-      type: object
-      properties:
-        channel_id:
-          type: integer
-        created_at:
-          type: string
-          format: date-time
-        entry_id:
-          type: integer
-        field1:
-          type: string
-        field2:
-          type: string
-        field3:
-          type: string
-        field4:
-          type: string
-        field5:
-          type: string
-        field6:
-          type: string
-        field7:
-          type: string
-        field8:
-          type: string
-        latitude:
-          type: number
-        longitude:
-          type: number
-        elevation:
-          type: number
-        status:
-          type: string
     UpdateRequest:
       type: object
       required:
@@ -185,6 +151,40 @@ components:
         created_at:
           type: string
           format: date-time
+    Entry:
+      type: object
+      properties:
+        channel_id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        entry_id:
+          type: integer
+        field1:
+          type: string
+        field2:
+          type: string
+        field3:
+          type: string
+        field4:
+          type: string
+        field5:
+          type: string
+        field6:
+          type: string
+        field7:
+          type: string
+        field8:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        elevation:
+          type: number
+        status:
+          type: string
   securitySchemes:
     UserApiKeyHeader:
       type: apiKey

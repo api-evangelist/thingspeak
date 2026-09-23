@@ -1,20 +1,46 @@
 {
   "provider": "thingspeak",
   "sources": [
+    "_original/thingspeak-feeds-api-openapi.yml",
+    "_original/thingspeak-talkback-api-openapi.yml",
     "thingspeak-channels-api-openapi.yml",
     "thingspeak-channels-json-api-openapi.yml",
-    "thingspeak-talkbacks-api-openapi.yml",
     "thingspeak-update-api-openapi.yml"
   ],
   "outputs": [
     "thingspeak-channels-api-openapi.yml",
-    "thingspeak-channels-json-api-openapi.yml",
     "thingspeak-talkbacks-api-openapi.yml",
+    "thingspeak-channels-json-api-openapi.yml",
     "thingspeak-update-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
-  "warnings": [],
-  "notes": [],
-  "skipped": []
+  "warnings": [
+    "thingspeak-channels-api-openapi.yml: previously refined output kept for 6 operation(s) no archived document covers (e.g. /channels/public.json get, /channels/{channel_id}.json delete, /channels/{channel_id}.json get); its other 5 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "thingspeak-channels-json-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /channels.json get, /channels.json post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "thingspeak-update-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /update get, /update post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "thingspeak-feeds-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "thingspeak-feeds-api-openapi.yml: tagged paths GET /channels/{channel_id}/feeds.json -> Channels",
+    "thingspeak-feeds-api-openapi.yml: tagged paths GET /channels/{channel_id}/fields/{field_id}.json -> Channels",
+    "thingspeak-feeds-api-openapi.yml: tagged paths GET /channels/{channel_id}/feeds/last.json -> Channels",
+    "thingspeak-feeds-api-openapi.yml: tagged paths GET /channels/{channel_id}/fields/{field_id}/last.json -> Channels",
+    "thingspeak-feeds-api-openapi.yml: tagged paths GET /channels/{channel_id}/status.json -> Channels",
+    "thingspeak-feeds-api-openapi.yml: declared missing tag: Channels",
+    "thingspeak-talkback-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "thingspeak-talkback-api-openapi.yml: tagged paths GET /talkbacks/{talkback_id}/commands.json -> Talkbacks",
+    "thingspeak-talkback-api-openapi.yml: tagged paths POST /talkbacks/{talkback_id}/commands.json -> Talkbacks",
+    "thingspeak-talkback-api-openapi.yml: tagged paths GET /talkbacks/{talkback_id}/commands/execute.json -> Talkbacks",
+    "thingspeak-talkback-api-openapi.yml: tagged paths GET /talkbacks/{talkback_id}/commands/{command_id}.json -> Talkbacks",
+    "thingspeak-talkback-api-openapi.yml: tagged paths PUT /talkbacks/{talkback_id}/commands/{command_id}.json -> Talkbacks",
+    "thingspeak-talkback-api-openapi.yml: tagged paths DELETE /talkbacks/{talkback_id}/commands/{command_id}.json -> Talkbacks",
+    "thingspeak-talkback-api-openapi.yml: declared missing tag: Talkbacks",
+    "tag 'Channels' spans 2 source specs (thingspeak-feeds-api-openapi.yml, thingspeak-channels-api-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "thingspeak-talkbacks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

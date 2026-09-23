@@ -1,15 +1,15 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ThingSpeak Channels Talkbacks API
+  title: ThingSpeak TalkBack Talkbacks API
   version: '1.0'
-  description: Create, list, update, and delete ThingSpeak channels — the primary container for time-series IoT data. Requires a User API Key on the `THINGSPEAKAPIKEY` header.
+  description: Asynchronous command queue for cloud-to-device communication. Devices poll for the next command and execute it; commands are added/updated/deleted via REST.
   contact:
     name: MathWorks
-    url: https://www.mathworks.com/help/thingspeak/channelsapi.html
+    url: https://www.mathworks.com/help/thingspeak/talkbackapp.html
 servers:
 - url: https://api.thingspeak.com
 security:
-- UserApiKeyHeader: []
+- TalkBackKeyQuery: []
 tags:
 - name: Talkbacks
 paths:
@@ -119,25 +119,6 @@ paths:
       tags:
       - Talkbacks
 components:
-  parameters:
-    CommandId:
-      in: path
-      name: command_id
-      required: true
-      schema:
-        type: integer
-    TalkBackId:
-      in: path
-      name: talkback_id
-      required: true
-      schema:
-        type: integer
-    ApiKey:
-      in: query
-      name: api_key
-      required: true
-      schema:
-        type: string
   schemas:
     CommandInput:
       type: object
@@ -160,14 +141,34 @@ components:
         position:
           type: integer
         executed_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         created_at:
           type: string
           format: date-time
+  parameters:
+    ApiKey:
+      in: query
+      name: api_key
+      required: true
+      schema:
+        type: string
+    TalkBackId:
+      in: path
+      name: talkback_id
+      required: true
+      schema:
+        type: integer
+    CommandId:
+      in: path
+      name: command_id
+      required: true
+      schema:
+        type: integer
   securitySchemes:
-    UserApiKeyHeader:
+    TalkBackKeyQuery:
       type: apiKey
-      in: header
-      name: THINGSPEAKAPIKEY
+      in: query
+      name: api_key

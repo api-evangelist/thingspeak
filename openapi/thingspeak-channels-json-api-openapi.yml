@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: ThingSpeak Channels Channels.json API
   version: '1.0'
@@ -48,6 +48,44 @@ paths:
       - Channels.json
 components:
   schemas:
+    ChannelInput:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        public_flag:
+          type: boolean
+        tags:
+          type: string
+          description: Comma-separated list of tags.
+        latitude:
+          type: number
+        longitude:
+          type: number
+        elevation:
+          type: number
+        url:
+          type: string
+        field1:
+          type: string
+        field2:
+          type: string
+        field3:
+          type: string
+        field4:
+          type: string
+        field5:
+          type: string
+        field6:
+          type: string
+        field7:
+          type: string
+        field8:
+          type: string
+        metadata:
+          type: string
     Channel:
       type: object
       properties:
@@ -93,44 +131,6 @@ components:
                 type: string
               write_flag:
                 type: boolean
-    ChannelInput:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        public_flag:
-          type: boolean
-        tags:
-          type: string
-          description: Comma-separated list of tags.
-        latitude:
-          type: number
-        longitude:
-          type: number
-        elevation:
-          type: number
-        url:
-          type: string
-        field1:
-          type: string
-        field2:
-          type: string
-        field3:
-          type: string
-        field4:
-          type: string
-        field5:
-          type: string
-        field6:
-          type: string
-        field7:
-          type: string
-        field8:
-          type: string
-        metadata:
-          type: string
   securitySchemes:
     UserApiKeyHeader:
       type: apiKey
