@@ -252,131 +252,7 @@ paths:
       security:
       - UserApiKeyHeader: []
 components:
-  parameters:
-    Results:
-      in: query
-      name: results
-      description: Number of entries to retrieve (max 8000).
-      schema:
-        type: integer
-    ReadApiKey:
-      in: query
-      name: api_key
-      schema:
-        type: string
-    ChannelId:
-      in: path
-      name: channel_id
-      required: true
-      schema:
-        type: integer
-    Max:
-      in: query
-      name: max
-      schema:
-        type: number
-    Offset:
-      in: query
-      name: offset
-      schema:
-        type: integer
-    Days:
-      in: query
-      name: days
-      schema:
-        type: integer
-    Status:
-      in: query
-      name: status
-      schema:
-        type: boolean
-    Median:
-      in: query
-      name: median
-      schema:
-        type: string
-    Location:
-      in: query
-      name: location
-      schema:
-        type: boolean
-    End:
-      in: query
-      name: end
-      schema:
-        type: string
-        format: date-time
-    Min:
-      in: query
-      name: min
-      schema:
-        type: number
-    Minutes:
-      in: query
-      name: minutes
-      schema:
-        type: integer
-    Round:
-      in: query
-      name: round
-      schema:
-        type: integer
-    Timezone:
-      in: query
-      name: timezone
-      schema:
-        type: string
-    Sum:
-      in: query
-      name: sum
-      schema:
-        type: string
-    Start:
-      in: query
-      name: start
-      schema:
-        type: string
-        format: date-time
-    Average:
-      in: query
-      name: average
-      description: Get average of x minutes (10, 15, 20, 30, 60, 240, 1440, daily).
-      schema:
-        type: string
   schemas:
-    Entry:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-        entry_id:
-          type: integer
-        field1:
-          type: string
-        field2:
-          type: string
-        field3:
-          type: string
-        field4:
-          type: string
-        field5:
-          type: string
-        field6:
-          type: string
-        field7:
-          type: string
-        field8:
-          type: string
-    FeedResponse:
-      type: object
-      properties:
-        channel:
-          $ref: '#/components/schemas/Channel'
-        feeds:
-          type: array
-          items:
-            $ref: '#/components/schemas/Entry'
     Channel:
       type: object
       properties:
@@ -414,6 +290,89 @@ components:
           format: date-time
         last_entry_id:
           type: integer
+    FeedResponse:
+      type: object
+      properties:
+        channel:
+          $ref: '#/components/schemas/Channel'
+        feeds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entry'
+    Entry:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        entry_id:
+          type: integer
+        field1:
+          type: string
+        field2:
+          type: string
+        field3:
+          type: string
+        field4:
+          type: string
+        field5:
+          type: string
+        field6:
+          type: string
+        field7:
+          type: string
+        field8:
+          type: string
+    ChannelInput:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        public_flag:
+          type: boolean
+        tags:
+          type: string
+          description: Comma-separated list of tags.
+        latitude:
+          type: number
+        longitude:
+          type: number
+        elevation:
+          type: number
+        url:
+          type: string
+        field1:
+          type: string
+        field2:
+          type: string
+        field3:
+          type: string
+        field4:
+          type: string
+        field5:
+          type: string
+        field6:
+          type: string
+        field7:
+          type: string
+        field8:
+          type: string
+        metadata:
+          type: string
+    BulkUpdateRequest:
+      type: object
+      required:
+      - write_api_key
+      - updates
+      properties:
+        write_api_key:
+          type: string
+        updates:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateRequest'
     Channel_2:
       type: object
       properties:
@@ -493,56 +452,97 @@ components:
         created_at:
           type: string
           format: date-time
-    ChannelInput:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        public_flag:
-          type: boolean
-        tags:
-          type: string
-          description: Comma-separated list of tags.
-        latitude:
-          type: number
-        longitude:
-          type: number
-        elevation:
-          type: number
-        url:
-          type: string
-        field1:
-          type: string
-        field2:
-          type: string
-        field3:
-          type: string
-        field4:
-          type: string
-        field5:
-          type: string
-        field6:
-          type: string
-        field7:
-          type: string
-        field8:
-          type: string
-        metadata:
-          type: string
-    BulkUpdateRequest:
-      type: object
-      required:
-      - write_api_key
-      - updates
-      properties:
-        write_api_key:
-          type: string
-        updates:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateRequest'
+  parameters:
+    Status:
+      in: query
+      name: status
+      schema:
+        type: boolean
+    Offset:
+      in: query
+      name: offset
+      schema:
+        type: integer
+    ReadApiKey:
+      in: query
+      name: api_key
+      schema:
+        type: string
+    Max:
+      in: query
+      name: max
+      schema:
+        type: number
+    Timezone:
+      in: query
+      name: timezone
+      schema:
+        type: string
+    Minutes:
+      in: query
+      name: minutes
+      schema:
+        type: integer
+    Location:
+      in: query
+      name: location
+      schema:
+        type: boolean
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        format: date-time
+    Round:
+      in: query
+      name: round
+      schema:
+        type: integer
+    Days:
+      in: query
+      name: days
+      schema:
+        type: integer
+    End:
+      in: query
+      name: end
+      schema:
+        type: string
+        format: date-time
+    Sum:
+      in: query
+      name: sum
+      schema:
+        type: string
+    ChannelId:
+      in: path
+      name: channel_id
+      required: true
+      schema:
+        type: integer
+    Median:
+      in: query
+      name: median
+      schema:
+        type: string
+    Min:
+      in: query
+      name: min
+      schema:
+        type: number
+    Average:
+      in: query
+      name: average
+      description: Get average of x minutes (10, 15, 20, 30, 60, 240, 1440, daily).
+      schema:
+        type: string
+    Results:
+      in: query
+      name: results
+      description: Number of entries to retrieve (max 8000).
+      schema:
+        type: integer
   securitySchemes:
     UserApiKeyHeader:
       type: apiKey

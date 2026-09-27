@@ -234,6 +234,7 @@ tags:
   - MATLAB
   - Sensors
   - Telemetry
+  - Real-Time
 tags_raw:
   - IoT
   - Internet of Things
@@ -243,6 +244,7 @@ tags_raw:
   - MATLAB
   - Sensors
   - Telemetry
+  - Real-Time
 kind: contract
 deliveryModel:
   model: saas
