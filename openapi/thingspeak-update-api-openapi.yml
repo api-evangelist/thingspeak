@@ -109,6 +109,13 @@ paths:
       tags:
       - Update
 components:
+  parameters:
+    ApiKeyQuery:
+      in: query
+      name: api_key
+      required: true
+      schema:
+        type: string
   schemas:
     Entry:
       type: object
@@ -178,13 +185,6 @@ components:
         created_at:
           type: string
           format: date-time
-  parameters:
-    ApiKeyQuery:
-      in: query
-      name: api_key
-      required: true
-      schema:
-        type: string
   securitySchemes:
     UserApiKeyHeader:
       type: apiKey
