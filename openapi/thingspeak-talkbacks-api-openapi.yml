@@ -119,18 +119,26 @@ paths:
       tags:
       - Talkbacks
 components:
+  parameters:
+    TalkBackId:
+      in: path
+      name: talkback_id
+      required: true
+      schema:
+        type: integer
+    ApiKey:
+      in: query
+      name: api_key
+      required: true
+      schema:
+        type: string
+    CommandId:
+      in: path
+      name: command_id
+      required: true
+      schema:
+        type: integer
   schemas:
-    CommandInput:
-      type: object
-      required:
-      - command_string
-      properties:
-        api_key:
-          type: string
-        command_string:
-          type: string
-        position:
-          type: integer
     Command:
       type: object
       properties:
@@ -148,25 +156,17 @@ components:
         created_at:
           type: string
           format: date-time
-  parameters:
-    CommandId:
-      in: path
-      name: command_id
-      required: true
-      schema:
-        type: integer
-    ApiKey:
-      in: query
-      name: api_key
-      required: true
-      schema:
-        type: string
-    TalkBackId:
-      in: path
-      name: talkback_id
-      required: true
-      schema:
-        type: integer
+    CommandInput:
+      type: object
+      required:
+      - command_string
+      properties:
+        api_key:
+          type: string
+        command_string:
+          type: string
+        position:
+          type: integer
   securitySchemes:
     TalkBackKeyQuery:
       type: apiKey
