@@ -252,6 +252,97 @@ paths:
       security:
       - UserApiKeyHeader: []
 components:
+  parameters:
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        format: date-time
+    Offset:
+      in: query
+      name: offset
+      schema:
+        type: integer
+    Minutes:
+      in: query
+      name: minutes
+      schema:
+        type: integer
+    Average:
+      in: query
+      name: average
+      description: Get average of x minutes (10, 15, 20, 30, 60, 240, 1440, daily).
+      schema:
+        type: string
+    ChannelId:
+      in: path
+      name: channel_id
+      required: true
+      schema:
+        type: integer
+    Days:
+      in: query
+      name: days
+      schema:
+        type: integer
+    End:
+      in: query
+      name: end
+      schema:
+        type: string
+        format: date-time
+    Min:
+      in: query
+      name: min
+      schema:
+        type: number
+    Status:
+      in: query
+      name: status
+      schema:
+        type: boolean
+    Median:
+      in: query
+      name: median
+      schema:
+        type: string
+    Sum:
+      in: query
+      name: sum
+      schema:
+        type: string
+    Location:
+      in: query
+      name: location
+      schema:
+        type: boolean
+    ReadApiKey:
+      in: query
+      name: api_key
+      schema:
+        type: string
+    Max:
+      in: query
+      name: max
+      schema:
+        type: number
+    Timezone:
+      in: query
+      name: timezone
+      schema:
+        type: string
+    Round:
+      in: query
+      name: round
+      schema:
+        type: integer
+    Results:
+      in: query
+      name: results
+      description: Number of entries to retrieve (max 8000).
+      schema:
+        type: integer
   schemas:
     Entry:
       type: object
@@ -323,18 +414,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Entry'
-    BulkUpdateRequest:
-      type: object
-      required:
-      - write_api_key
-      - updates
-      properties:
-        write_api_key:
-          type: string
-        updates:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateRequest'
     Channel_2:
       type: object
       properties:
@@ -418,6 +497,18 @@ components:
           type: string
         metadata:
           type: string
+    BulkUpdateRequest:
+      type: object
+      required:
+      - write_api_key
+      - updates
+      properties:
+        write_api_key:
+          type: string
+        updates:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateRequest'
     UpdateRequest:
       type: object
       required:
@@ -452,97 +543,6 @@ components:
         created_at:
           type: string
           format: date-time
-  parameters:
-    Timezone:
-      in: query
-      name: timezone
-      schema:
-        type: string
-    Sum:
-      in: query
-      name: sum
-      schema:
-        type: string
-    Average:
-      in: query
-      name: average
-      description: Get average of x minutes (10, 15, 20, 30, 60, 240, 1440, daily).
-      schema:
-        type: string
-    Round:
-      in: query
-      name: round
-      schema:
-        type: integer
-    Min:
-      in: query
-      name: min
-      schema:
-        type: number
-    Days:
-      in: query
-      name: days
-      schema:
-        type: integer
-    Results:
-      in: query
-      name: results
-      description: Number of entries to retrieve (max 8000).
-      schema:
-        type: integer
-    End:
-      in: query
-      name: end
-      schema:
-        type: string
-        format: date-time
-    Max:
-      in: query
-      name: max
-      schema:
-        type: number
-    ReadApiKey:
-      in: query
-      name: api_key
-      schema:
-        type: string
-    Location:
-      in: query
-      name: location
-      schema:
-        type: boolean
-    Minutes:
-      in: query
-      name: minutes
-      schema:
-        type: integer
-    Status:
-      in: query
-      name: status
-      schema:
-        type: boolean
-    Start:
-      in: query
-      name: start
-      schema:
-        type: string
-        format: date-time
-    Median:
-      in: query
-      name: median
-      schema:
-        type: string
-    Offset:
-      in: query
-      name: offset
-      schema:
-        type: integer
-    ChannelId:
-      in: path
-      name: channel_id
-      required: true
-      schema:
-        type: integer
   securitySchemes:
     UserApiKeyHeader:
       type: apiKey

@@ -109,13 +109,6 @@ paths:
       tags:
       - Update
 components:
-  parameters:
-    ApiKeyQuery:
-      in: query
-      name: api_key
-      required: true
-      schema:
-        type: string
   schemas:
     UpdateRequest:
       type: object
@@ -185,6 +178,13 @@ components:
           type: number
         status:
           type: string
+  parameters:
+    ApiKeyQuery:
+      in: query
+      name: api_key
+      required: true
+      schema:
+        type: string
   securitySchemes:
     UserApiKeyHeader:
       type: apiKey
